@@ -5,25 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HomeOffice"
         mc:Ignorable="d"
-        Title="AdminPanel" Height="450" Width="800">
+        Title="AdminPanel" Height="500" Width="800">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="431*"/>
-            <ColumnDefinition Width="361*"/>
-        </Grid.ColumnDefinitions>
-        <Label RenderTransformOrigin="0.5,0.5" Margin="10,0,362.333,392">Name:</Label>
-        <Label RenderTransformOrigin="0.5,0.5" Margin="188,0,183.333,392">Surname:</Label>
-        <Label RenderTransformOrigin="0.5,0.5" Margin="366,0,344,392" Grid.ColumnSpan="2">Date of Birth:</Label>
 
-        <TextBox Name="UserName" Margin="10,27,248.333,365"></TextBox>
-        <TextBox Name="UserSurname" Margin="188,27,70.333,365"></TextBox>
-        <TextBox x:Name="UserDate" Margin="366,27,253,365" Grid.ColumnSpan="2"/>
-        <Button Name="AddUser" Margin="112.667,81,75,309" Grid.Column="1">Add User to Database</Button>
-        <ComboBox HorizontalAlignment="Left" Margin="113,27,0,0" VerticalAlignment="Top" Width="173" Grid.Column="1" Height="27">
+        <TextBox Name="UserName" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Margin="10,27,0,365" Width="173"></TextBox>
+        <TextBox Name="UserSurname" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Margin="188,27,0,365" Width="173"></TextBox>
+        <TextBox x:Name="UserDate" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Margin="366,27,0,365" Width="175"/>
+        <Button Content="Add User to Database" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Name="AddUser" Margin="546,81,0,0" Width="173"/>
+        <ComboBox HorizontalAlignment="Left" Margin="546,27,0,0" VerticalAlignment="Top" Width="173" Height="28">
             <ComboBoxItem Content="Employee" HorizontalAlignment="Left" Width="171"/>
             <ComboBoxItem Content="Manager" HorizontalAlignment="Left" Width="171"/>
             <ComboBoxItem Content="Administrator" HorizontalAlignment="Left" Width="171"/>
         </ComboBox>
+
+        <Label Content="Name:" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="10,0,605.6,392"/>
+        <Label Content="Surname" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="188,0,427.6,392"/>
+        <Label Content="Date of Birth:" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="366,0,344,392"/>
+        <Label Content="Type of User:" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="546,0,163.6,392"/>
+
+
 
 
     </Grid>
