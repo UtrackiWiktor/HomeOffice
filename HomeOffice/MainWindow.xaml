@@ -7,6 +7,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Label Name="HelloWorld" FontSize="88">Hello world</Label>
+        <Button Margin="128,75,112,92" x:Name="LogIn" Click="LogIn_Click">Log in</Button>
     </Grid>
 </Window>

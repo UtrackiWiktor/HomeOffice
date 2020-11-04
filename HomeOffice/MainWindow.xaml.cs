@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using HomeOffice.classes.Users;
 namespace HomeOffice
 {
     /// <summary>
@@ -22,7 +22,23 @@ namespace HomeOffice
     {
         public MainWindow()
         {
+            
+            //User user;
+            //string Data = "admin";
+            //if (Data == "admin")
+            //    user = new Administrator();
+            //else if (Data == "employee")
+            //    user = new Employee();
+            //else
+            //    user = new Manager();
+            //user.addUser();
             InitializeComponent();
+        }
+
+        private void LogIn_Click(object sender, RoutedEventArgs e)
+        {
+            AdminPanel adminPanel = new AdminPanel();
+            adminPanel.Show();
         }
     }
 }
