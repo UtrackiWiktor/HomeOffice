@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HomeOffice.classes.Users;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using HomeOffice.classes.Users;
+using System.Globalization;
 
 namespace HomeOffice
 {
@@ -19,9 +22,39 @@ namespace HomeOffice
     /// </summary>
     public partial class AdminPanel : Window
     {
+        User user = new Administrator();
         public AdminPanel()
         {
             InitializeComponent();
+        }
+
+        private void AddUser_Click(object sender, RoutedEventArgs e)
+        {
+            DateTime dateTime=new DateTime();
+            try
+            {
+                dateTime = DateTime.ParseExact(UserDate.Text, "dd.MM.yyyy", CultureInfo.InvariantCulture);
+            }
+            catch(Exception exception)
+            {
+                MessageBox.Show("You probably provided incorrect data. Please correct it");
+            }
+            if (!String.IsNullOrWhiteSpace(UserName.Text) && !String.IsNullOrWhiteSpace(UserSurname.Text) && !String.IsNullOrWhiteSpace(UserDate.Text))
+            {
+                TypeOfUser typeOfUser;
+                if (SelectedTypeOfUser.SelectedItem.ToString() == "Employee")
+                    typeOfUser = TypeOfUser.Employee;
+                else if (SelectedTypeOfUser.SelectedItem.ToString() == "Manager")
+                    typeOfUser = TypeOfUser.Manager;
+                else
+                    typeOfUser = TypeOfUser.Administrator;
+
+                user.addUser(UserName.Text, UserSurname.Text, dateTime, typeOfUser);
+            }
+            else
+            {
+                MessageBox.Show("You probably provided incorrect data. Please correct it");
+            }
         }
     }
 }

@@ -13,7 +13,6 @@ namespace HomeOffice.classes.Users
         string surname { get; set; }
         DateTime birthDate { get; set; }
 
-        virtual public void addUser(string name, string surname, DateTime date, TypeOfUser user) 
-        { }
+        virtual public void addUser(string name, string surname, DateTime date, TypeOfUser user){}
     }
 }
