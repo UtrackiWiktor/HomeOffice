@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using HomeOffice.classes.Users;
+using MySql.Data.MySqlClient;
+
 namespace HomeOffice
 {
     /// <summary>
@@ -37,6 +39,7 @@ namespace HomeOffice
 
         private void LogIn_Click(object sender, RoutedEventArgs e)
         {
+
             AdminPanel adminPanel = new AdminPanel();
             adminPanel.Show();
         }
