@@ -8,11 +8,17 @@ namespace HomeOffice.classes.Users
 {
     class User
     {
-        uint id { get; set; }
-        string name { get; set; }
-        string surname { get; set; }
-        DateTime birthDate { get; set; }
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public DateTime DateOfBirth { get; set; }
+        public int Unit { get; set; }
+        public int UserGroup { get; set; }
 
-        virtual public void addUser(string name, string surname, DateTime date, TypeOfUser user){}
+        public virtual void addUser(string name, string surname, DateTime date, TypeOfUser typeOfUser, int unit) { }
+        public virtual string usersToString()
+        {
+            return null;
+        }
     }
 }

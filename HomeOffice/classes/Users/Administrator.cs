@@ -1,6 +1,8 @@
-﻿using MySql.Data.MySqlClient;
+﻿using HomeOffice.Data;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
@@ -12,21 +14,53 @@ namespace HomeOffice.classes.Users
 {
     class Administrator: User
     {
-        override public void addUser(string name,string surname, DateTime date, TypeOfUser user) 
+
+        public override void addUser(string name, string surname, DateTime date, TypeOfUser typeOfUser, int unit)
         {
-            //send data to database
-            string server = "homeoffice.c0pmexmy2ypg.eu-central-1.rds.amazonaws.com";
-            string database = "mydb";
-            string uid = "admin";
-            string password = "hom3off1ce";
-            string connectionString;
-            connectionString = "SERVER=" + server + "; PORT = 3306 ;" + "DATABASE=" + database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
-            var mycon = new MySqlConnection(connectionString);
-
-            mycon.Open();
-            MySqlCommand a = new MySqlCommand("INSERT INTO Units(UnitName) VALUES(\"TestowaGrupa5555\")", mycon);
-            a.ExecuteNonQuery();
-
+            using (var DbContext = new HomeOfficeContext())
+            {
+                DbContext.Database.EnsureCreated();
+                User user = new User
+                {
+                    Name = name,
+                    Surname = surname,
+                    DateOfBirth = date,
+                    UserGroup = (int)typeOfUser,
+                    Unit = unit
+                };
+                DbContext.Users.Add(user);
+                DbContext.SaveChanges();
+            }
         }
+
+        public override string usersToString()
+        {
+            string output=null;
+            using (var DbContext = new HomeOfficeContext())
+            {
+                var users = DbContext.Users;
+                foreach(var user in users)
+                {
+                    output += $"{user.Name}, {user.Surname}, {user.DateOfBirth.ToString()}, {user.Unit.ToString()}, {user.UserGroup.ToString()}\n";
+                }
+            }
+            return output;
+        }
+        //override public void addUser(string name, string surname, DateTime date, TypeOfUser user,int unit)
+        //{
+        //    //send data to database
+        //    string server = "homeoffice.c0pmexmy2ypg.eu-central-1.rds.amazonaws.com";
+        //    string database = "mydb";
+        //    string uid = "admin";
+        //    string password = "hom3off1ce";
+        //    string connectionString;
+        //    connectionString = "SERVER=" + server + "; PORT = 3306 ;" + "DATABASE=" + database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
+        //    var mycon = new MySqlConnection(connectionString);
+
+        //    mycon.Open();
+        //    MySqlCommand a = new MySqlCommand("INSERT INTO Units(UnitName) VALUES(\"TestowaGrupa5555\")", mycon);
+        //    a.ExecuteNonQuery();
+
+        //}
     }
 }

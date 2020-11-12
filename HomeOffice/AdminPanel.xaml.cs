@@ -25,6 +25,7 @@ namespace HomeOffice
         User user = new Administrator();
         public AdminPanel()
         {
+           
             InitializeComponent();
         }
 
@@ -39,7 +40,8 @@ namespace HomeOffice
             {
                 MessageBox.Show("You probably provided incorrect data. Please correct it");
             }
-            if (!String.IsNullOrWhiteSpace(UserName.Text) && !String.IsNullOrWhiteSpace(UserSurname.Text) && !String.IsNullOrWhiteSpace(UserDate.Text))
+            int unit;
+            if (!String.IsNullOrWhiteSpace(UserName.Text) && !String.IsNullOrWhiteSpace(UserSurname.Text) && !String.IsNullOrWhiteSpace(UserDate.Text)&& int.TryParse(UserUnit.Text, out unit))
             {
                 TypeOfUser typeOfUser;
                 if (SelectedTypeOfUser.SelectedItem.ToString() == "Employee")
@@ -49,12 +51,18 @@ namespace HomeOffice
                 else
                     typeOfUser = TypeOfUser.Administrator;
 
-                user.addUser(UserName.Text, UserSurname.Text, dateTime, typeOfUser);
+                user.addUser(UserName.Text, UserSurname.Text, dateTime, typeOfUser,unit);
             }
             else
             {
                 MessageBox.Show("You probably provided incorrect data. Please correct it");
             }
+        }
+
+        private void RefreshButton_Click(object sender, RoutedEventArgs e)
+        {
+            Output.Document.Blocks.Clear();
+            Output.AppendText(user.usersToString());
         }
     }
 }

@@ -14,12 +14,12 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using HomeOffice.classes.Users;
 using MySql.Data.MySqlClient;
+using HomeOffice.Data;
+using System.Xaml;
+using Microsoft.EntityFrameworkCore;
 
 namespace HomeOffice
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -39,6 +39,7 @@ namespace HomeOffice
 
         private void LogIn_Click(object sender, RoutedEventArgs e)
         {
+
 
             AdminPanel adminPanel = new AdminPanel();
             adminPanel.Show();
