@@ -9,8 +9,8 @@ namespace HomeOffice.classes.Users
     enum TypeOfUser
     {
         Error,
-        Employee=1,
-        Manager,
-        Administrator
+        Administrator=1,
+        Manager=2,
+        Employee=3
     }
 }
