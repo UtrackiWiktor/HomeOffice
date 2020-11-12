@@ -24,14 +24,35 @@
         <Label Content="Type of User:" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="546,0,163.6,392"/>
         <Label Content="Unit:" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="10,63,0,329"/>
         <TextBox x:Name="UserUnit" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Margin="10,91,0,0" Width="173"/>
-        <RichTextBox Name="Output" HorizontalAlignment="Left" Height="248" Margin="10,178,0,0" VerticalAlignment="Top" Width="709">
-            <FlowDocument>
-                <Paragraph>
-                    <Run Text=""/>
-                </Paragraph>
-            </FlowDocument>
-        </RichTextBox>
-        <Button Content="Refresh" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" x:Name="RefreshButton" Margin="546,131,0,0" Width="173" Click="RefreshButton_Click"/>
+        <Button Content="Refresh" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" x:Name="RefreshButton" Margin="546,137,0,0" Width="173" Click="RefreshButton_Click" RenderTransformOrigin="0.491,-0.5"/>
+        <DataGrid Name="UserGrid" HorizontalAlignment="Left" Height="239" Margin="10,170,0,0" VerticalAlignment="Top" Width="709" Loaded="UserGrid_Loaded">
+            <DataGrid.ContextMenu>
+            <ContextMenu>
+
+                <!--MenuItem Header="Edit" Click="Edit_Click">
+
+                    <MenuItem.Icon>
+
+                        <Image Name="Edit" Height="20" Width="20"></Image>
+
+                    </MenuItem.Icon>
+
+                </-->
+                <MenuItem Header="Delete" Click="Delete_Click">
+
+                    <MenuItem.Icon>
+
+                        <Image Name="Delete" Height="20" Width="20"></Image>
+
+                    </MenuItem.Icon>
+
+                </MenuItem>
+
+            </ContextMenu>
+
+            </DataGrid.ContextMenu>
+          </DataGrid>
+        <!--Button Content="Delete selected" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" x:Name="RefreshButton_Copy" Margin="10,431,0,0" Width="709" Click="DeleteButton_Click" RenderTransformOrigin="0.491,-0.5"/-->
     </Grid>
 
 </Window>

@@ -44,14 +44,19 @@ namespace HomeOffice
             if (!String.IsNullOrWhiteSpace(UserName.Text) && !String.IsNullOrWhiteSpace(UserSurname.Text) && !String.IsNullOrWhiteSpace(UserDate.Text)&& int.TryParse(UserUnit.Text, out unit))
             {
                 TypeOfUser typeOfUser;
-                if (SelectedTypeOfUser.SelectedItem.ToString() == "Employee")
+                var index = SelectedTypeOfUser.SelectedIndex;
+                if (index == 0)//employee
                     typeOfUser = TypeOfUser.Employee;
-                else if (SelectedTypeOfUser.SelectedItem.ToString() == "Manager")
+                else if (index == 1)//employee
                     typeOfUser = TypeOfUser.Manager;
-                else
+                else if (index == 2)//employee
                     typeOfUser = TypeOfUser.Administrator;
+                else
+                    typeOfUser = TypeOfUser.Error;
 
-                user.addUser(UserName.Text, UserSurname.Text, dateTime, typeOfUser,unit);
+                user.AddUser(UserName.Text, UserSurname.Text, dateTime, typeOfUser,unit);
+                MessageBox.Show("User was added successfully");
+                UserGrid.ItemsSource = user.UsersToList();
             }
             else
             {
@@ -61,8 +66,19 @@ namespace HomeOffice
 
         private void RefreshButton_Click(object sender, RoutedEventArgs e)
         {
-            Output.Document.Blocks.Clear();
-            Output.AppendText(user.usersToString());
+            UserGrid.ItemsSource = user.UsersToList();
+        }
+
+        private void UserGrid_Loaded(object sender, RoutedEventArgs e)
+        {
+            UserGrid.ItemsSource = user.UsersToList();
+        }
+
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Do you want to delete this user?", "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            user.DeleteUser(((User)UserGrid.SelectedItem));
+            UserGrid.ItemsSource = user.UsersToList();
         }
     }
 }

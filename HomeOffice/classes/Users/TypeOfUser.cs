@@ -8,8 +8,8 @@ namespace HomeOffice.classes.Users
 {
     enum TypeOfUser
     {
-        Error=0,
-        Employee,
+        Error,
+        Employee=1,
         Manager,
         Administrator
     }

@@ -15,7 +15,7 @@ namespace HomeOffice.classes.Users
     class Administrator: User
     {
 
-        public override void addUser(string name, string surname, DateTime date, TypeOfUser typeOfUser, int unit)
+        public override void AddUser(string name, string surname, DateTime date, TypeOfUser typeOfUser, int unit)
         {
             using (var DbContext = new HomeOfficeContext())
             {
@@ -33,18 +33,22 @@ namespace HomeOffice.classes.Users
             }
         }
 
-        public override string usersToString()
+        public override List<User> UsersToList()
         {
-            string output=null;
             using (var DbContext = new HomeOfficeContext())
             {
-                var users = DbContext.Users;
-                foreach(var user in users)
-                {
-                    output += $"{user.Name}, {user.Surname}, {user.DateOfBirth.ToString()}, {user.Unit.ToString()}, {user.UserGroup.ToString()}\n";
-                }
+                var users = DbContext.Users.ToList();
+
+                return users;
             }
-            return output;
+        }
+        public override void DeleteUser(User user)
+        {
+            using (var DbContext = new HomeOfficeContext())
+            {
+                DbContext.Remove(user);
+                DbContext.SaveChanges();
+            }
         }
         //override public void addUser(string name, string surname, DateTime date, TypeOfUser user,int unit)
         //{

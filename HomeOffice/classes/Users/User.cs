@@ -15,10 +15,13 @@ namespace HomeOffice.classes.Users
         public int Unit { get; set; }
         public int UserGroup { get; set; }
 
-        public virtual void addUser(string name, string surname, DateTime date, TypeOfUser typeOfUser, int unit) { }
-        public virtual string usersToString()
+        public virtual void AddUser(string name, string surname, DateTime date, TypeOfUser typeOfUser, int unit) { }
+        public virtual List<User> UsersToList()
         {
             return null;
         }
+
+        public virtual void DeleteUser(User user)
+        { }
     }
 }
