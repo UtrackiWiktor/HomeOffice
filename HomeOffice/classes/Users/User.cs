@@ -15,7 +15,7 @@ namespace HomeOffice.classes.Users
         public int Unit { get; set; }
         public int UserGroup { get; set; }
 
-        public virtual void AddUser(string name, string surname, DateTime date, TypeOfUser typeOfUser, int unit) { }
+        public virtual void AddUser(string name, string surname, DateTime date, UserRoles typeOfUser, int unit) { }
         public virtual List<User> UsersToList()
         {
             return null;

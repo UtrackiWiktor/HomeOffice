@@ -15,7 +15,7 @@ namespace HomeOffice.classes.Users
     class Administrator: User
     {
 
-        public override void AddUser(string name, string surname, DateTime date, TypeOfUser typeOfUser, int unit)
+        public override void AddUser(string name, string surname, DateTime date, UserRoles typeOfUser, int unit)
         {
             using (var DbContext = new HomeOfficeContext())
             {

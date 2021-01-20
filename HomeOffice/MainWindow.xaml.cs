@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -17,6 +17,8 @@ using MySql.Data.MySqlClient;
 using HomeOffice.Data;
 using System.Xaml;
 using Microsoft.EntityFrameworkCore;
+using HomeOffice.classes.Tasks;
+using HomeOffice.classes.Units;
 
 namespace HomeOffice
 {
@@ -39,7 +41,6 @@ namespace HomeOffice
 
         private void LogIn_Click(object sender, RoutedEventArgs e)
         {
-
 
             AdminPanel adminPanel = new AdminPanel();
             adminPanel.Show();

@@ -43,16 +43,16 @@ namespace HomeOffice
             int unit;
             if (!String.IsNullOrWhiteSpace(UserName.Text) && !String.IsNullOrWhiteSpace(UserSurname.Text) && !String.IsNullOrWhiteSpace(UserDate.Text)&& int.TryParse(UserUnit.Text, out unit))
             {
-                TypeOfUser typeOfUser;
+                UserRoles typeOfUser;
                 var index = SelectedTypeOfUser.SelectedIndex;
                 if (index == 0)//employee
-                    typeOfUser = TypeOfUser.Employee;
+                    typeOfUser = UserRoles.Employee;
                 else if (index == 1)//employee
-                    typeOfUser = TypeOfUser.Manager;
+                    typeOfUser = UserRoles.Manager;
                 else if (index == 2)//employee
-                    typeOfUser = TypeOfUser.Administrator;
+                    typeOfUser = UserRoles.Administrator;
                 else
-                    typeOfUser = TypeOfUser.Error;
+                    typeOfUser = UserRoles.Error;
 
                 user.AddUser(UserName.Text, UserSurname.Text, dateTime, typeOfUser,unit);
                 MessageBox.Show("User was added successfully");

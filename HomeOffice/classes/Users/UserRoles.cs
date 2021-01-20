@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HomeOffice.classes.Users
 {
-    enum TypeOfUser
+    enum UserRoles
     {
         Error,
         Administrator=1,

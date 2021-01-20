@@ -229,10 +229,13 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="classes\Tasks\Task.cs" />
+    <Compile Include="classes\Tasks\TaskDictionary.cs" />
+    <Compile Include="classes\Units\Unit.cs" />
     <Compile Include="classes\Users\Administrator.cs" />
     <Compile Include="classes\Users\Employee.cs" />
     <Compile Include="classes\Users\Manager.cs" />
-    <Compile Include="classes\Users\TypeOfUser.cs" />
+    <Compile Include="classes\Users\UserRoles.cs" />
     <Compile Include="classes\Users\User.cs" />
     <Compile Include="Data\HomeOfficeContext.cs" />
     <Compile Include="MainWindow.xaml.cs">
