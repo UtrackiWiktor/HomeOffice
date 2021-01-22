@@ -22,7 +22,7 @@ namespace HomeOffice
     /// </summary>
     public partial class AdminPanel : Window
     {
-        User user = new Administrator();
+        User user = new Administrator("Paweł","jumper",DateTime.Now,UserRoles.Administrator,10);
         public AdminPanel()
         {
            
@@ -35,30 +35,30 @@ namespace HomeOffice
             try
             {
                 dateTime = DateTime.ParseExact(UserDate.Text, "dd.MM.yyyy", CultureInfo.InvariantCulture);
-            }
-            catch(Exception exception)
-            {
-                MessageBox.Show("You probably provided incorrect data. Please correct it");
-            }
-            int unit;
-            if (!String.IsNullOrWhiteSpace(UserName.Text) && !String.IsNullOrWhiteSpace(UserSurname.Text) && !String.IsNullOrWhiteSpace(UserDate.Text)&& int.TryParse(UserUnit.Text, out unit))
-            {
-                UserRoles typeOfUser;
-                var index = SelectedTypeOfUser.SelectedIndex;
-                if (index == 0)//employee
-                    typeOfUser = UserRoles.Employee;
-                else if (index == 1)//employee
-                    typeOfUser = UserRoles.Manager;
-                else if (index == 2)//employee
-                    typeOfUser = UserRoles.Administrator;
-                else
-                    typeOfUser = UserRoles.Error;
+                int unit;
+                if (!String.IsNullOrWhiteSpace(UserName.Text) && !String.IsNullOrWhiteSpace(UserSurname.Text) && !String.IsNullOrWhiteSpace(UserDate.Text)&& int.TryParse(UserUnit.Text, out unit))
+                {
+                    UserRoles typeOfUser;
+                    var index = SelectedTypeOfUser.SelectedIndex;
+                    if (index == 0)//employee
+                        typeOfUser = UserRoles.Employee;
+                    else if (index == 1)//employee
+                        typeOfUser = UserRoles.Manager;
+                    else if (index == 2)//employee
+                        typeOfUser = UserRoles.Administrator;
+                    else
+                        typeOfUser = UserRoles.Error;
 
-                user.AddUser(UserName.Text, UserSurname.Text, dateTime, typeOfUser,unit);
-                MessageBox.Show("User was added successfully");
-                UserGrid.ItemsSource = user.UsersToList();
+                    user.AddUser(new User(UserName.Text, UserSurname.Text, dateTime, typeOfUser,unit));
+                    MessageBox.Show("User was added successfully");
+                    UserGrid.ItemsSource = user.AllUsersToList();
+                }
+                else
+                {
+                    MessageBox.Show("You probably provided incorrect data. Please correct it");
+                }
             }
-            else
+            catch (Exception exception)
             {
                 MessageBox.Show("You probably provided incorrect data. Please correct it");
             }
@@ -66,19 +66,19 @@ namespace HomeOffice
 
         private void RefreshButton_Click(object sender, RoutedEventArgs e)
         {
-            UserGrid.ItemsSource = user.UsersToList();
+            UserGrid.ItemsSource = user.AllUsersToList();
         }
 
         private void UserGrid_Loaded(object sender, RoutedEventArgs e)
         {
-            UserGrid.ItemsSource = user.UsersToList();
+            UserGrid.ItemsSource = user.AllUsersToList();
         }
 
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Do you want to delete this user?", "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             user.DeleteUser(((User)UserGrid.SelectedItem));
-            UserGrid.ItemsSource = user.UsersToList();
+            UserGrid.ItemsSource = user.AllUsersToList();
         }
     }
 }

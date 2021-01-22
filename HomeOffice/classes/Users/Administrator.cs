@@ -14,26 +14,19 @@ namespace HomeOffice.classes.Users
 {
     class Administrator: User
     {
+        public Administrator(string name, string surname, DateTime date, UserRoles typeOfUser, int unit) : base(name, surname, date, typeOfUser, unit) { }
 
-        public override void AddUser(string name, string surname, DateTime date, UserRoles typeOfUser, int unit)
+        public override void AddUser(User user)
         {
             using (var DbContext = new HomeOfficeContext())
             {
                 DbContext.Database.EnsureCreated();
-                User user = new User
-                {
-                    Name = name,
-                    Surname = surname,
-                    DateOfBirth = date,
-                    UserGroup = (int)typeOfUser,
-                    Unit = unit
-                };
                 DbContext.Users.Add(user);
                 DbContext.SaveChanges();
             }
         }
 
-        public override List<User> UsersToList()
+        public override List<User> AllUsersToList()
         {
             using (var DbContext = new HomeOfficeContext())
             {

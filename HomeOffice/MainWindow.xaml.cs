@@ -27,15 +27,7 @@ namespace HomeOffice
         public MainWindow()
         {
             
-            //User user;
-            //string Data = "admin";
-            //if (Data == "admin")
-            //    user = new Administrator();
-            //else if (Data == "employee")
-            //    user = new Employee();
-            //else
-            //    user = new Manager();
-            //user.addUser();
+
             InitializeComponent();
         }
 

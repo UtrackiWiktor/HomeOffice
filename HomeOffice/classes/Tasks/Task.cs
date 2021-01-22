@@ -13,25 +13,25 @@ namespace HomeOffice.classes.Tasks
         public int UsersID { get; set; }
         public int TaskDictionaryID { get; set; }
         public bool Status { get; set; }
-
-        public void AddTask(int UID, int TDID)
+        public Task() { }//used by entity framework, otherwise it throws exp
+        public Task(int UID,int TDID)
+        {
+            UsersID = UID;
+            TaskDictionaryID = TDID;
+            Status = false;
+        }
+        public void AddTask()
         {
             using (var DbContext = new HomeOfficeContext())
             {
                 DbContext.Database.EnsureCreated();
-                Task task = new Task
-                {
-                    UsersID = UID,
-                    TaskDictionaryID = TDID,
-                    Status = false
 
-                };
-                DbContext.Tasks.Add(task);
+                DbContext.Tasks.Add(this);
                 DbContext.SaveChanges();
             }
         }
 
-        public List<Task> TasksToList()
+        public List<Task> AllTasksToList()
         {
             using (var DbContext = new HomeOfficeContext())
             {
@@ -40,11 +40,11 @@ namespace HomeOffice.classes.Tasks
                 return tasks;
             }
         }
-        public void DeleteTask(Task task)
+        public void DeleteTask()
         {
             using (var DbContext = new HomeOfficeContext())
             {
-                DbContext.Remove(task);
+                DbContext.Remove(this);
                 DbContext.SaveChanges();
             }
         }

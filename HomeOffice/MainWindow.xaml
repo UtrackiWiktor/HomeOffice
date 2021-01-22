@@ -7,6 +7,10 @@
         mc:Ignorable="d"
         Title="Hello World!" Height="450" Width="800">
     <Grid>
-        <Button Margin="128,75,112,92" x:Name="LogIn" Click="LogIn_Click">Log in</Button>
+        <Button Margin="128,268,112,92" x:Name="LogIn" Click="LogIn_Click">Log in</Button>
+        <TextBox HorizontalAlignment="Left" Height="62" Margin="128,59,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="552"/>
+        <TextBox HorizontalAlignment="Left" Height="62" Margin="128,157,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="552"/>
+        <Label Content="Pesel" HorizontalAlignment="Left" Margin="128,10,0,0" VerticalAlignment="Top"/>
+        <Label Content="Password:" HorizontalAlignment="Left" Margin="128,121,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

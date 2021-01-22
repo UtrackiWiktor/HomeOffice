@@ -12,24 +12,23 @@ namespace HomeOffice.classes.Tasks
         public int ID { get; set; }
         public string TaskName { get; set; }
         public string TaskDescription { get; set; }
-
-        public void AddTaskDictionary(string tskName, string tskDesctiption)
+        public TaskDictionary() { }//used by entity framework, otherwise it throws exp
+        public TaskDictionary(string tskName, string tskDesctiption)
+        {
+             TaskName = tskName;
+             TaskDescription = tskDesctiption;
+        }
+        public void AddTaskDictionary()
         {
             using (var DbContext = new HomeOfficeContext())
             {
                 DbContext.Database.EnsureCreated();
-                TaskDictionary taskDictionary = new TaskDictionary
-                {
-                    TaskName = tskName,
-                    TaskDescription = tskDesctiption
-
-                };
-                DbContext.TaskDictionary.Add(taskDictionary);
+                DbContext.TaskDictionary.Add(this);
                 DbContext.SaveChanges();
             }
         }
 
-        public List<TaskDictionary> TaskDictionaryToList()
+        public List<TaskDictionary> AllTaskDictionaryToList()
         {
             using (var DbContext = new HomeOfficeContext())
             {
@@ -38,11 +37,11 @@ namespace HomeOffice.classes.Tasks
                 return tasksDictionary;
             }
         }
-        public void DeleteTaskDictionary(TaskDictionary taskDictionary)
+        public void DeleteTaskDictionary()
         {
             using (var DbContext = new HomeOfficeContext())
             {
-                DbContext.Remove(taskDictionary);
+                DbContext.Remove(this);
                 DbContext.SaveChanges();
             }
         }

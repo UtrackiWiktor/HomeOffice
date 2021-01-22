@@ -14,9 +14,17 @@ namespace HomeOffice.classes.Users
         public DateTime DateOfBirth { get; set; }
         public int Unit { get; set; }
         public int UserGroup { get; set; }
-
-        public virtual void AddUser(string name, string surname, DateTime date, UserRoles typeOfUser, int unit) { }
-        public virtual List<User> UsersToList()
+        public User() { }//used by entity framework, otherwise it throws exp
+        public User(string name, string surname, DateTime date, UserRoles typeOfUser, int unit)
+        {
+            Name = name;
+            Surname = surname;
+            DateOfBirth = date;
+            UserGroup = (int)typeOfUser;
+            Unit = unit;
+        }
+        public virtual void AddUser(User user) { }
+        public virtual List<User> AllUsersToList()
         {
             return null;
         }
