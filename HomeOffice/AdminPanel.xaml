@@ -24,12 +24,14 @@
         <Label Content="Type of User:" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="546,0,163.6,392"/>
         <Label Content="Unit:" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="10,63,0,329"/>
         <TextBox x:Name="UserUnit" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Margin="10,91,0,0" Width="173"/>
+        <Label Content="Pesel:" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="188,63,0,329"/>
+        <TextBox x:Name="UserPesel" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Margin="188,91,0,0" Width="173"/>
         <Button Content="Refresh" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" x:Name="RefreshButton" Margin="546,137,0,0" Width="173" Click="RefreshButton_Click" RenderTransformOrigin="0.491,-0.5"/>
         <DataGrid Name="UserGrid" HorizontalAlignment="Left" Height="239" Margin="10,170,0,0" VerticalAlignment="Top" Width="709" Loaded="UserGrid_Loaded">
             <DataGrid.ContextMenu>
-            <ContextMenu>
+                <ContextMenu>
 
-                <!--MenuItem Header="Edit" Click="Edit_Click">
+                    <!--MenuItem Header="Edit" Click="Edit_Click">
 
                     <MenuItem.Icon>
 
@@ -38,20 +40,20 @@
                     </MenuItem.Icon>
 
                 </-->
-                <MenuItem Header="Delete" Click="Delete_Click">
+                    <MenuItem Header="Delete" Click="Delete_Click">
 
-                    <MenuItem.Icon>
+                        <MenuItem.Icon>
 
-                        <Image Name="Delete" Height="20" Width="20"></Image>
+                            <Image Name="Delete" Height="20" Width="20"></Image>
 
-                    </MenuItem.Icon>
+                        </MenuItem.Icon>
 
-                </MenuItem>
+                    </MenuItem>
 
-            </ContextMenu>
+                </ContextMenu>
 
             </DataGrid.ContextMenu>
-          </DataGrid>
+        </DataGrid>
         <!--Button Content="Delete selected" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" x:Name="RefreshButton_Copy" Margin="10,431,0,0" Width="709" Click="DeleteButton_Click" RenderTransformOrigin="0.491,-0.5"/-->
     </Grid>
 

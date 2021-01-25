@@ -8,6 +8,8 @@ using HomeOffice.classes.Users;
 using Microsoft.EntityFrameworkCore;
 using MySQL.Data.EntityFrameworkCore;
 using HomeOffice.classes.Tasks;
+using HomeOffice.classes.Passwords;
+
 using HomeOffice.classes.Units;
 namespace HomeOffice.Data
 {
@@ -17,6 +19,7 @@ namespace HomeOffice.Data
         public DbSet<classes.Tasks.Task> Tasks { get; set; }
         public DbSet<TaskDictionary> TaskDictionary { get; set; }
         public DbSet<Unit> Units { get; set; }
+        public DbSet<Password> Passwords { get; set; }
         //then DbSets of tasks, units, user groups and task dictionaries
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -35,6 +38,7 @@ namespace HomeOffice.Data
                 entity.Property(e => e.DateOfBirth).IsRequired().HasColumnName("DateOfBirth");
                 entity.Property(e => e.Unit).IsRequired().HasColumnName("Units_Id");
                 entity.Property(e => e.UserGroup).IsRequired().HasColumnName("UserRoles_Id");
+                entity.Property(e => e.PESEL).IsRequired().HasColumnName("PESEL");
             });
 
             modelBuilder.Entity<classes.Tasks.Task>(entity =>
@@ -50,6 +54,12 @@ namespace HomeOffice.Data
                 entity.HasKey(e => e.ID);
                 entity.Property(e => e.TaskDescription).IsRequired().HasColumnName("TaskDescription");
                 entity.Property(e => e.TaskName).IsRequired().HasColumnName("TaskName");
+            });
+
+            modelBuilder.Entity<Password>(entity =>
+            {
+                entity.HasKey(e => e.ID);
+                entity.Property(e => e.Password_).IsRequired().HasColumnName("Password");
             });
         }
     }

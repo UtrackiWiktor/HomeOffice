@@ -12,17 +12,14 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using HomeOffice.classes.Users;
+using HomeOffice.classes.Passwords;
 using System.Globalization;
 
 namespace HomeOffice
 {
-    /// <summary>
-    /// Interaction logic for AdminPanel.xaml
-    /// </summary>
     public partial class AdminPanel : Window
     {
-        User user = new Administrator("Paweł","jumper",DateTime.Now,UserRoles.Administrator,10);
+        User user = new Administrator("Paweł","jumper",DateTime.Now,UserRoles.Administrator,10, 89020119495);
         public AdminPanel()
         {
            
@@ -48,9 +45,13 @@ namespace HomeOffice
                         typeOfUser = UserRoles.Administrator;
                     else
                         typeOfUser = UserRoles.Error;
+                    User newUser = new User(UserName.Text, UserSurname.Text, dateTime, typeOfUser, unit, Convert.ToInt64(UserPesel.Text));
 
-                    user.AddUser(new User(UserName.Text, UserSurname.Text, dateTime, typeOfUser,unit));
-                    MessageBox.Show("User was added successfully");
+                    user.AddUser(newUser);
+                    Password password = new Password(newUser.ID);
+                    user.AddPassword(password);
+                    MessageBox.Show("User was added successfully.\n His password is: \""+password.GetPassword()+"\". \nPlease note it otherwise this data will be lost.");
+                    password = null;//wipe data
                     UserGrid.ItemsSource = user.AllUsersToList();
                 }
                 else

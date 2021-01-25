@@ -8,6 +8,6 @@ namespace HomeOffice.classes.Users
 {
     class Employee: User
     {
-        public Employee(string name, string surname, DateTime date, UserRoles typeOfUser, int unit) : base(name, surname, date, typeOfUser, unit) { }
+        public Employee(string name, string surname, DateTime date, UserRoles typeOfUser, int unit, long Pesel) : base(name, surname, date, typeOfUser, unit, Pesel) { }
     }
 }

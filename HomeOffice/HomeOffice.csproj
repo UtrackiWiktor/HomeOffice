@@ -229,6 +229,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="classes\Passwords\Password.cs" />
     <Compile Include="classes\Tasks\Task.cs" />
     <Compile Include="classes\Tasks\TaskDictionary.cs" />
     <Compile Include="classes\Units\Unit.cs" />

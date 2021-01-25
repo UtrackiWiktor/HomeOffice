@@ -1,4 +1,5 @@
 ﻿using HomeOffice.Data;
+using HomeOffice.classes.Passwords;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace HomeOffice.classes.Users
 {
     class Administrator: User
     {
-        public Administrator(string name, string surname, DateTime date, UserRoles typeOfUser, int unit) : base(name, surname, date, typeOfUser, unit) { }
+        public Administrator(string name, string surname, DateTime date, UserRoles typeOfUser, int unit,long Pesel) : base(name, surname, date, typeOfUser, unit, Pesel) { }
 
         public override void AddUser(User user)
         {
@@ -25,7 +26,15 @@ namespace HomeOffice.classes.Users
                 DbContext.SaveChanges();
             }
         }
-
+        public override void AddPassword(Password password)
+        {
+            using (var DbContext = new HomeOfficeContext())
+            {
+                DbContext.Database.EnsureCreated();
+                DbContext.Passwords.Add(password);
+                DbContext.SaveChanges();
+            }
+        }
         public override List<User> AllUsersToList()
         {
             using (var DbContext = new HomeOfficeContext())
@@ -37,9 +46,20 @@ namespace HomeOffice.classes.Users
         }
         public override void DeleteUser(User user)
         {
+            DeletePasswordOfUser(user);
             using (var DbContext = new HomeOfficeContext())
             {
                 DbContext.Remove(user);
+                DbContext.SaveChanges();
+            }
+        }
+
+        private void DeletePasswordOfUser(User user)
+        {
+            using (var DbContext = new HomeOfficeContext())
+            {
+                Password password = new Password(user.ID);
+                DbContext.Remove(password);
                 DbContext.SaveChanges();
             }
         }
