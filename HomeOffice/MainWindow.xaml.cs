@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using HomeOffice.classes.Users;
+using HomeOffice.classes.Passwords;
 using MySql.Data.MySqlClient;
 using HomeOffice.Data;
 using System.Xaml;
@@ -33,7 +34,21 @@ namespace HomeOffice
 
         private void LogIn_Click(object sender, RoutedEventArgs e)
         {
-
+            User user = new User();
+            //user.PESEL = Convert.ToInt64(PeselBox.Text);
+            //var users = user.AllUsersToList();
+            //User result =users.Single(u=>u.PESEL==user.PESEL);
+            //if(result!=null)
+            //{
+            //    Password password = new Password(user.ID);
+            //    var passwords = password.AllPasswordsToList();
+            //    Password res = passwords.Single(p => p.ID == password.ID);
+            //    if(res.Password_==password.Password_)
+            //    {
+            //        AdminPanel AdminPanel = new AdminPanel();
+            //        AdminPanel.Show();
+            //    }
+            //}
             AdminPanel adminPanel = new AdminPanel();
             adminPanel.Show();
         }
