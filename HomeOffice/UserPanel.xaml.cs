@@ -17,10 +17,10 @@ using System.Globalization;
 
 namespace HomeOffice
 {
-    public partial class AdminPanel : Window
+    public partial class UserPanel : Window
     {
         User user = new Administrator("Paweł","jumper",DateTime.Now,UserRoles.Administrator,10, 89020119495);
-        public AdminPanel()
+        public UserPanel()
         {
            
             InitializeComponent();

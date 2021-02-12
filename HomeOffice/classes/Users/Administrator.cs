@@ -39,6 +39,7 @@ namespace HomeOffice.classes.Users
         {
             using (var DbContext = new HomeOfficeContext())
             {
+            
                 var users = DbContext.Users.ToList();
 
                 return users;

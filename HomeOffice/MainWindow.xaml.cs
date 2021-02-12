@@ -45,12 +45,12 @@ namespace HomeOffice
             //    Password res = passwords.Single(p => p.ID == password.ID);
             //    if(res.Password_==password.Password_)
             //    {
-            //        AdminPanel AdminPanel = new AdminPanel();
-            //        AdminPanel.Show();
+            //        UserPanel UserPanel = new UserPanel();
+            //        UserPanel.Show();
             //    }
             //}
-            AdminPanel adminPanel = new AdminPanel();
-            adminPanel.Show();
+            UserPanel userPanel = new UserPanel();
+            userPanel.Show();
         }
     }
 }

@@ -1,11 +1,11 @@
-﻿<Window x:Class="HomeOffice.AdminPanel"
+﻿<Window x:Class="HomeOffice.UserPanel"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HomeOffice"
         mc:Ignorable="d"
-        Title="AdminPanel" Height="500" Width="800">
+        Title="HomeOffice- User Panel" Height="500" Width="800">
     <Grid>
 
         <TextBox Name="UserName" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Margin="10,27,0,365" Width="173"></TextBox>
@@ -18,13 +18,13 @@
             <ComboBoxItem Content="Administrator" HorizontalAlignment="Left" Width="171"/>
         </ComboBox>
 
-        <Label Content="Name:" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="10,0,605.6,392"/>
-        <Label Content="Surname" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="188,0,427.6,392"/>
-        <Label Content="Date of Birth:" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="366,0,344,392"/>
-        <Label Content="Type of User:" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="546,0,163.6,392"/>
-        <Label Content="Unit:" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="10,63,0,329"/>
+        <Label Content="Name:" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="10,0,0,442"/>
+        <Label Content="Surname" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="188,0,0,442"/>
+        <Label Content="Date of Birth:" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="366,0,0,442"/>
+        <Label Content="Type of User:" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="546,0,0,442"/>
+        <Label Content="Unit:" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="10,63,0,378"/>
         <TextBox x:Name="UserUnit" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Margin="10,91,0,0" Width="173"/>
-        <Label Content="Pesel:" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="188,63,0,329"/>
+        <Label Content="Pesel:" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="188,63,0,378"/>
         <TextBox x:Name="UserPesel" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Margin="188,91,0,0" Width="173"/>
         <Button Content="Refresh" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" x:Name="RefreshButton" Margin="546,137,0,0" Width="173" Click="RefreshButton_Click" RenderTransformOrigin="0.491,-0.5"/>
         <DataGrid Name="UserGrid" HorizontalAlignment="Left" Height="239" Margin="10,170,0,0" VerticalAlignment="Top" Width="709" Loaded="UserGrid_Loaded">

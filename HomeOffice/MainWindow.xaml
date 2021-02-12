@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HomeOffice"
         mc:Ignorable="d"
-        Title="Hello World!" Height="450" Width="800">
+        Title="HomeOffice- Log in" Height="450" Width="800">
     <Grid>
         <Button Margin="128,268,112,92" x:Name="LogIn" Click="LogIn_Click">Log in</Button>
         <TextBox  x:Name="PeselBox" HorizontalAlignment="Left" Height="62" Margin="128,59,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="552"/>
