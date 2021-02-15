@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HomeOffice.classes.Passwords;
+using HomeOffice.Data;
 
 namespace HomeOffice.classes.Users
 {
@@ -25,6 +26,28 @@ namespace HomeOffice.classes.Users
             UserGroup = (int)typeOfUser;
             Unit = unit;
             PESEL = pesel;
+        }
+        public User(long pesel)
+        {
+            
+            using (var DbContext = new HomeOfficeContext())
+            {
+                DbContext.Database.EnsureCreated();
+                var query = DbContext.Users.Where(us => us.PESEL == pesel);
+                User u = query.FirstOrDefault<User>();
+                if (u != null)
+                {
+                    ID = u.ID;
+                    Name = u.Name;
+                    Surname = u.Surname;
+                    DateOfBirth = u.DateOfBirth;
+                    UserGroup = u.UserGroup;
+                    Unit = u.Unit;
+                    PESEL = u.PESEL;
+                }
+                else
+                    ID = -1;
+            }
         }
         public virtual void AddPassword(Password password) { }
         public virtual void AddUser(User user) { }

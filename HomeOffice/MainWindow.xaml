@@ -8,9 +8,10 @@
         Title="HomeOffice- Log in" Height="450" Width="800">
     <Grid>
         <Button Margin="128,268,112,92" x:Name="LogIn" Click="LogIn_Click">Log in</Button>
-        <TextBox  x:Name="PeselBox" HorizontalAlignment="Left" Height="62" Margin="128,59,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="552"/>
-        <TextBox  x:Name="PasswordBox" HorizontalAlignment="Left" Height="62" Margin="128,157,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="552"/>
-        <Label Content="Pesel" HorizontalAlignment="Left" Margin="128,10,0,0" VerticalAlignment="Top"/>
-        <Label Content="Password:" HorizontalAlignment="Left" Margin="128,121,0,0" VerticalAlignment="Top"/>
+        <TextBox  x:Name="PeselBox" HorizontalAlignment="Left" Height="25" Margin="128,59,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="552"/>
+        <TextBox  x:Name="PasswordBox" HorizontalAlignment="Left" Height="25" Margin="128,157,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="552"/>
+        <Label x:Name="Warning" Content="" HorizontalAlignment="Left" Margin="128,10,0,0" VerticalAlignment="Top" Foreground="Red"/>
+        <Label Content="Pesel:" HorizontalAlignment="Left" Margin="62,55,0,0" VerticalAlignment="Top"/>
+        <Label Content="Password:" HorizontalAlignment="Left" Margin="37,153,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

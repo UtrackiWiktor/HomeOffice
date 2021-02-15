@@ -20,6 +20,7 @@ using System.Xaml;
 using Microsoft.EntityFrameworkCore;
 using HomeOffice.classes.Tasks;
 using HomeOffice.classes.Units;
+using HomeOffice.Views;
 
 namespace HomeOffice
 {
@@ -39,8 +40,27 @@ namespace HomeOffice
 
         private void LogIn_Click(object sender, RoutedEventArgs e)
         {
-            
-            //user.PESEL = Convert.ToInt64(PeselBox.Text);
+
+            try
+            {
+                user = new User(Convert.ToInt64(PeselBox.Text));
+            }
+            catch
+            {
+               Warning.Content="The PESEL value is incorrect";
+            }
+            if (user != null && user.ID >= 1 )
+            {
+                //MessageBox.Show(user.Surname);//to debbuging
+                Warning.Content = "";
+                UserPanel userPanel = new UserPanel(user);
+                userPanel.Show();
+                
+            }
+            else
+            {
+                Warning.Content = "No user with such PESEL in database";
+            }
             //var users = user.AllUsersToList();
             //User result =users.Single(u=>u.PESEL==user.PESEL);
             //if(result!=null)
@@ -56,9 +76,8 @@ namespace HomeOffice
             //}
 
             //test normalnie wyszukaj w bazie
-            user= new Administrator("Paweł", "Tomaszewski", DateTime.Now, UserRoles.Administrator, 10, 89020119495);
-            UserPanel userPanel = new UserPanel(user);
-            userPanel.Show();
+           // user= new Administrator("Paweł", "Tomaszewski", DateTime.Now, UserRoles.Administrator, 10, 89020119495);
+
         }
     }
 }

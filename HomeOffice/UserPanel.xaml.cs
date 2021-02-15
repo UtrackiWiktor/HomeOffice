@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using HomeOffice.classes.Passwords;
+using HomeOffice.Views;
 using System.Globalization;
 
 namespace HomeOffice
@@ -28,8 +29,19 @@ namespace HomeOffice
 
         public UserPanel(User u)
         {
-            user = u;
             InitializeComponent();
+            user = u;
+            if ((UserRoles)user.UserGroup == UserRoles.Administrator)
+            {
+                var viewModel = new AdminView();
+                this.DataContext = viewModel;
+            }
+            else if ((UserRoles)user.UserGroup == UserRoles.Employee)
+            {
+                var viewModel = new EmployeeView();
+                this.DataContext = viewModel;
+            }
+            
         }
 
         private void AddUser_Click(object sender, RoutedEventArgs e)
