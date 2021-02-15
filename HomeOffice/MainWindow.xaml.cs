@@ -25,10 +25,10 @@ namespace HomeOffice
 {
     public partial class MainWindow : Window
     {
-        private readonly User user1 = new User();
-        public void SetUser(User user)
+       private User user = new User();
+        public void SetUser(User u)
         {
-
+            user = u;
         }
         public MainWindow()
         {
@@ -54,7 +54,10 @@ namespace HomeOffice
             //        UserPanel.Show();
             //    }
             //}
-            UserPanel userPanel = new UserPanel();
+
+            //test normalnie wyszukaj w bazie
+            user= new Administrator("Paweł", "Tomaszewski", DateTime.Now, UserRoles.Administrator, 10, 89020119495);
+            UserPanel userPanel = new UserPanel(user);
             userPanel.Show();
         }
     }

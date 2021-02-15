@@ -19,10 +19,16 @@ namespace HomeOffice
 {
     public partial class UserPanel : Window
     {
-        User user = new Administrator("Paweł","jumper",DateTime.Now,UserRoles.Administrator,10, 89020119495);
+        User user;
         public UserPanel()
         {
-           
+            user = null;
+            InitializeComponent();
+        }
+
+        public UserPanel(User u)
+        {
+            user = u;
             InitializeComponent();
         }
 
@@ -53,6 +59,8 @@ namespace HomeOffice
                     MessageBox.Show("User was added successfully.\n His password is: \""+password.GetPassword()+"\". \nPlease note it otherwise this data will be lost.");
                     password = null;//wipe data
                     UserGrid.ItemsSource = user.AllUsersToList();
+                    //test
+                    //((MainWindow)Application.Current.MainWindow).SetUser(new User("Ula", "Stańczyk", dateTime, UserRoles.Employee, 10, 100));
                 }
                 else
                 {
