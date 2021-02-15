@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HomeOffice.classes.Tasks
 {
-    class TaskDictionary
+    public class TaskDictionary
     {
         public int ID { get; set; }
         public string TaskName { get; set; }

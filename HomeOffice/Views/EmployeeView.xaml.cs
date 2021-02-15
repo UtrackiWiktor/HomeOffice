@@ -24,5 +24,9 @@ namespace HomeOffice.Views
         {
             InitializeComponent();
         }
+        void LoadTasks(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -7,7 +7,7 @@ using HomeOffice.classes.Passwords;
 
 namespace HomeOffice.classes.Users
 {
-    class User
+    public class User
     {
         public int ID { get; set; }
         public string Name { get; set; }

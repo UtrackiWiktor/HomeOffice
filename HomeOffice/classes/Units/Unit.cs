@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using HomeOffice.Data;
 namespace HomeOffice.classes.Units
 {
-    class Unit
+    public class Unit
     {
         public int ID { get; set; }
         public string UnitName { get; set; }

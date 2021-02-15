@@ -24,5 +24,23 @@ namespace HomeOffice.Views
         {
             InitializeComponent();
         }
+
+        private void AddUser_Click(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private void RefreshButton_Click(object sender, RoutedEventArgs e)
+        {
+           
+        }
+
+        private void UserGrid_Loaded(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+        }
     }
 }

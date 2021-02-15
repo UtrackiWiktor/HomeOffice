@@ -25,6 +25,11 @@ namespace HomeOffice
 {
     public partial class MainWindow : Window
     {
+        private readonly User user1 = new User();
+        public void SetUser(User user)
+        {
+
+        }
         public MainWindow()
         {
             
@@ -34,7 +39,7 @@ namespace HomeOffice
 
         private void LogIn_Click(object sender, RoutedEventArgs e)
         {
-            User user = new User();
+            
             //user.PESEL = Convert.ToInt64(PeselBox.Text);
             //var users = user.AllUsersToList();
             //User result =users.Single(u=>u.PESEL==user.PESEL);

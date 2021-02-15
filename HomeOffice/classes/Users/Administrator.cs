@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using System.Web;
 namespace HomeOffice.classes.Users
 {
-    class Administrator: User
+    public class Administrator: User
     {
         public Administrator(string name, string surname, DateTime date, UserRoles typeOfUser, int unit,long Pesel) : base(name, surname, date, typeOfUser, unit, Pesel) { }
 

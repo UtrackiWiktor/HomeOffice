@@ -43,7 +43,7 @@
             <TextBox Name="empUnit" VerticalContentAlignment="Center" FontSize="20" Margin="20,5" />
         </DockPanel>
         <DockPanel Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="3" Grid.RowSpan="7">
-            <DataGrid Name="tasksList" Margin="20" Loaded="loadTasks"/>
+            <DataGrid Name="tasksList" Margin="20" Loaded="LoadTasks"/>
         </DockPanel>
     </Grid>
 </UserControl>
