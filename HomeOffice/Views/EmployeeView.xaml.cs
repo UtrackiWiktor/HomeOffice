@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using HomeOffice.classes.Users;
 
 namespace HomeOffice.Views
 {
@@ -20,8 +21,10 @@ namespace HomeOffice.Views
     /// </summary>
     public partial class EmployeeView : UserControl
     {
+        User user;
         public EmployeeView()
         {
+            user = ((MainWindow)Application.Current.MainWindow).GetUser();
             InitializeComponent();
         }
         void LoadTasks(object sender, RoutedEventArgs e)

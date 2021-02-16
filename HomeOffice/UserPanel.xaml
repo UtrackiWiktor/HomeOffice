@@ -18,52 +18,6 @@
     </Window.Resources>
     <Grid>
         <ContentControl Content="{Binding}"/>
-        <TextBox Name="UserName" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Margin="10,27,0,365" Width="173"></TextBox>
-        <TextBox Name="UserSurname" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Margin="188,27,0,365" Width="173"></TextBox>
-        <TextBox x:Name="UserDate" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Margin="366,27,0,365" Width="175"/>
-        <Button Content="Add User to Database" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Name="AddUser" Margin="546,81,0,0" Width="173" Click="AddUser_Click"/>
-        <ComboBox Name="SelectedTypeOfUser" HorizontalAlignment="Left" Margin="546,27,0,0" VerticalAlignment="Top" Width="173" Height="28">
-            <ComboBoxItem Content="Employee" HorizontalAlignment="Left" Width="171"/>
-            <ComboBoxItem Content="Manager" HorizontalAlignment="Left" Width="171"/>
-            <ComboBoxItem Content="Administrator" HorizontalAlignment="Left" Width="171"/>
-        </ComboBox>
-
-        <Label Content="Name:" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="10,0,0,442"/>
-        <Label Content="Surname" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="188,0,0,442"/>
-        <Label Content="Date of Birth:" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="366,0,0,442"/>
-        <Label Content="Type of User:" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="546,0,0,442"/>
-        <Label Content="Unit:" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="10,63,0,378"/>
-        <TextBox x:Name="UserUnit" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Margin="10,91,0,0" Width="173"/>
-        <Label Content="Pesel:" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" Margin="188,63,0,378"/>
-        <TextBox x:Name="UserPesel" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Margin="188,91,0,0" Width="173"/>
-        <Button Content="Refresh" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" x:Name="RefreshButton" Margin="546,137,0,0" Width="173" Click="RefreshButton_Click" RenderTransformOrigin="0.491,-0.5"/>
-        <DataGrid Name="UserGrid" HorizontalAlignment="Left" Height="239" Margin="10,170,0,0" VerticalAlignment="Top" Width="709" Loaded="UserGrid_Loaded">
-            <DataGrid.ContextMenu>
-                <ContextMenu>
-
-                    <!--MenuItem Header="Edit" Click="Edit_Click">
-
-                    <MenuItem.Icon>
-
-                        <Image Name="Edit" Height="20" Width="20"></Image>
-
-                    </MenuItem.Icon>
-
-                </-->
-                    <MenuItem Header="Delete" Click="Delete_Click">
-
-                        <MenuItem.Icon>
-
-                            <Image Name="Delete" Height="20" Width="20"></Image>
-
-                        </MenuItem.Icon>
-
-                    </MenuItem>
-
-                </ContextMenu>
-
-            </DataGrid.ContextMenu>
-        </DataGrid>
         <!--Button Content="Delete selected" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" x:Name="RefreshButton_Copy" Margin="10,431,0,0" Width="709" Click="DeleteButton_Click" RenderTransformOrigin="0.491,-0.5"/-->
     </Grid>
 

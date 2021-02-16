@@ -24,15 +24,16 @@ namespace HomeOffice.Views
     public partial class AdminView : UserControl
     {
         User user;
-        public AdminView()
-        {
-            InitializeComponent();
-        }
-        public AdminView(User u)
+        public void SetUser(User u)
         {
             user = u;
+        }
+        public AdminView()
+        {
+            user= ((MainWindow)Application.Current.MainWindow).GetUser();
             InitializeComponent();
         }
+
 
         private void AddUser_Click(object sender, RoutedEventArgs e)
         {

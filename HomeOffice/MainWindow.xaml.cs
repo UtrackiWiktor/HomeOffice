@@ -31,6 +31,10 @@ namespace HomeOffice
         {
             user = u;
         }
+        public User GetUser()
+        {
+            return user;
+        }
         public MainWindow()
         {
             
