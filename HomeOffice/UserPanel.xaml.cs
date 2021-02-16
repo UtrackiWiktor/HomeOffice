@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using HomeOffice.classes.Passwords;
 using HomeOffice.Views;
 using System.Globalization;
+using HomeOffice.ViewModels;
 
 namespace HomeOffice
 {
@@ -33,12 +34,12 @@ namespace HomeOffice
             user = u;
             if ((UserRoles)user.UserGroup == UserRoles.Administrator)
             {
-                var viewModel = new AdminView();
+                var viewModel = new AdminViewModel();
                 this.DataContext = viewModel;
             }
             else if ((UserRoles)user.UserGroup == UserRoles.Employee)
             {
-                var viewModel = new EmployeeView();
+                var viewModel = new EmployeeViewModel();
                 this.DataContext = viewModel;
             }
             
