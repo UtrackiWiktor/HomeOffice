@@ -23,14 +23,14 @@ namespace HomeOffice.Views
     /// </summary>
     public partial class AdminView : UserControl
     {
-        User user;
+        User admin;
         public void SetUser(User u)
         {
-            user = u;
+            admin = new Administrator(u);
         }
         public AdminView()
         {
-            user= ((MainWindow)Application.Current.MainWindow).GetUser();
+            admin= new Administrator (((MainWindow)Application.Current.MainWindow).GetUser());
             InitializeComponent();
         }
 
@@ -56,12 +56,12 @@ namespace HomeOffice.Views
                         typeOfUser = UserRoles.Error;
                     User newUser = new User(UserName.Text, UserSurname.Text, dateTime, typeOfUser, unit, Convert.ToInt64(UserPesel.Text));
 
-                    user.AddUser(newUser);
+                    admin.AddUser(newUser);
                     Password password = new Password(newUser.ID);
-                    user.AddPassword(password);
+                    admin.AddPassword(password);
                     MessageBox.Show("User was added successfully.\n His password is: \"" + password.GetPassword() + "\". \nPlease note it otherwise this data will be lost.");
                     password = null;//wipe data
-                    UserGrid.ItemsSource = user.AllUsersToList();
+                    UserGrid.ItemsSource = admin.AllUsersToList();
                     //test
                     //((MainWindow)Application.Current.MainWindow).SetUser(new User("Ula", "Stańczyk", dateTime, UserRoles.Employee, 10, 100));
                 }
@@ -78,19 +78,19 @@ namespace HomeOffice.Views
 
         private void RefreshButton_Click(object sender, RoutedEventArgs e)
         {
-            UserGrid.ItemsSource = user.AllUsersToList();
+            UserGrid.ItemsSource = admin.AllUsersToList();
         }
 
         private void UserGrid_Loaded(object sender, RoutedEventArgs e)
         {
-            UserGrid.ItemsSource = user.AllUsersToList();
+            UserGrid.ItemsSource = admin.AllUsersToList();
         }
 
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Do you want to delete this user?", "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-                user.DeleteUser(((User)UserGrid.SelectedItem));
-            UserGrid.ItemsSource = user.AllUsersToList();
+                admin.DeleteUser(((User)UserGrid.SelectedItem));
+            UserGrid.ItemsSource = admin.AllUsersToList();
         }
     }
 }

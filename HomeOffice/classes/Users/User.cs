@@ -49,6 +49,16 @@ namespace HomeOffice.classes.Users
                     ID = -1;
             }
         }
+        public User(User u)
+        {
+            ID = u.ID;
+            Name = u.Name;
+            Surname = u.Surname;
+            DateOfBirth = u.DateOfBirth;
+            UserGroup = u.UserGroup;
+            Unit = u.Unit;
+            PESEL = u.PESEL;
+        }
         public virtual void AddPassword(Password password) { }
         public virtual void AddUser(User user) { }
         public virtual List<User> AllUsersToList()
