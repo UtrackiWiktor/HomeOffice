@@ -55,11 +55,16 @@ namespace HomeOffice
             }
             if (user != null && user.ID >= 1 )
             {
-                //MessageBox.Show(user.Surname);//to debbuging
-                Warning.Content = "";
-                UserPanel userPanel = new UserPanel(user);
-                userPanel.Show();
-                
+                Password password = new Password();
+                password.FromDatabase(user.ID);
+                if (password.CompareWithPassword(PasswordBox.Text)&&password.ID>=1)
+                {
+                    Warning.Content = "";
+                    UserPanel userPanel = new UserPanel(user);
+                    userPanel.Show();
+                }
+                else
+                    Warning.Content = "Wrong password";
             }
             else
             {

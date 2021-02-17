@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HomeOffice.Data;
+using System.Security.Cryptography;
 
 namespace HomeOffice.classes.Passwords
 {
@@ -36,13 +37,54 @@ namespace HomeOffice.classes.Passwords
         {
             return Password_;
         }
-        public void EncodePassword(int seed, string toEncode)
+        public string EncodePassword()
         {
-            Password_ = toEncode;
+            using (SHA256 sha256Hash = SHA256.Create())
+            { 
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(Password_));
+
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2"));
+                }
+                Password_ = builder.ToString();
+                return Password_;
+            }
         }
-        public void DecodePassword(int seed, string toDecode)
+        public bool CompareWithPassword(string input)
         {
-            Password_ = toDecode;
+            string result;
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                // ComputeHash - returns byte array  
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
+
+                // Convert byte array to a string   
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2"));
+                }
+                result = builder.ToString();
+            }
+            return (result == Password_);
+        }
+        public void FromDatabase(int id)
+        {
+            using (var DbContext = new HomeOfficeContext())
+            {
+                DbContext.Database.EnsureCreated();
+                var query = DbContext.Passwords.Where(p => p.ID == id);
+                Password password= query.FirstOrDefault<Password>();
+                if (password != null)
+                {
+                    ID = password.ID;
+                    Password_ = password.Password_;
+                }
+                else
+                    ID = -1;
+            }
         }
         public void AddPassword()
         {

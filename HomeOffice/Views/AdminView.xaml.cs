@@ -37,7 +37,7 @@ namespace HomeOffice.Views
 
         private void AddUser_Click(object sender, RoutedEventArgs e)
         {
-            DateTime dateTime = new DateTime();
+            DateTime dateTime;
             try
             {
                 dateTime = DateTime.ParseExact(UserDate.Text, "dd.MM.yyyy", CultureInfo.InvariantCulture);
@@ -58,8 +58,10 @@ namespace HomeOffice.Views
 
                     admin.AddUser(newUser);
                     Password password = new Password(newUser.ID);
+                    var p = password.GetPassword();
+                    password.EncodePassword();
                     admin.AddPassword(password);
-                    MessageBox.Show("User was added successfully.\n His password is: \"" + password.GetPassword() + "\". \nPlease note it otherwise this data will be lost.");
+                    MessageBox.Show("User was added successfully.\n His password is: \"" + p + "\". \nPlease note it otherwise this data will be lost.");
                     password = null;//wipe data
                     UserGrid.ItemsSource = admin.AllUsersToList();
                     //test
