@@ -12,11 +12,13 @@ namespace HomeOffice.classes.Tasks
         public int ID { get; set; }
         public string TaskName { get; set; }
         public string TaskDescription { get; set; }
+        public int Unit { get; set; }
         public TaskDictionary() { }//used by entity framework, otherwise it throws exp
-        public TaskDictionary(string tskName, string tskDesctiption)
+        public TaskDictionary(string tskName, string tskDesctiption, int unit)
         {
              TaskName = tskName;
              TaskDescription = tskDesctiption;
+             Unit = unit;
         }
         public void AddTaskDictionary()
         {

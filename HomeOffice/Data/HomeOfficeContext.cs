@@ -36,24 +36,25 @@ namespace HomeOffice.Data
                 entity.Property(e => e.Name).IsRequired().HasColumnName("Name");
                 entity.Property(e => e.Surname).IsRequired().HasColumnName("Surname");
                 entity.Property(e => e.DateOfBirth).IsRequired().HasColumnName("DateOfBirth");
-                entity.Property(e => e.Unit).IsRequired().HasColumnName("Units_Id");
-                entity.Property(e => e.UserGroup).IsRequired().HasColumnName("UserRoles_Id");
+                entity.Property(e => e.Unit).HasColumnName("Units_ID");
+                entity.Property(e => e.UserGroup).IsRequired().HasColumnName("UserRoles_ID");
                 entity.Property(e => e.PESEL).IsRequired().HasColumnName("PESEL");
             });
 
             modelBuilder.Entity<classes.Tasks.Task>(entity =>
             {
-                entity.HasKey(e => e.ID);
-                entity.Property(e => e.TaskDictionaryID).IsRequired().HasColumnName("TaskDictionary_ID");
-                entity.Property(e => e.UsersID).IsRequired().HasColumnName("Users_ID");
+                entity.HasKey(e => e.Task_ID);
+                entity.Property(e => e.TaskDictionary_ID).IsRequired().HasColumnName("TaskDictionary_ID");
+                entity.Property(e => e.Users_ID).IsRequired().HasColumnName("Users_ID");
                 entity.Property(e => e.Status).IsRequired().HasColumnName("Status");
             });
 
             modelBuilder.Entity<TaskDictionary>(entity =>
             {
                 entity.HasKey(e => e.ID);
-                entity.Property(e => e.TaskDescription).IsRequired().HasColumnName("TaskDescription");
+                entity.Property(e => e.TaskDescription).HasColumnName("TaskDescription");
                 entity.Property(e => e.TaskName).IsRequired().HasColumnName("TaskName");
+                entity.Property(e => e.Unit).HasColumnName("Unit");
             });
 
             modelBuilder.Entity<Password>(entity =>

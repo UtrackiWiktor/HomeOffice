@@ -24,7 +24,7 @@ namespace HomeOffice.classes.Passwords
 
             StringBuilder passwordBuilder = new StringBuilder();
             Random random = new Random();
-            int length = random.Next(8, 15);
+            int length = random.Next(5, 8);
             string legalChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
             for (int i=0;i<length;i++)
             {

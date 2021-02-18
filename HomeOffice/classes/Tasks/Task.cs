@@ -9,15 +9,15 @@ namespace HomeOffice.classes.Tasks
 {
     public class Task
     {
-        public int ID { get; set; }
-        public int UsersID { get; set; }
-        public int TaskDictionaryID { get; set; }
+        public int Task_ID { get; set; }
+        public int Users_ID { get; set; }
+        public int TaskDictionary_ID { get; set; }
         public bool Status { get; set; }
         public Task() { }//used by entity framework, otherwise it throws exp
         public Task(int UID,int TDID)
         {
-            UsersID = UID;
-            TaskDictionaryID = TDID;
+            Users_ID = UID;
+            TaskDictionary_ID = TDID;
             Status = false;
         }
         public void AddTask()
