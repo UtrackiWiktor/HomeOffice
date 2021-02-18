@@ -370,3 +370,4 @@ C:\Users\wikto\Desktop\ważne duperele na studia\Software Engineering\Project - 
 C:\Users\Pawel\source\repos\ProjectStudia\HomeOffice\HomeOffice\obj\Debug\GeneratedInternalTypeHelper.g.cs
 C:\Users\wikto\Desktop\ważne duperele na studia\Software Engineering\Project - Home office\HomeOffice\HomeOffice\obj\Debug\Views\ManagerView.g.cs
 C:\Users\wikto\Desktop\ważne duperele na studia\Software Engineering\Project - Home office\HomeOffice\HomeOffice\obj\Debug\Views\ManagerView.baml
+C:\Users\wikto\Desktop\ważne duperele na studia\Software Engineering\Project - Home office\HomeOffice\HomeOffice\obj\Debug\App.baml

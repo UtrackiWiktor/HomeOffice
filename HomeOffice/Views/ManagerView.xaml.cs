@@ -24,5 +24,21 @@ namespace HomeOffice.Views
         {
             InitializeComponent();
         }
+        private void filterButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void refreshButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void reportButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void tasksGrid_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

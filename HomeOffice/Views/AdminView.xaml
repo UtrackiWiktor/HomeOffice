@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:HomeOffice.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+    <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -74,7 +74,7 @@
             <Button Margin="10,5" Content="Refresh" Name="RefreshButton" Click="RefreshButton_Click"/>
         </DockPanel>
         <DockPanel Grid.Column="0" Grid.Row="5" Grid.RowSpan="7" Grid.ColumnSpan="4">
-            <DataGrid Name="UserGrid" Margin="10, 0, 10, 40" Loaded="UserGrid_Loaded">
+            <DataGrid Name="UserGrid" Margin="10, 0, 10, 20" Loaded="UserGrid_Loaded">
                 <DataGrid.ContextMenu>
                     <ContextMenu>
 
