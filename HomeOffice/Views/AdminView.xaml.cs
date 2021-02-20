@@ -26,6 +26,7 @@ namespace HomeOffice.Views
         User admin;
         public delegate void RefreshList();
         public event RefreshList RefreshListEvent;
+        List<User> userList;
         public void SetUser(User u)
         {
             admin = new Administrator(u);
@@ -33,12 +34,47 @@ namespace HomeOffice.Views
         public AdminView()
         {
             admin = new Administrator(((MainWindow)Application.Current.MainWindow).GetUser());
+            userList = admin.AllUsersToList();
             InitializeComponent();
-           
+        }
+
+        private void filterUserDataGrid()
+        {
+            List<User> temp = userList;
+            if(UserName.Text != null)
+            {
+                //like %UserName.Text%
+                temp = temp.Where(u => u.Name.ToUpper().Contains(UserName.Text.ToUpper())).ToList();
+            }
+            if (UserSurname.Text != null)
+            {
+                temp = temp.Where(u => u.Surname.ToUpper().Contains(UserSurname.Text.ToUpper())).ToList();
+            }
+            if(UserUnit.Text != null)
+            {
+                temp = temp.Where(u => u.Unit.ToString().Contains(UserUnit.Text)).ToList();
+            }
+            if(SelectedTypeOfUser.SelectedItem != null)
+            {
+                UserRoles userRole;
+                var index = SelectedTypeOfUser.SelectedIndex;
+                if (index == 0)//employee
+                    userRole = UserRoles.Employee;
+                else if (index == 1)//employee
+                    userRole = UserRoles.Manager;
+                else if (index == 2)//employee
+                    userRole = UserRoles.Administrator;
+                else
+                    userRole = UserRoles.Error;
+
+                temp = temp.Where(u =>u.UserGroup.ToString().Contains(((int)userRole).ToString())).ToList();
+            }
+            UserDataGrid.ItemsSource = temp;
         }
         public void RefreshUserList()
         {
-            UserGrid.ItemsSource = admin.AllUsersToList();
+            userList = admin.AllUsersToList();
+            filterUserDataGrid();
         }
 
         private void AddUser_Click(object sender, RoutedEventArgs e)
@@ -56,18 +92,33 @@ namespace HomeOffice.Views
 
         private void UserGrid_Loaded(object sender, RoutedEventArgs e)
         {
-            UserGrid.ItemsSource = admin.AllUsersToList();
+            UserDataGrid.ItemsSource = admin.AllUsersToList();
         }
 
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Do you want to delete this user?", "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-                admin.DeleteUser(((User)UserGrid.SelectedItem));
+                admin.DeleteUser(((User)UserDataGrid.SelectedItem));
             RefreshUserList();
         }
         private void FilterButton_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void User_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            filterUserDataGrid();
+        }
+
+        private void SelectedTypeOfUser_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            filterUserDataGrid();
+        }
+
+        private void SelectedTypeOfUser_Unselected(object sender, RoutedEventArgs e)
+        {
+            SelectedTypeOfUser.SelectedIndex= -1;
         }
     }
 }
