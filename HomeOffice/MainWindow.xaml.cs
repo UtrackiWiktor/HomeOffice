@@ -45,11 +45,11 @@ namespace HomeOffice
         private void LogIn_Click(object sender, RoutedEventArgs e)
         {
 
-           // try
+            try
             {
                 user = new User(Convert.ToInt64(PeselBox.Text));
             }
-           // catch
+            catch
             {
                Warning.Content="The PESEL value is incorrect";
             }

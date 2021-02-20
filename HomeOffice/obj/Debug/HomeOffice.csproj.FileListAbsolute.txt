@@ -502,3 +502,5 @@ C:\Users\user\Source\Repos\HomeOffice\HomeOffice\obj\Debug\HomeOffice.csproj.Cor
 C:\Users\user\Source\Repos\HomeOffice\HomeOffice\obj\Debug\HomeOffice.csproj.CopyComplete
 C:\Users\user\Source\Repos\HomeOffice\HomeOffice\obj\Debug\HomeOffice.exe
 C:\Users\user\Source\Repos\HomeOffice\HomeOffice\obj\Debug\HomeOffice.pdb
+C:\Users\Pawel\source\repos\ProjectStudia\HomeOffice\HomeOffice\obj\Debug\AddUserWindow.g.cs
+C:\Users\Pawel\source\repos\ProjectStudia\HomeOffice\HomeOffice\obj\Debug\AddUserWindow.baml

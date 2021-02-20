@@ -214,8 +214,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AddUser.xaml.cs">
-      <DependentUpon>AddUser.xaml</DependentUpon>
+    <Compile Include="AddUserWindow.xaml.cs">
+      <DependentUpon>AddUserWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\AdminViewModel.cs" />
     <Compile Include="ViewModels\EmployeeViewModel.cs" />
@@ -229,7 +229,7 @@
     <Compile Include="Views\ManagerView.xaml.cs">
       <DependentUpon>ManagerView.xaml</DependentUpon>
     </Compile>
-    <Page Include="AddUser.xaml">
+    <Page Include="AddUserWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

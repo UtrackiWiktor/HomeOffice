@@ -98,7 +98,7 @@
                     </DockPanel>
                 </Grid>
             </TabItem>
-            <TabItem Header="Task dictionary" Name="taskDictionary">
+            <TabItem Header="Task dictionary" Name="taskDictionary" HorizontalAlignment="Right" Width="94">
                 
             </TabItem>
         </TabControl>

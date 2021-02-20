@@ -24,6 +24,8 @@ namespace HomeOffice.Views
     public partial class AdminView : UserControl
     {
         User admin;
+        public delegate void RefreshList();
+        public event RefreshList RefreshListEvent;
         public void SetUser(User u)
         {
             admin = new Administrator(u);
@@ -32,55 +34,24 @@ namespace HomeOffice.Views
         {
             admin = new Administrator(((MainWindow)Application.Current.MainWindow).GetUser());
             InitializeComponent();
+           
         }
-
+        public void RefreshUserList()
+        {
+            UserGrid.ItemsSource = admin.AllUsersToList();
+        }
 
         private void AddUser_Click(object sender, RoutedEventArgs e)
         {
-            DateTime dateTime;
-            try
-            {
-                dateTime = DateTime.ParseExact(UserDate.Text, "dd.MM.yyyy", CultureInfo.InvariantCulture);
-                int unit;
-                if (!String.IsNullOrWhiteSpace(UserName.Text) && !String.IsNullOrWhiteSpace(UserSurname.Text) && !String.IsNullOrWhiteSpace(UserDate.Text) && int.TryParse(UserUnit.Text, out unit))
-                {
-                    UserRoles typeOfUser;
-                    var index = SelectedTypeOfUser.SelectedIndex;
-                    if (index == 0)//employee
-                        typeOfUser = UserRoles.Employee;
-                    else if (index == 1)//employee
-                        typeOfUser = UserRoles.Manager;
-                    else if (index == 2)//employee
-                        typeOfUser = UserRoles.Administrator;
-                    else
-                        typeOfUser = UserRoles.Error;
-                    User newUser = new User(UserName.Text, UserSurname.Text, dateTime, typeOfUser, unit, Convert.ToInt64(UserPesel.Text));
-
-                    admin.AddUser(newUser);
-                    Password password = new Password(newUser.ID);
-                    var p = password.GetPassword();
-                    password.EncodePassword();
-                    admin.AddPassword(password);
-                    MessageBox.Show("User was added successfully.\n His password is: \"" + p + "\". \nPlease note it otherwise this data will be lost.");
-                    password = null;//wipe data
-                    UserGrid.ItemsSource = admin.AllUsersToList();
-                    //test
-                    //((MainWindow)Application.Current.MainWindow).SetUser(new User("Ula", "Stańczyk", dateTime, UserRoles.Employee, 10, 100));
-                }
-                else
-                {
-                    MessageBox.Show("You probably provided incorrect data. Please correct it");
-                }
-            }
-            catch (Exception exception)
-            {
-                MessageBox.Show("You probably provided incorrect data. Please correct it");
-            }
+            AddUserWindow addUserInstance = new AddUserWindow(admin);
+            RefreshListEvent += new RefreshList(RefreshUserList);
+            addUserInstance.addUserDel = RefreshListEvent;
+            addUserInstance.Show();
         }
 
         private void RefreshButton_Click(object sender, RoutedEventArgs e)
         {
-            UserGrid.ItemsSource = admin.AllUsersToList();
+            RefreshUserList();
         }
 
         private void UserGrid_Loaded(object sender, RoutedEventArgs e)
@@ -92,7 +63,7 @@ namespace HomeOffice.Views
         {
             if (MessageBox.Show("Do you want to delete this user?", "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 admin.DeleteUser(((User)UserGrid.SelectedItem));
-            UserGrid.ItemsSource = admin.AllUsersToList();
+            RefreshUserList();
         }
         private void FilterButton_Click(object sender, RoutedEventArgs e)
         {
