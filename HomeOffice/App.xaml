@@ -66,11 +66,11 @@
                             <Border
                                 x:Name="checkBoxBorder"
                                 Grid.ColumnSpan="2"
-                                Margin="1,10,0,7.4"
+                                Margin="0,12,0,7.6"
                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}">
+                                BorderThickness="{TemplateBinding BorderThickness}" Width="16">
                                 <Grid
                                     x:Name="markGrid"
                                     Width="12"

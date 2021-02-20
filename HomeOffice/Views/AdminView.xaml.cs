@@ -30,7 +30,7 @@ namespace HomeOffice.Views
         }
         public AdminView()
         {
-            admin= new Administrator (((MainWindow)Application.Current.MainWindow).GetUser());
+            admin = new Administrator(((MainWindow)Application.Current.MainWindow).GetUser());
             InitializeComponent();
         }
 
@@ -93,6 +93,10 @@ namespace HomeOffice.Views
             if (MessageBox.Show("Do you want to delete this user?", "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 admin.DeleteUser(((User)UserGrid.SelectedItem));
             UserGrid.ItemsSource = admin.AllUsersToList();
+        }
+        private void FilterButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

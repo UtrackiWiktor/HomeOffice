@@ -1,0 +1,68 @@
+﻿<Window x:Class="HomeOffice.AddUser"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HomeOffice"
+        mc:Ignorable="d"
+        Title="Home Office - Add User" Height="400" Width="400">
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Column="0" Grid.Row="0">
+            <Label Content="Name:" FontSize="18" Margin="6,0" VerticalAlignment="Center"/>
+        </DockPanel>
+        <DockPanel Grid.Column="0" Grid.Row="1">
+            <TextBox Name="UserName"  Margin="10,5" VerticalContentAlignment="Center" FontSize="18"/>
+        </DockPanel>
+        <DockPanel Grid.Column="1" Grid.Row="0">
+            <Label Content="Surname:" FontSize="18" Margin="6,0" VerticalAlignment="Center"/>
+        </DockPanel>
+        <DockPanel Grid.Column="1" Grid.Row="1">
+            <TextBox Name="UserSurname" Margin="10,5" VerticalContentAlignment="Center" FontSize="18"/>
+        </DockPanel>
+        <DockPanel Grid.Column="0" Grid.Row="2">
+            <Label Content="Date of Birth:" FontSize="18" Margin="6,0" VerticalAlignment="Center"/>
+        </DockPanel>
+        <DockPanel Grid.Column="0" Grid.Row="3">
+            <DatePicker Name="UserDate" FontSize="18" VerticalAlignment="Center" Margin="10,0"/>
+        </DockPanel>
+        <DockPanel Grid.Column="1" Grid.Row="2">
+            <Label Content="Type of User:" FontSize="18" Margin="6,0" VerticalAlignment="Center"/>
+        </DockPanel>
+        <DockPanel Grid.Column="1" Grid.Row="3">
+            <ComboBox Name="SelectedTypeOfUser"  Margin="10,5" VerticalContentAlignment="Center" FontSize="18">
+                <ComboBoxItem Content="Employee"/>
+                <ComboBoxItem Content="Manager"/>
+                <ComboBoxItem Content="Administrator"/>
+            </ComboBox>
+        </DockPanel>
+        <DockPanel Grid.Column="0" Grid.Row="4">
+            <Label Content="Unit:" FontSize="18" Margin="6,0" VerticalAlignment="Center"/>
+        </DockPanel>
+        <DockPanel Grid.Column="0" Grid.Row="5">
+            <TextBox Name="UserUnit"  Margin="10,5" VerticalContentAlignment="Center" FontSize="18"/>
+        </DockPanel>
+        <DockPanel Grid.Column="1" Grid.Row="4">
+            <Label Content="Pesel:" FontSize="18" Margin="6,0" VerticalAlignment="Center"/>
+        </DockPanel>
+        <DockPanel Grid.Column="1" Grid.Row="5">
+            <TextBox Name="UserPesel" Margin="10,5" VerticalContentAlignment="Center" FontSize="18"/>
+        </DockPanel>
+        <DockPanel Grid.Column="0" Grid.Row="6" Grid.RowSpan="2" Grid.ColumnSpan="2">
+            <Button Margin="10,20" Content="Add user" Name="AddUser" Click="AddUser_Click"/>
+        </DockPanel>
+    </Grid>
+</Window>
