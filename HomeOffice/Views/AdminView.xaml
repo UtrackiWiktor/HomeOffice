@@ -78,20 +78,11 @@
                             <DataGrid.ContextMenu>
                                 <ContextMenu>
 
-                                    <!--MenuItem Header="Edit" Click="Edit_Click">
+                                    <MenuItem Header="Reset password" Click="ResetPassword_Click"/>
 
-                    <MenuItem.Icon>
+                                    <MenuItem Header="Delete" Click="Delete_Click"/>
 
-                        <Image Name="Edit" Height="20" Width="20"></Image>
 
-                    </MenuItem.Icon>
-
-                </-->
-                                    <MenuItem Header="Delete" Click="Delete_Click">
-                                        <MenuItem.Icon>
-                                            <Image Name="Delete" Height="20" Width="20"></Image>
-                                        </MenuItem.Icon>
-                                    </MenuItem>
                                 </ContextMenu>
                             </DataGrid.ContextMenu>
                         </DataGrid>

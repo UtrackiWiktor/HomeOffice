@@ -95,12 +95,6 @@ namespace HomeOffice.Views
             UserDataGrid.ItemsSource = admin.AllUsersToList();
         }
 
-        private void Delete_Click(object sender, RoutedEventArgs e)
-        {
-            if (MessageBox.Show("Do you want to delete this user?", "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-                admin.DeleteUser(((User)UserDataGrid.SelectedItem));
-            RefreshUserList();
-        }
         private void FilterButton_Click(object sender, RoutedEventArgs e)
         {
 
@@ -119,6 +113,25 @@ namespace HomeOffice.Views
         private void SelectedTypeOfUser_Unselected(object sender, RoutedEventArgs e)
         {
             SelectedTypeOfUser.SelectedIndex= -1;
+        }
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Do you want to delete this user?", "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                admin.DeleteUser(((User)UserDataGrid.SelectedItem));
+            RefreshUserList();
+        }
+        private void ResetPassword_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Do you want to reset password of this user?", "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                Password password = new Password( ((User)UserDataGrid.SelectedItem).ID );
+                var p = password.GetPassword();
+                password.EncodePassword();
+                password.ResetPassword();
+              
+                MessageBox.Show("User password was changed successfully.\n His password is: \"" + p + "\". \nPlease note it otherwise this data will be lost.");
+                p = null;
+            }
         }
     }
 }

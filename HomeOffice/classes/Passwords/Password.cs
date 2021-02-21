@@ -52,6 +52,19 @@ namespace HomeOffice.classes.Passwords
                 return Password_;
             }
         }
+        public void ResetPassword()
+        {
+            using (var DbContext = new HomeOfficeContext())
+            {
+                var result = DbContext.Passwords.SingleOrDefault(p => p.ID == ID);
+                if (result != null)
+                {
+                    
+                    result.Password_ = Password_;
+                    DbContext.SaveChanges();
+                }
+            }
+        }
         public bool CompareWithPassword(string input)
         {
             string result;
