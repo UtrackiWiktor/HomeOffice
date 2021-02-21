@@ -22,19 +22,30 @@ namespace HomeOffice.Views
     public partial class EmployeeView : UserControl
     {
         User user;
+        Task task;
         public EmployeeView()
         {
             user = ((MainWindow)Application.Current.MainWindow).GetUser();
             InitializeComponent();
         }
+
         void LoadTasks(object sender, RoutedEventArgs e)
         {
+            //jezeli dobrze rozumiem to to jest show my activity
+            //System.Windows.Forms.MessageBox.Show(emp.ShowMyActivity());
 
         }
 
         private void DoneUndone_Click(object sender, RoutedEventArgs e)
         {
 
+            //System.Windows.Forms.MessageBox.Show(task.FinishMyActivity);
         }
+
+        private void refreshTasks_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
     }
 }
