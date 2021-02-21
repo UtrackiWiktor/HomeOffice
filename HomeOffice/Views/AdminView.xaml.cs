@@ -42,7 +42,7 @@ namespace HomeOffice.Views
         private void filterUserDataGrid()
         {
             List<User> temp = userList;
-            if(UserName.Text != null)
+            if (UserName.Text != null)
             {
                 //like %UserName.Text%
                 temp = temp.Where(u => u.Name.ToUpper().Contains(UserName.Text.ToUpper())).ToList();
@@ -51,11 +51,11 @@ namespace HomeOffice.Views
             {
                 temp = temp.Where(u => u.Surname.ToUpper().Contains(UserSurname.Text.ToUpper())).ToList();
             }
-            if(UserUnit.Text != null)
+            if (UserUnit.Text != null)
             {
                 temp = temp.Where(u => u.Unit.ToString().Contains(UserUnit.Text)).ToList();
             }
-            if(SelectedTypeOfUser.SelectedItem != null)
+            if (SelectedTypeOfUser.SelectedItem != null)
             {
                 UserRoles userRole;
                 var index = SelectedTypeOfUser.SelectedIndex;
@@ -99,10 +99,6 @@ namespace HomeOffice.Views
             UserDataGrid.ItemsSource = admin.AllUsersToList();
         }
 
-        private void FilterButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private void User_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -116,7 +112,7 @@ namespace HomeOffice.Views
 
         private void SelectedTypeOfUser_Unselected(object sender, RoutedEventArgs e)
         {
-            SelectedTypeOfUser.SelectedIndex= -1;
+            SelectedTypeOfUser.SelectedIndex = -1;
         }
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
@@ -128,14 +124,39 @@ namespace HomeOffice.Views
         {
             if (MessageBox.Show("Do you want to reset password of this user?", "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                Password password = new Password( ((User)UserDataGrid.SelectedItem).ID );
+                Password password = new Password(((User)UserDataGrid.SelectedItem).ID);
                 var p = password.GetPassword();
                 password.EncodePassword();
                 password.ResetPassword();
-              
+
                 MessageBox.Show("User password was changed successfully.\n His password is: \"" + p + "\". \nPlease note it otherwise this data will be lost.");
                 p = null;
             }
+        }
+
+        private void tasks_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            filterTasksDataGrid();
+        }
+
+        private void filterTasksDataGrid()
+        {
+
+        }
+
+        private void refreshTasks_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AddTask_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void tasksDataGrid_Loaded(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

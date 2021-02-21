@@ -72,5 +72,10 @@ namespace HomeOffice.Views
         {
 
         }
+
+        private void deleteAssigned_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

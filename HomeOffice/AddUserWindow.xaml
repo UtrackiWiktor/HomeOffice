@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HomeOffice"
         mc:Ignorable="d"
-        Title="Home Office - Add User" Height="400" Width="400">
+        Title="Home Office - Add User" Height="400" Width="400" ResizeMode="NoResize">
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -62,7 +62,7 @@
             <TextBox Name="UserPesel" Margin="10,5" VerticalContentAlignment="Center" FontSize="18"/>
         </DockPanel>
         <DockPanel Grid.Column="0" Grid.Row="6" Grid.RowSpan="2" Grid.ColumnSpan="2">
-            <Button Margin="10,20" Content="Add user" Name="AddUser" Click="AddUser_Click"/>
+            <Button Margin="10,20" Content="Add user" Name="AddUser" FontSize="18" Click="AddUser_Click"/>
         </DockPanel>
     </Grid>
 </Window>

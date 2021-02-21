@@ -31,5 +31,10 @@ namespace HomeOffice.Views
         {
 
         }
+
+        private void DoneUndone_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

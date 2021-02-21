@@ -37,25 +37,25 @@
                         <Label Content="Name(s):" FontSize="18" Margin="6,0" VerticalAlignment="Center"/>
                     </DockPanel>
                     <DockPanel Grid.Column="0" Grid.Row="2">
-                        <TextBox Name="UserName"  Margin="10,5" VerticalContentAlignment="Center" FontSize="18" TextChanged="User_TextChanged"/>
+                        <TextBox Name="UserName"  Margin="10,0" VerticalContentAlignment="Center" FontSize="18" TextChanged="User_TextChanged"/>
                     </DockPanel>
                     <DockPanel Grid.Column="1" Grid.Row="1">
                         <Label Content="Surname(s):" FontSize="18" Margin="6,0" VerticalAlignment="Center"/>
                     </DockPanel>
                     <DockPanel Grid.Column="1" Grid.Row="2">
-                        <TextBox Name="UserSurname" Margin="10,5" VerticalContentAlignment="Center" FontSize="18" TextChanged="User_TextChanged"/>
+                        <TextBox Name="UserSurname" Margin="10,0" VerticalContentAlignment="Center" FontSize="18" TextChanged="User_TextChanged"/>
                     </DockPanel>
                     <DockPanel Grid.Column="2" Grid.Row="1">
                         <Label Content="Unit(s):" FontSize="18" Margin="6,0" VerticalAlignment="Center"/>
                     </DockPanel>
                     <DockPanel Grid.Column="2" Grid.Row="2">
-                        <TextBox Name="UserUnit"  Margin="10,5" VerticalContentAlignment="Center" FontSize="18" TextChanged="User_TextChanged"/>
+                        <TextBox Name="UserUnit"  Margin="10,0" VerticalContentAlignment="Center" FontSize="18" TextChanged="User_TextChanged"/>
                     </DockPanel>
                     <DockPanel Grid.Column="3" Grid.Row="1">
                         <Label Content="Type(s) of user(s):" FontSize="18" Margin="6,0" VerticalAlignment="Center"/>
                     </DockPanel>
                     <DockPanel Grid.Column="3" Grid.Row="2">
-                        <ComboBox Name="SelectedTypeOfUser"  Margin="10,5" VerticalContentAlignment="Center" FontSize="18" SelectionChanged="SelectedTypeOfUser_SelectionChanged">
+                        <ComboBox Name="SelectedTypeOfUser"  Margin="10,0" VerticalContentAlignment="Center" FontSize="18" SelectionChanged="SelectedTypeOfUser_SelectionChanged">
                             <ComboBoxItem Content="Employee"/>
                             <ComboBoxItem Content="Manager"/>
                             <ComboBoxItem Content="Administrator"/>
@@ -66,13 +66,10 @@
                         <CheckBox Name="selectAll1" Content=" Select all" Margin="10,0" VerticalContentAlignment="Center" FontSize="18"/>
                     </DockPanel>
                     <DockPanel Grid.Column="3" Grid.Row="4">
-                        <Button Margin="10,5" Content="Add new user" Name="AddUser" Click="AddUser_Click"/>
-                    </DockPanel>
-                    <DockPanel Grid.Column="1" Grid.Row="4">
-                        <Button Margin="10,5" Content="Filter" Name="filterButton" Click="FilterButton_Click"/>
+                        <Button Margin="10,0" Content="Add new user" Name="AddUser" FontSize="18" Click="AddUser_Click"/>
                     </DockPanel>
                     <DockPanel Grid.Column="2" Grid.Row="4">
-                        <Button Margin="10,5" Content="Refresh" Name="RefreshButton" Click="RefreshButton_Click"/>
+                        <Button Margin="10,0" Content="Refresh" Name="RefreshButton" FontSize="18" Click="RefreshButton_Click"/>
                     </DockPanel>
                     <DockPanel Grid.Column="0" Grid.Row="6" Grid.RowSpan="6" Grid.ColumnSpan="4">
                         <DataGrid Name="UserDataGrid" Margin="10, 0, 10, 20" Loaded="UserGrid_Loaded">
@@ -91,7 +88,52 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Task dictionary" Name="taskDictionary" HorizontalAlignment="Right" Width="94">
-                
+                <Grid Margin="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <DockPanel Grid.ColumnSpan="2">
+                        <Label Content="Filters:" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+                    </DockPanel>
+                    <DockPanel Grid.Column="0" Grid.Row="1">
+                        <Label Content="Task(s) title:" VerticalAlignment="Center"  Margin="6,0" FontSize="18"/>
+                    </DockPanel>
+                    <DockPanel Grid.Column="0" Grid.Row="2">
+                        <TextBox Name="tasksTitle"  Margin="10,5" VerticalContentAlignment="Center" FontSize="18" TextChanged="tasks_TextChanged"/>
+                    </DockPanel>
+                    <DockPanel Grid.Column="1" Grid.Row="1">
+                        <Label Content="Task(s) description:" VerticalAlignment="Center"  Margin="6,0" FontSize="18"/>
+                    </DockPanel>
+                    <DockPanel Grid.Column="1" Grid.Row="2">
+                        <TextBox Name="tasksDesc" Margin="10,5" VerticalContentAlignment="Center" FontSize="18" TextChanged="tasks_TextChanged"/>
+                    </DockPanel>
+                    <DockPanel Grid.Column="2" Grid.Row="2">
+                        <CheckBox Name="selectAll2" Content=" Select all" Margin="10,0" VerticalContentAlignment="Center" FontSize="18"/>
+                    </DockPanel>
+                    <DockPanel Grid.Column="3" Grid.Row="1">
+                        <Button Margin="10,5" Content="Refresh" Name="refreshTasks" FontSize="18" Click="refreshTasks_Click"/>
+                    </DockPanel>
+                    <DockPanel Grid.Column="3" Grid.Row="2">
+                        <Button Margin="10,5" Content="Add new task" Name="AddTask" FontSize="18" Click="AddTask_Click"/>
+                    </DockPanel>
+                    <DockPanel Grid.Column="0" Grid.Row="4" Grid.RowSpan="5" Grid.ColumnSpan="4">
+                        <DataGrid Name="tasksDataGrid" Margin="10, 0, 10, 20" Loaded="tasksDataGrid_Loaded"/>
+                    </DockPanel>
+                </Grid>
             </TabItem>
         </TabControl>
     </Grid>

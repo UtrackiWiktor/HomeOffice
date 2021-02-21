@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HomeOffice"
         mc:Ignorable="d"
-        Title="HomeOffice- Log in" Height="320" Width="460">
+        Title="HomeOffice- Log in" Height="320" Width="460" ResizeMode="NoResize">
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
