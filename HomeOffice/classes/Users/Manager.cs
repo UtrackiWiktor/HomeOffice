@@ -4,6 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HomeOffice.classes.Tasks;
+using HomeOffice.Data;
 
 namespace HomeOffice.classes.Users
 {
@@ -12,7 +14,7 @@ namespace HomeOffice.classes.Users
         internal static object manager;
 
         public Manager(string name, string surname, DateTime date, UserRoles typeOfUser, int unit,long pesel) : base(name, surname, date, typeOfUser, unit, pesel) { }
-
+        public Manager(User u) : base(u) { }
 
         //Manager prints the report of all activities that has the same ManagerID
         public String PrintTheReport(List<String> list)
@@ -62,5 +64,28 @@ namespace HomeOffice.classes.Users
             return str;
         }
 
+        public override void AssignActivity(TaskDictionary task, User u)
+        {
+            Tasks.Task t = new Tasks.Task(u.ID, task.ID);
+            using (var DbContext = new HomeOfficeContext())
+            {
+                DbContext.Database.EnsureCreated();
+                DbContext.Tasks.Add(t);
+                DbContext.SaveChanges();
+            }
+        }
+
+        public override void UnassignActivity(Tasks.Task t)
+        {
+            using (var DbContext = new HomeOfficeContext())
+            {
+                var result = DbContext.Tasks.SingleOrDefault(b => b.Users_ID == t.Users_ID && b.TaskDictionary_ID == t.TaskDictionary_ID);
+                if (result != null)
+                {
+                    result.Status = true;
+                    DbContext.SaveChanges();
+                }
+            }
+        }
     }
 }
