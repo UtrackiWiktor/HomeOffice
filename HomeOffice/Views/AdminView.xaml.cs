@@ -36,6 +36,7 @@ namespace HomeOffice.Views
             admin = new Administrator(((MainWindow)Application.Current.MainWindow).GetUser());
             userList = admin.AllUsersToList();
             InitializeComponent();
+            SelectedTypeOfUser.SelectedIndex = 3;
         }
 
         private void filterUserDataGrid()
@@ -58,16 +59,19 @@ namespace HomeOffice.Views
             {
                 UserRoles userRole;
                 var index = SelectedTypeOfUser.SelectedIndex;
-                if (index == 0)//employee
-                    userRole = UserRoles.Employee;
-                else if (index == 1)//employee
-                    userRole = UserRoles.Manager;
-                else if (index == 2)//employee
-                    userRole = UserRoles.Administrator;
-                else
-                    userRole = UserRoles.Error;
+                if (index != 3)
+                {
+                    if (index == 0)//employee
+                        userRole = UserRoles.Employee;
+                    else if (index == 1)//employee
+                        userRole = UserRoles.Manager;
+                    else if (index == 2)//employee
+                        userRole = UserRoles.Administrator;
+                    else
+                        userRole = UserRoles.Error;
 
-                temp = temp.Where(u =>u.UserGroup.ToString().Contains(((int)userRole).ToString())).ToList();
+                    temp = temp.Where(u => u.UserGroup.ToString().Contains(((int)userRole).ToString())).ToList();
+                }
             }
             UserDataGrid.ItemsSource = temp;
         }

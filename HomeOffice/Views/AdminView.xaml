@@ -59,6 +59,7 @@
                             <ComboBoxItem Content="Employee"/>
                             <ComboBoxItem Content="Manager"/>
                             <ComboBoxItem Content="Administrator"/>
+                            <ComboBoxItem Content="-"/>
                         </ComboBox>
                     </DockPanel>
                     <DockPanel Grid.Column="0" Grid.Row="4">
