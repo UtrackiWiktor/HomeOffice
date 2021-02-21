@@ -1,0 +1,43 @@
+﻿<Window x:Class="HomeOffice.AddToDictionary"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HomeOffice"
+        mc:Ignorable="d"
+        Title="HomeOffice - Add To Dictionary" Height="400" Width="400" ResizeMode="NoResize">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="0" Grid.ColumnSpan="2">
+            <Label Content="Task title:" FontSize="18" Margin="16,0" VerticalAlignment="Center"/>
+        </DockPanel>
+        <DockPanel Grid.Row="1" Grid.ColumnSpan="2">
+            <TextBox Name="taskTitle"  Margin="20,5" VerticalContentAlignment="Center" FontSize="18"/>
+        </DockPanel>
+        <DockPanel Grid.Row="2">
+            <Label Content="Task description:" FontSize="18" Margin="16,0" VerticalAlignment="Center"/>
+        </DockPanel>
+        <DockPanel Grid.Column="1" Grid.Row="2">
+            <Label Name="charLimit" Content="0/225" Margin="20,0" FontSize="12" Foreground="Gray" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+        </DockPanel>
+        <DockPanel Grid.Row="3" Grid.RowSpan="3" Grid.ColumnSpan="2">
+            <TextBox Name="taskDesc"  Margin="20,5" TextWrapping="Wrap" FontSize="18"/>
+        </DockPanel>
+        <DockPanel Grid.Row="6" Grid.RowSpan="2" Grid.ColumnSpan="2">
+            <Button Margin="20" Content="Add task to dictionary" FontSize="18" Name="AddUser" Click="AddUser_Click"/>
+        </DockPanel>
+    </Grid>
+</Window>
