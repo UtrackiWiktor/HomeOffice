@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using HomeOffice.classes.Passwords;
 using HomeOffice.Data;
+using HomeOffice.classes.Tasks;
 
 namespace HomeOffice.classes.Users
 {
@@ -68,5 +69,8 @@ namespace HomeOffice.classes.Users
 
         public virtual void DeleteUser(User user)
         { }
+
+        public virtual void AssignActivity(TaskDictionary task, User u) { }
+        public virtual void UnassignActivity(Tasks.Task t) { }
     }
 }
