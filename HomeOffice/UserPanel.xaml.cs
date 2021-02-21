@@ -42,6 +42,11 @@ namespace HomeOffice
                 var viewModel = new EmployeeViewModel();
                 this.DataContext = viewModel;
             }
+            else if ((UserRoles)user.UserGroup==UserRoles.Manager)
+            {
+                var viewModel = new ManagerViewModel();
+                this.DataContext = viewModel;
+            }
             
         }
 
