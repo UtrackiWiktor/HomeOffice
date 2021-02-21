@@ -134,17 +134,17 @@ namespace HomeOffice.Views
             }
         }
 
-        private void tasks_TextChanged(object sender, TextChangedEventArgs e)
+        private void Tasks_TextChanged(object sender, TextChangedEventArgs e)
         {
-            filterTasksDataGrid();
+            FilterTasksDataGrid();
         }
 
-        private void filterTasksDataGrid()
+        private void FilterTasksDataGrid()
         {
 
         }
 
-        private void refreshTasks_Click(object sender, RoutedEventArgs e)
+        private void RefreshTasks_Click(object sender, RoutedEventArgs e)
         {
 
         }
@@ -154,9 +154,15 @@ namespace HomeOffice.Views
 
         }
 
-        private void tasksDataGrid_Loaded(object sender, RoutedEventArgs e)
+        private void TasksDataGrid_Loaded(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void SelectAll_Checked(object sender, RoutedEventArgs e)
+        {
+            UserDataGrid.Focus();
+            UserDataGrid.SelectAll(); 
         }
     }
 }

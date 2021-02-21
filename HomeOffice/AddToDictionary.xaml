@@ -37,7 +37,7 @@
             <TextBox Name="taskDesc"  Margin="20,5" TextWrapping="Wrap" FontSize="18"/>
         </DockPanel>
         <DockPanel Grid.Row="6" Grid.RowSpan="2" Grid.ColumnSpan="2">
-            <Button Margin="20" Content="Add task to dictionary" FontSize="18" Name="AddUser" Click="AddUser_Click"/>
+            <Button Margin="20" Content="Add task to dictionary" FontSize="18" Name="AddTask" Click="AddTask_Click"/>
         </DockPanel>
     </Grid>
 </Window>

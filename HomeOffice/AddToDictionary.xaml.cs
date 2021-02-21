@@ -23,5 +23,15 @@ namespace HomeOffice
         {
             InitializeComponent();
         }
+
+        private void AddUser_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AddTask_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
