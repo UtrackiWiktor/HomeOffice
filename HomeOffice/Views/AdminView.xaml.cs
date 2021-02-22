@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -14,6 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using HomeOffice.classes.Users;
 using HomeOffice.classes.Passwords;
+using HomeOffice.classes.Tasks;
 using System.Globalization;
 
 namespace HomeOffice.Views
@@ -27,8 +27,9 @@ namespace HomeOffice.Views
         public delegate void RefreshList();
         public event RefreshList RefreshListEvent;
         List<User> userList;
+        List<TaskDictionary> tasksDictionaryList;
         List<int> updatedUserIDs;
-        Task task;
+
         public void SetUser(User u)
         {
             admin = new Administrator(u);
@@ -80,7 +81,7 @@ namespace HomeOffice.Views
             }
             //WarningLabel.Content = "";
             UserDataGrid.ItemsSource = temp;
-            if(UserDataGrid.Columns.Count>1) // at init is 1
+            if(UserDataGrid.Columns.Count>1) // at init is 0
                 UserDataGrid.Columns[0].IsReadOnly = true;
 
 
@@ -116,6 +117,7 @@ namespace HomeOffice.Views
         }
         private void UserDataGrid_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
+
             if (UserDataGrid.SelectedItem is User)
             {
                 if (!updatedUserIDs.Contains(((User)UserDataGrid.SelectedItem).ID))
@@ -238,7 +240,19 @@ namespace HomeOffice.Views
 
         private void FilterTasksDataGrid()
         {
-
+            List<TaskDictionary> temp = tasksDictionaryList;
+            if (TasksTitle.Text != null)
+            {
+                //like %tasksTitle.Text%
+                temp = temp.Where(t => t.TaskName.ToUpper().Contains(TasksTitle.Text.ToUpper())).ToList();
+            }
+            if (TasksDescription.Text != null)
+            {
+                temp = temp.Where(t => t.TaskDescription.ToUpper().Contains(TasksDescription.Text.ToUpper())).ToList();
+            }
+            TasksDataGrid.ItemsSource = temp;
+            if (TasksDataGrid.Columns.Count > 1) // at init is 0
+                TasksDataGrid.Columns[0].IsReadOnly = true;
         }
 
         private void RefreshTasks_Click(object sender, RoutedEventArgs e)
@@ -253,9 +267,9 @@ namespace HomeOffice.Views
 
         private void TasksDataGrid_Loaded(object sender, RoutedEventArgs e)
         {
-            tasksDataGrid.ItemsSource = admin.TaskDictionaryList();
-            if(tasksDataGrid.Columns.Count>1)
-                tasksDataGrid.Columns[0].IsReadOnly = true;
+            TasksDataGrid.ItemsSource =tasksDictionaryList = admin.TaskDictionaryList();
+            if(TasksDataGrid.Columns.Count>1)
+                TasksDataGrid.Columns[0].IsReadOnly = true;
         }
 
         private void LogOut_Click(object sender, RoutedEventArgs e)
