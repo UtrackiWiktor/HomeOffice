@@ -67,9 +67,8 @@ namespace HomeOffice.classes.Users
             return null;
         }
 
-        public virtual void DeleteUser(User user)
-        { }
-
+        public virtual void DeleteUser(User user) { }
+        public virtual void UpdateUser(User user) { }
         public virtual void AssignActivity(TaskDictionary task, User u) { }
         public virtual void UnassignActivity(Tasks.Task t) { }
     }

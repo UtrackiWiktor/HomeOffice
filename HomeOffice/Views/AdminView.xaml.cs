@@ -27,6 +27,7 @@ namespace HomeOffice.Views
         public delegate void RefreshList();
         public event RefreshList RefreshListEvent;
         List<User> userList;
+        List<int> updatedUserIDs;
         public void SetUser(User u)
         {
             admin = new Administrator(u);
@@ -37,6 +38,9 @@ namespace HomeOffice.Views
             userList = admin.AllUsersToList();
             InitializeComponent();
             SelectedTypeOfUser.SelectedIndex = 3;
+            updatedUserIDs = new List<int>();
+
+
         }
 
         private void filterUserDataGrid()
@@ -61,23 +65,27 @@ namespace HomeOffice.Views
                 var index = SelectedTypeOfUser.SelectedIndex;
                 if (index != 3)
                 {
-                    if (index == 0)//employee
-                        userRole = UserRoles.Employee;
-                    else if (index == 1)//employee
-                        userRole = UserRoles.Manager;
-                    else if (index == 2)//employee
+                    if (index == 0)
                         userRole = UserRoles.Administrator;
+                    else if (index == 1)
+                        userRole = UserRoles.Manager;
+                    else if (index == 2)
+                        userRole = UserRoles.Employee;
                     else
                         userRole = UserRoles.Error;
 
                     temp = temp.Where(u => u.UserGroup.ToString().Contains(((int)userRole).ToString())).ToList();
                 }
             }
+            //WarningLabel.Content = "";
             UserDataGrid.ItemsSource = temp;
         }
         public void RefreshUserList()
         {
             userList = admin.AllUsersToList();
+            WarningLabel.Content = "";
+            updatedUserIDs = new List<int>();
+            UserDataGrid.Columns[0].IsReadOnly = true;
             filterUserDataGrid();
         }
 
@@ -97,8 +105,24 @@ namespace HomeOffice.Views
         private void UserGrid_Loaded(object sender, RoutedEventArgs e)
         {
             UserDataGrid.ItemsSource = admin.AllUsersToList();
+            UserDataGrid.Columns[0].IsReadOnly = true;
         }
-
+        private void UserDataGrid_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+        {
+            if (UserDataGrid.SelectedItem is User)
+            {
+                if (!updatedUserIDs.Contains(((User)UserDataGrid.SelectedItem).ID))
+                {
+                    updatedUserIDs.Add(((User)UserDataGrid.SelectedItem).ID);
+                    if (updatedUserIDs.Count==1)
+                    {
+                        WarningLabel.Content = "Non committed changes for users with ids: ";
+                    }
+                    var s= ((User)(UserDataGrid.SelectedItem)).ID.ToString();
+                    WarningLabel.Content+=s +", ";
+                }
+            }
+        }
 
         private void User_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -116,23 +140,88 @@ namespace HomeOffice.Views
         }
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("Do you want to delete this user?", "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-                admin.DeleteUser(((User)UserDataGrid.SelectedItem));
-            RefreshUserList();
+            if (UserDataGrid.SelectedItems[0] is User)
+            {
+                string str = "User";
+                if (UserDataGrid.SelectedCells.Count > 1)
+                    str += "s";
+                if (MessageBox.Show("Do you want to delete selected " + str + "?", "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    foreach (var selected in UserDataGrid.SelectedItems)
+                    {
+                        if (selected is User)
+                        admin.DeleteUser(((User)selected));
+                    }
+
+                    RefreshUserList();
+            }
         }
         private void ResetPassword_Click(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("Do you want to reset password of this user?", "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            if (UserDataGrid.SelectedItems[0] is User)
             {
-                Password password = new Password(((User)UserDataGrid.SelectedItem).ID);
-                var p = password.GetPassword();
-                password.EncodePassword();
-                password.ResetPassword();
+                string str = "User";
+                if (UserDataGrid.SelectedCells.Count > 1)
+                    str += "s";
+                if (MessageBox.Show("Do you want to reset password of selected " + str + "?", "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    foreach (var selected in UserDataGrid.SelectedItems)
+                    {
+                        if (selected is User)
+                        {
+                            Password password = new Password(((User)selected).ID);
+                            var p = password.GetPassword();
+                            password.EncodePassword();
+                            password.ResetPassword();
 
-                MessageBox.Show("User password was changed successfully.\n His password is: \"" + p + "\". \nPlease note it otherwise this data will be lost.");
-                p = null;
+                            MessageBox.Show("The password of User with ID="+((User)selected).ID + " was changed successfully.\n His password is: \"" + p + "\". \nPlease note it otherwise this data will be lost.");
+                            p = null;
+                        }
+                    }
+                }
             }
         }
+
+        private void Update_Click(object sender, RoutedEventArgs e)
+        {
+            string str = "User";
+            if (UserDataGrid.SelectedCells.Count > 1)
+                str += "s";
+            if (MessageBox.Show("Do you want to update selected " + str + "?", "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                foreach (var selected in UserDataGrid.SelectedItems)
+                {
+                    if (selected is User && updatedUserIDs.Contains(((User)selected).ID))
+                    {
+                        admin.UpdateUser(((User)selected));
+                        updatedUserIDs.Remove(((User)selected).ID);
+                    }
+
+                }
+                if(updatedUserIDs.Count==0)
+                {
+                        WarningLabel.Content = "";
+                        updatedUserIDs = new List<int>();
+                }
+                else
+                {
+                        WarningLabel.Content = "Non committed changes for users with ids: ";
+                        foreach(var id in updatedUserIDs)
+                        {
+                        WarningLabel.Content += id.ToString() + ", ";
+                        }
+                }
+            }
+           
+        }
+        private void SelectAll_Checked(object sender, RoutedEventArgs e)
+        {
+            if (selectAll1.IsChecked == true)
+            {
+                UserDataGrid.Focus();
+                UserDataGrid.SelectAll();
+            }
+        }
+
 
         private void Tasks_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -159,10 +248,6 @@ namespace HomeOffice.Views
 
         }
 
-        private void SelectAll_Checked(object sender, RoutedEventArgs e)
-        {
-            UserDataGrid.Focus();
-            UserDataGrid.SelectAll(); 
-        }
+
     }
 }

@@ -45,6 +45,20 @@ namespace HomeOffice.classes.Users
                 return users;
             }
         }
+        public override void UpdateUser(User user)
+        {
+            using (var DbContext = new HomeOfficeContext())
+            {
+                var result = DbContext.Users.SingleOrDefault(u => u.ID == user.ID);
+                if (result != null)
+                {
+                    DbContext.Entry(result).CurrentValues.SetValues(user);
+                    DbContext.SaveChanges();
+                    
+                }
+                
+            }
+        }
         public override void DeleteUser(User user)
         {
             DeletePasswordOfUser(user);
