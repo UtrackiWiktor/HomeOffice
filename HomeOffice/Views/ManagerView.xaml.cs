@@ -102,5 +102,10 @@ namespace HomeOffice.Views
         {
 
         }
+
+        private void logOut_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
