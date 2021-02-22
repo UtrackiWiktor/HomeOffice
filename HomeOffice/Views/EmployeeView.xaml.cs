@@ -66,8 +66,8 @@ namespace HomeOffice.Views
         }
 
         private void ShowMyActivity(object sender, RoutedEventArgs e){
-             SetUser(user);
-             System.Windows.Forms.MessageBox.Show(emp.ShowMyActivity());
+            // SetUser(user);
+            // System.Windows.Forms.MessageBox.Show(emp.ShowMyActivity());
         }
 
 
