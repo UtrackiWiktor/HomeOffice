@@ -43,5 +43,20 @@ namespace HomeOffice.classes.Units
                 DbContext.SaveChanges();
             }
         }
+
+        public void UpdateUnit()
+        {
+            using (var DbContext = new HomeOfficeContext())
+            {
+                var result = DbContext.Units.SingleOrDefault(u => u.ID == ID);
+                if (result != null)
+                {
+                    DbContext.Entry(result).CurrentValues.SetValues(this);
+                    DbContext.SaveChanges();
+
+                }
+
+            }
+        }
     }
 }

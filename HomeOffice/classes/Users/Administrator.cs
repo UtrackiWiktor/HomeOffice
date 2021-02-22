@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using HomeOffice.classes.Tasks;
+using HomeOffice.classes.Units;
 
 namespace HomeOffice.classes.Users
 {
@@ -72,7 +73,7 @@ namespace HomeOffice.classes.Users
         }
         public override List<TaskDictionary> TaskDictionaryList()
         {
-            return (new TaskDictionary()).AllTaskDictionaryToList();
+            return base.TaskDictionaryList();
         }
         public override void AddToTaskDictionary(TaskDictionary taskDictionary)
         {
@@ -93,5 +94,20 @@ namespace HomeOffice.classes.Users
                 DbContext.SaveChanges();
             }
         }
+
+        public override void AddUnit(Unit unit) 
+        {
+            unit.AddUnit();
+        }
+        public override void DeleteUnit(Unit unit) 
+        {
+            unit.DeleteUnit();
+        }
+        public override void UpdateUnit(Unit unit) 
+        {
+            unit.UpdateUnit();
+        }
+        public override List<Unit> UnitList() 
+        { return (new Unit()).AllUnitsToList(); }
     }
 }

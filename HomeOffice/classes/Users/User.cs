@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using HomeOffice.classes.Passwords;
 using HomeOffice.Data;
 using HomeOffice.classes.Tasks;
-
+using HomeOffice.classes.Units;
 namespace HomeOffice.classes.Users
 {
     public class User
@@ -30,7 +30,7 @@ namespace HomeOffice.classes.Users
         }
         public User(long pesel)
         {
-            
+
             using (var DbContext = new HomeOfficeContext())
             {
                 DbContext.Database.EnsureCreated();
@@ -63,15 +63,18 @@ namespace HomeOffice.classes.Users
         public virtual void AddPassword(Password password) { }
         public virtual void AddUser(User user) { }
         public virtual List<User> AllUsersToList()
-        {
-            return null;
-        }
-        public virtual List<TaskDictionary> TaskDictionaryList() { return null; }
+        {return null;}
+        public virtual List<TaskDictionary> TaskDictionaryList()
+        { return (new TaskDictionary()).AllTaskDictionaryToList(); }
         public virtual void DeleteUser(User user) { }
         public virtual void UpdateUser(User user) { }
         public virtual void AssignActivity(TaskDictionary task, User u) { }
         public virtual void UnassignActivity(Tasks.Task t) { }
         public virtual void AddToTaskDictionary(TaskDictionary taskDictionary) { }
         public virtual void DeleteFromTaskDictionary(TaskDictionary taskDictionary) { }
+        public virtual void AddUnit(Unit unit) { }
+        public virtual void DeleteUnit(Unit unit) { }
+        public virtual void UpdateUnit(Unit unit) { }
+        public virtual List<Unit> UnitList() { return null; }
     }
 }
