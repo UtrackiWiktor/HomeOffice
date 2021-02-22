@@ -32,6 +32,11 @@
                     <DockPanel Grid.ColumnSpan="3">
                         <Label Content="Filters:" FontSize="18" Margin="6,0" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold"/>
                     </DockPanel>
+                    <DockPanel Grid.Column="3">
+                        <Button x:Name="logOut" Background="Transparent" FontSize="18" Margin="10, 0" HorizontalAlignment="Right" VerticalAlignment="Top" Foreground="Navy" BorderThickness="0" Click="logOut_Click">
+                            <TextBlock TextDecorations="Underline" Text="Log Out"/>
+                        </Button>
+                    </DockPanel>
                     <DockPanel Grid.Column="0" Grid.Row="1">
                         <Label Content="Name(s):"  FontSize="18" Margin="6,0"/>
                     </DockPanel>
@@ -106,6 +111,11 @@
                     </DockPanel>
                     <DockPanel Grid.Column="4" Grid.Row="0" Grid.ColumnSpan="2">
                         <Label Content="Name(s):" Margin="10, 0" FontSize="18" VerticalAlignment="Center"/>
+                    </DockPanel>
+                    <DockPanel Grid.Column="5">
+                        <Button x:Name="logOut2" Background="Transparent" FontSize="18" Margin="10, 0" HorizontalAlignment="Right" VerticalAlignment="Top" Foreground="Navy" BorderThickness="0" Click="logOut_Click">
+                            <TextBlock TextDecorations="Underline" Text="Log Out"/>
+                        </Button>
                     </DockPanel>
                     <DockPanel Grid.Column="4" Grid.Row="1" Grid.ColumnSpan="2">
                         <TextBox Name="usersNames2nd"  Margin="10,5" VerticalContentAlignment="Center" FontSize="18"/>

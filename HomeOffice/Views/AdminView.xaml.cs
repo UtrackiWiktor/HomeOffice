@@ -256,6 +256,39 @@ namespace HomeOffice.Views
            
         }
 
+        private void logOut_Click(object sender, RoutedEventArgs e)
+        {
 
+        }
+
+        private void unitName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void unitNameAdd_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void unitNameFilter_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void refreshUnits_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void addNewUnit_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void unitsDataGrid_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
