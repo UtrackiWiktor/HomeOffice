@@ -39,10 +39,6 @@ namespace HomeOffice.Views
             admin = new Administrator(((MainWindow)Application.Current.MainWindow).GetUser());
             userList = admin.AllUsersToList();
             InitializeComponent();
-            SelectedTypeOfUser.SelectedIndex = 3;
-            updatedUserIDs = new List<int>();
-
-
         }
 
         private void filterUserDataGrid()
@@ -114,6 +110,12 @@ namespace HomeOffice.Views
         {
             UserDataGrid.ItemsSource = admin.AllUsersToList();
             UserDataGrid.Columns[0].IsReadOnly = true;
+            updatedUserIDs = new List<int>();
+            WarningLabel.Content = "";
+            UserName.Text = "";
+            UserSurname.Text = "";
+            UserUnit.Text = "";
+            SelectedTypeOfUser.SelectedIndex = 3;
         }
         private void UserDataGrid_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {

@@ -95,5 +95,10 @@ namespace HomeOffice.classes.Users
                 }
             }
         }
+
+        public override List<TaskDictionary> TaskDictionaryList()
+        {
+            return (base.TaskDictionaryList().Where(u => u.Unit == Unit)).ToList();
+        }
     }
 }

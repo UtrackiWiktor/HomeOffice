@@ -144,7 +144,15 @@
                         <Button Margin="10,5" Content="Add new task" Name="AddTask" FontSize="18" Click="AddTask_Click"/>
                     </DockPanel>
                     <DockPanel Grid.Column="0" Grid.Row="4" Grid.RowSpan="5" Grid.ColumnSpan="4">
-                        <DataGrid Name="TasksDataGrid" Margin="10, 0, 10, 20" Loaded="TasksDataGrid_Loaded"/>
+                        <DataGrid Name="TasksDataGrid" Margin="10, 0, 10, 20" Loaded="TasksDataGrid_Loaded">
+                            <DataGrid.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Delete" Click="Delete_Click"/>
+
+                                    <MenuItem Header="Update" Click="Update_Click"/>
+                                </ContextMenu>
+                            </DataGrid.ContextMenu>
+                        </DataGrid>
                     </DockPanel>
                 </Grid>
             </TabItem>
