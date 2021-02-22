@@ -34,7 +34,7 @@
                         <Label Content="Filters:" FontSize="18" Margin="6,0" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold"/>
                     </DockPanel>
                     <DockPanel Grid.Column="3">
-                        <Button x:Name="logOut" Background="Transparent" FontSize="18" Margin="10, 0" HorizontalAlignment="Right" VerticalAlignment="Top" Foreground="Navy" BorderThickness="0" Click="logOut_Click">
+                        <Button x:Name="logOut" Background="Transparent" FontSize="18" Margin="10, 0" HorizontalAlignment="Right" VerticalAlignment="Top" Foreground="Navy" BorderThickness="0" Click="LogOut_Click">
                             <TextBlock TextDecorations="Underline" Text="Log Out"/>
                         </Button>
                     </DockPanel>
@@ -118,7 +118,7 @@
                         <Label Content="Filters:" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
                     </DockPanel>
                     <DockPanel Grid.Column="3">
-                        <Button x:Name="logOut2" Background="Transparent" FontSize="18" Margin="10, 0" HorizontalAlignment="Right" VerticalAlignment="Top" Foreground="Navy" BorderThickness="0" Click="logOut_Click">
+                        <Button x:Name="logOut2" Background="Transparent" FontSize="18" Margin="10, 0" HorizontalAlignment="Right" VerticalAlignment="Top" Foreground="Navy" BorderThickness="0" Click="LogOut_Click">
                             <TextBlock TextDecorations="Underline" Text="Log Out"/>
                         </Button>
                     </DockPanel>
@@ -168,7 +168,7 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <DockPanel Grid.Column="3">
-                        <Button x:Name="logOut3" Background="Transparent" FontSize="18" Margin="10, 0" HorizontalAlignment="Right" VerticalAlignment="Top" Foreground="Navy" BorderThickness="0" Click="logOut_Click">
+                        <Button x:Name="logOut3" Background="Transparent" FontSize="18" Margin="10, 0" HorizontalAlignment="Right" VerticalAlignment="Top" Foreground="Navy" BorderThickness="0" Click="LogOut_Click">
                             <TextBlock TextDecorations="Underline" Text="Log Out"/>
                         </Button>
                     </DockPanel>
@@ -179,7 +179,7 @@
                         <Label Content="Unit(s) name:" VerticalAlignment="Center"  Margin="6,0" FontSize="18"/>
                     </DockPanel>
                     <DockPanel Grid.Column="1" Grid.Row="1">
-                        <TextBox Name="unitNameFilter"  Margin="10, 5" VerticalContentAlignment="Center" FontSize="18" TextChanged="unitNameFilter_TextChanged"/>
+                        <TextBox Name="unitNameFilter"  Margin="10, 5" VerticalContentAlignment="Center" FontSize="18" TextChanged="UnitNameFilter_TextChanged"/>
                     </DockPanel>
                     <DockPanel Grid.Column="2" Grid.ColumnSpan="2">
                         <Label Content="Add new unit" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold"/>
@@ -188,7 +188,7 @@
                         <Label Content="Unit name:" VerticalAlignment="Center" Margin="6,0" FontSize="18"/>
                     </DockPanel>
                     <DockPanel Grid.Column="3" Grid.Row="1">
-                        <TextBox Name="unitNameAdd"  Margin="10, 5" VerticalContentAlignment="Center" FontSize="18" TextChanged="unitNameAdd_TextChanged"/>
+                        <TextBox Name="unitNameAdd"  Margin="10, 5" VerticalContentAlignment="Center" FontSize="18" TextChanged="UnitNameAdd_TextChanged"/>
                     </DockPanel>
                     <DockPanel Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Grid.ColumnSpan="2">
                         <Rectangle VerticalAlignment="Stretch" Fill="Gray" Width="1" HorizontalAlignment="Center"/>
@@ -197,14 +197,14 @@
                         <CheckBox Name="selectAll3" Content=" Select all" Margin="10,5" VerticalContentAlignment="Center" FontSize="18"/>
                     </DockPanel>
                     <DockPanel Grid.Column="2" Grid.Row="2">
-                        <Button Name="refreshUnits" Content="Refresh" FontSize="18" Margin="10, 5" Click="refreshUnits_Click"/>
+                        <Button Name="refreshUnits" Content="Refresh" FontSize="18" Margin="10, 5" Click="RefreshUnits_Click"/>
                     </DockPanel>
                     <DockPanel Grid.Column="3" Grid.Row="2">
-                        <Button Name="addNewUnit" Content="Add new unit" FontSize="18" Margin="10, 5" Click="addNewUnit_Click"/>
+                        <Button Name="addNewUnit" Content="Add new unit" FontSize="18" Margin="10, 5" Click="AddNewUnit_Click"/>
                     </DockPanel>
                     <DockPanel Grid.Column="0" Grid.Row="3" Grid.RowSpan="6" Grid.ColumnSpan="4">
                         <DockPanel Grid.Column="0" Grid.Row="4" Grid.RowSpan="5" Grid.ColumnSpan="4">
-                            <DataGrid Name="unitsDataGrid" Margin="10, 20" Loaded="unitsDataGrid_Loaded"/>
+                            <DataGrid Name="unitsDataGrid" Margin="10, 20" Loaded="UnitsDataGrid_Loaded"/>
                         </DockPanel>
                     </DockPanel>
                 </Grid>

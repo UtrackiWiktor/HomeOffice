@@ -70,6 +70,10 @@ namespace HomeOffice.classes.Users
                 DbContext.SaveChanges();
             }
         }
+        public override List<TaskDictionary> TaskDictionaryList()
+        {
+            return (new TaskDictionary()).AllTaskDictionaryToList();
+        }
         public override void AddToTaskDictionary(TaskDictionary taskDictionary)
         {
             taskDictionary.AddTaskDictionary();

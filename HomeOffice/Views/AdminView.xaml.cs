@@ -253,40 +253,42 @@ namespace HomeOffice.Views
 
         private void TasksDataGrid_Loaded(object sender, RoutedEventArgs e)
         {
-           
+            tasksDataGrid.ItemsSource = admin.TaskDictionaryList();
+            if(tasksDataGrid.Columns.Count>1)
+                tasksDataGrid.Columns[0].IsReadOnly = true;
         }
 
-        private void logOut_Click(object sender, RoutedEventArgs e)
+        private void LogOut_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void unitName_TextChanged(object sender, TextChangedEventArgs e)
+        private void UnitName_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }
 
-        private void unitNameAdd_TextChanged(object sender, TextChangedEventArgs e)
+        private void UnitNameAdd_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }
 
-        private void unitNameFilter_TextChanged(object sender, TextChangedEventArgs e)
+        private void UnitNameFilter_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }
 
-        private void refreshUnits_Click(object sender, RoutedEventArgs e)
+        private void RefreshUnits_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void addNewUnit_Click(object sender, RoutedEventArgs e)
+        private void AddNewUnit_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void unitsDataGrid_Loaded(object sender, RoutedEventArgs e)
+        private void UnitsDataGrid_Loaded(object sender, RoutedEventArgs e)
         {
 
         }
