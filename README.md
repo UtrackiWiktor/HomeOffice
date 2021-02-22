@@ -14,7 +14,7 @@ Main features:
 - Assigning new tasks to employees
 - Displaying results of their work
 - Storing their personal information in super-safe database storage
-- Motivating them after completing their daily responsibilities with motivational quotes
+- Prompt them after completing their daily responsibilities with motivational quotes
 - and many more!
 
 Do not hesitate! Should you purchase our application today, you shall receive a personal discount of 10% for our other products!
