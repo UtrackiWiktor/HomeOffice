@@ -79,14 +79,20 @@ namespace HomeOffice.Views
             }
             //WarningLabel.Content = "";
             UserDataGrid.ItemsSource = temp;
+            if(UserDataGrid.Columns.Count>1) // at init is 1
+                UserDataGrid.Columns[0].IsReadOnly = true;
+
+
+
         }
         public void RefreshUserList()
         {
             userList = admin.AllUsersToList();
             WarningLabel.Content = "";
             updatedUserIDs = new List<int>();
-            UserDataGrid.Columns[0].IsReadOnly = true;
+            
             filterUserDataGrid();
+            UserDataGrid.Columns[0].IsReadOnly = true;
         }
 
         private void AddUser_Click(object sender, RoutedEventArgs e)
@@ -127,6 +133,7 @@ namespace HomeOffice.Views
         private void User_TextChanged(object sender, TextChangedEventArgs e)
         {
             filterUserDataGrid();
+
         }
 
         private void SelectedTypeOfUser_SelectionChanged(object sender, SelectionChangedEventArgs e)
