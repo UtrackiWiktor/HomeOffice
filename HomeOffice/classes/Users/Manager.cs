@@ -16,7 +16,7 @@ namespace HomeOffice.classes.Users
         public Manager(User u) : base(u) { }
 
         //Manager prints the report of all activities that has the same ManagerID
-        public String PrintTheReport(List<User> list)
+        public String PrintTheReport(List<TaskDictionary> list)
         {
             //search for a user's desktop and create folder there
             string path = Environment.GetFolderPath(

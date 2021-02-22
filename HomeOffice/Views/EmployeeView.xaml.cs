@@ -56,8 +56,13 @@ namespace HomeOffice.Views
 
         private void DoneUndone_Click(object sender, RoutedEventArgs e)
         {
-            SetUser(user);
-            System.Windows.Forms.MessageBox.Show(emp.FinishMyActivity());
+              foreach (var selected in tasksList.SelectedItems)
+                {
+                    if (selected is Task)
+                    {
+                      System.Windows.Forms.MessageBox.Show(emp.FinishMyActivity((Task)selected));
+                    }
+                }
         }
 
         private void refreshTasks_Click(object sender, RoutedEventArgs e)

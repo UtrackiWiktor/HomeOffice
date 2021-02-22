@@ -44,10 +44,9 @@ namespace HomeOffice.Views
         //tutaj
         private void reportButton_Click(object sender, RoutedEventArgs e)
         { 
-            using (var DbContext = new HomeOfficeContext())
+             using (var DbContext = new HomeOfficeContext())
             {
-            var query = DbContext.Users.Where(u => u.Unit == manager.Unit).ToList();
-            
+                var query = DbContext.TaskDictionary.Where(t => t.Unit == manager.Unit).ToList();        
                 System.Windows.Forms.MessageBox.Show(manager.PrintTheReport(query));
                 }
             

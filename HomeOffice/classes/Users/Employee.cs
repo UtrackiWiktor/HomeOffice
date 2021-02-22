@@ -17,7 +17,7 @@ namespace HomeOffice.classes.Users
 
 
         //Simply change current state of task that employee has finished already to true
-        public String FinishMyActivity()
+        public String FinishMyActivity(Task task)
         {
             string quote = "";
            // task.Status = true;
