@@ -72,21 +72,12 @@ namespace HomeOffice.classes.Users
         }
         public override void AddToTaskDictionary(TaskDictionary taskDictionary)
         {
-           using (var DbContext = new HomeOfficeContext())
-            {
-                    DbContext.Database.EnsureCreated();
-                    DbContext.TaskDictionary.Add(taskDictionary);
-                    DbContext.SaveChanges();                
-            }
+            taskDictionary.AddTaskDictionary();
         }
 
         public override void DeleteFromTaskDictionary(TaskDictionary taskDictionary)
         {
-            using (var DbContext = new HomeOfficeContext())
-            {
-                DbContext.TaskDictionary.Remove(taskDictionary);
-                DbContext.SaveChanges();
-            }
+            taskDictionary.DeleteTaskDictionary();
         }
 
         private void DeletePasswordOfUser(User user)
