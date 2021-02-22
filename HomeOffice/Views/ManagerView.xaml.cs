@@ -70,12 +70,12 @@ namespace HomeOffice.Views
 
         private void taskDicGrid_Loaded(object sender, RoutedEventArgs e)
         {
-            taskDicGrid.ItemsSource = task.AllTaskDictionaryToList();
-           /* using (var DbContext = new HomeOfficeContext())
+           
+            using (var DbContext = new HomeOfficeContext())
             {
                 var query = DbContext.TaskDictionary.Where(t => t.Unit == manager.Unit).ToList();
                 taskDicGrid.ItemsSource = query;
-            }*/
+            }
         }
 
         private void filterButton2nd_Click(object sender, RoutedEventArgs e)
