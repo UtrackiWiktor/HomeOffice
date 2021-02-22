@@ -11,6 +11,8 @@ using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using HomeOffice.classes.Tasks;
+
 namespace HomeOffice.classes.Users
 {
     public class Administrator: User
@@ -68,6 +70,24 @@ namespace HomeOffice.classes.Users
                 DbContext.SaveChanges();
             }
         }
+        public override void AddToTaskDictionary(TaskDictionary taskDictionary)
+        {
+           using (var DbContext = new HomeOfficeContext())
+            {
+                    DbContext.Database.EnsureCreated();
+                    DbContext.TaskDictionary.Add(taskDictionary);
+                    DbContext.SaveChanges();                
+            }
+        }
+
+        public override void DeleteFromTaskDictionary(TaskDictionary taskDictionary)
+        {
+            using (var DbContext = new HomeOfficeContext())
+            {
+                DbContext.TaskDictionary.Remove(taskDictionary);
+                DbContext.SaveChanges();
+            }
+        }
 
         private void DeletePasswordOfUser(User user)
         {
@@ -78,21 +98,5 @@ namespace HomeOffice.classes.Users
                 DbContext.SaveChanges();
             }
         }
-        //override public void addUser(string name, string surname, DateTime date, TypeOfUser user,int unit)
-        //{
-        //    //send data to database
-        //    string server = "homeoffice.c0pmexmy2ypg.eu-central-1.rds.amazonaws.com";
-        //    string database = "mydb";
-        //    string uid = "admin";
-        //    string password = "hom3off1ce";
-        //    string connectionString;
-        //    connectionString = "SERVER=" + server + "; PORT = 3306 ;" + "DATABASE=" + database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
-        //    var mycon = new MySqlConnection(connectionString);
-
-        //    mycon.Open();
-        //    MySqlCommand a = new MySqlCommand("INSERT INTO Units(UnitName) VALUES(\"TestowaGrupa5555\")", mycon);
-        //    a.ExecuteNonQuery();
-
-        //}
     }
 }

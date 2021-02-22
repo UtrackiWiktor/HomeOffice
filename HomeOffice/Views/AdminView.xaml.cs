@@ -28,6 +28,7 @@ namespace HomeOffice.Views
         public event RefreshList RefreshListEvent;
         List<User> userList;
         List<int> updatedUserIDs;
+        Task task;
         public void SetUser(User u)
         {
             admin = new Administrator(u);
@@ -252,7 +253,7 @@ namespace HomeOffice.Views
 
         private void TasksDataGrid_Loaded(object sender, RoutedEventArgs e)
         {
-
+           
         }
 
 

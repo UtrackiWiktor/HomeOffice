@@ -71,5 +71,7 @@ namespace HomeOffice.classes.Users
         public virtual void UpdateUser(User user) { }
         public virtual void AssignActivity(TaskDictionary task, User u) { }
         public virtual void UnassignActivity(Tasks.Task t) { }
+        public virtual void AddToTaskDictionary(TaskDictionary taskDictionary) { }
+        public virtual void DeleteFromTaskDictionary(TaskDictionary taskDictionary) { }
     }
 }
