@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -13,6 +12,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using HomeOffice.classes.Users;
+using System.Windows;
+using System.Windows.Controls;
+using HomeOffice.classes.Users;
+using HomeOffice.classes.Tasks;
+using System.Collections.Generic;
+using HomeOffice.Data;
+using System.Data.Entity;
+using System.Data.SqlClient;
+using System.Linq;
+
 
 namespace HomeOffice.Views
 {
@@ -22,7 +31,14 @@ namespace HomeOffice.Views
     public partial class EmployeeView : UserControl
     {
         User user;
-        Task task;
+        Task t = new Task();
+        TaskDictionary task = new TaskDictionary();
+        Employee emp;
+        public void SetUser(User u)
+        {
+            emp = new Employee(u);
+        }
+
         public EmployeeView()
         {
             user = ((MainWindow)Application.Current.MainWindow).GetUser();
@@ -31,15 +47,17 @@ namespace HomeOffice.Views
 
         void LoadTasks(object sender, RoutedEventArgs e)
         {
-            //jezeli dobrze rozumiem to to jest show my activity
-            //System.Windows.Forms.MessageBox.Show(emp.ShowMyActivity());
-
+            using (var DbContext = new HomeOfficeContext())
+            {
+                tasksList.ItemsSource = t.AllTasksToList();
+            }
+            
         }
 
         private void DoneUndone_Click(object sender, RoutedEventArgs e)
         {
-
-            //System.Windows.Forms.MessageBox.Show(task.FinishMyActivity);
+            SetUser(user);
+            System.Windows.Forms.MessageBox.Show(emp.FinishMyActivity());
         }
 
         private void refreshTasks_Click(object sender, RoutedEventArgs e)
@@ -51,5 +69,10 @@ namespace HomeOffice.Views
         {
 
         }
+
+        private void ShowMyActivity(object sender, RoutedEventArgs e){
+
+        }
+
     }
 }

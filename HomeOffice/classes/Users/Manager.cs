@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using HomeOffice.classes.Tasks;
 using HomeOffice.Data;
 
@@ -17,15 +16,24 @@ namespace HomeOffice.classes.Users
         public Manager(User u) : base(u) { }
 
         //Manager prints the report of all activities that has the same ManagerID
-        public String PrintTheReport(List<String> list)
+        public String PrintTheReport(List<User> list)
         {
             //search for a user's desktop and create folder there
             string path = Environment.GetFolderPath(
                          System.Environment.SpecialFolder.DesktopDirectory);
-            var file = File.CreateText(path);
+            path += "/report.csv";
+            //var file = File.CreateText(path);
+
+            StreamWriter writer = new StreamWriter(path);  
+ 
+   writer.WriteLine(CreateCSVTextFile(list));   
+            writer.Flush();
+
+
             //save task list content to the list
-            file.Write(CreateCSVTextFile(list));
-            return "Report saved as CSV file";
+           // file.Write(CreateCSVTextFile(list));
+            
+            return "Report saved as CSV file" + CreateCSVTextFile(list);
         }
 
         private string CreateCSVTextFile<T>(List<T> data)

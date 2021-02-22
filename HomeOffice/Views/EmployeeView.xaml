@@ -51,12 +51,12 @@
             <Button Margin="10,0" Content="Refresh" Name="refreshTasks" FontSize="18" />
         </DockPanel>
         <DockPanel Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="3" Grid.RowSpan="7">
-            <DataGrid Name="tasksList" Margin="10, 20" Loaded="LoadTasks">
+            <DataGrid Name="tasksList" Margin="10, 20" Loaded="LoadTasks" CanUserAddRows="false">
                 <DataGrid.ContextMenu>
                     <ContextMenu>
 
                         <MenuItem Header="Mark as done/undone" Click="DoneUndone_Click"/>
-
+						<MenuItem Header="Show more info" Click="ShowMyActivity"/>
                     </ContextMenu>
                 </DataGrid.ContextMenu>
             </DataGrid>

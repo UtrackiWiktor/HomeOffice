@@ -43,9 +43,14 @@ namespace HomeOffice.Views
 
         //tutaj
         private void reportButton_Click(object sender, RoutedEventArgs e)
-        {
-          //  List<String> list = manager.task;
-          //  System.Windows.Forms.MessageBox.Show(manager.PrintTheReport(list));
+        { 
+            using (var DbContext = new HomeOfficeContext())
+            {
+            var query = DbContext.Users.Where(u => u.Unit == manager.Unit).ToList();
+            
+                System.Windows.Forms.MessageBox.Show(manager.PrintTheReport(query));
+                }
+            
         }
 
         private void tasksGrid_Loaded(object sender, RoutedEventArgs e)
