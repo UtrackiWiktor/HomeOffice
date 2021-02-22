@@ -75,6 +75,9 @@ namespace HomeOffice.classes.Users
         public virtual void AddUnit(Unit unit) { }
         public virtual void DeleteUnit(Unit unit) { }
         public virtual void UpdateUnit(Unit unit) { }
+        
         public virtual List<Unit> UnitList() { return null; }
+        public virtual String FinishMyActivity(Tasks.Task task) { return null; }
     }
+
 }

@@ -33,15 +33,15 @@ namespace HomeOffice.Views
         User user;
         Task t = new Task();
         TaskDictionary task = new TaskDictionary();
-        Employee emp;
+        //Employee emp;
         public void SetUser(User u)
         {
-            emp = new Employee(u);
+            //emp = new Employee(u);
         }
 
         public EmployeeView()
         {
-            user = ((MainWindow)Application.Current.MainWindow).GetUser();
+            user = new Employee(((MainWindow)Application.Current.MainWindow).GetUser());
             InitializeComponent();
         }
 
@@ -60,7 +60,7 @@ namespace HomeOffice.Views
                 {
                     if (selected is Task)
                     {
-                      System.Windows.Forms.MessageBox.Show(emp.FinishMyActivity((Task)selected));
+                      System.Windows.Forms.MessageBox.Show(user.FinishMyActivity((Task)selected));
                     }
                 }
         }
