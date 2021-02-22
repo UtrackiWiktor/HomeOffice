@@ -21,4 +21,4 @@ Do not hesitate! Should you purchase our application today, you shall receive a 
 
 
 
-*None of the Mini Korpo affiliates, partners, suppliers or licensors take responsibility or liability for the frequency of provision and accuracy of the "Home-office Activity Records" rate towards employee effectiveness, whether or not arising from the negligence of any of Mini Korpor or the Suppliers.
+*None of the Mini Korpo affiliates, partners, suppliers or licensors take responsibility or liability for the frequency of provision and accuracy of the "Home-office Activity Records" rate towards employee effectiveness, whether or not arising from the negligence of any of Mini Korpo associates or the Suppliers.
