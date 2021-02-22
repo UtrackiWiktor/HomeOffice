@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using HomeOffice.classes.Tasks;
+using HomeOffice.Data;
 
 namespace HomeOffice.classes.Users
 {
@@ -20,10 +21,28 @@ namespace HomeOffice.classes.Users
         public override String FinishMyActivity(Task task)
         {
             string quote = "";
-           // task.Status = true;
+            if(task.Status == true){
+                task.Status = false;
+            }
+            else{
+                task.Status = true;
+            }
+            
             Random rnd = new Random();
             int rand = rnd.Next(0, 11);      
     
+            using (var DbContext = new HomeOfficeContext())
+            {
+                var result = DbContext.Tasks.SingleOrDefault(t => t.Task_ID == task.Task_ID);
+                if (result != null)
+                {
+                    DbContext.Entry(result).CurrentValues.SetValues(task);
+                    DbContext.SaveChanges();
+                    
+                }
+                
+            }
+
             switch (rand)
             {
                 case 0:

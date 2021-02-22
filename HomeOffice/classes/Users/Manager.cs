@@ -26,7 +26,7 @@ namespace HomeOffice.classes.Users
 
             StreamWriter writer = new StreamWriter(path);  
  
-   writer.WriteLine(CreateCSVTextFile(list));   
+            writer.WriteLine(CreateCSVTextFile(list));   
             writer.Flush();
 
 
