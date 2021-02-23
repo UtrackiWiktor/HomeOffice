@@ -7,7 +7,8 @@ using HomeOffice.Data;
 using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Linq;
-
+using System.Text.RegularExpressions;
+using System;
 
 namespace HomeOffice.Views
 {
@@ -39,7 +40,16 @@ namespace HomeOffice.Views
 
         private void refreshButton_Click(object sender, RoutedEventArgs e)
         {
+            using (var DbContext = new HomeOfficeContext())
+            {
+                var query = (from tasks in DbContext.Tasks
+                             join user in DbContext.Users on tasks.Users_ID equals user.ID
+                             join taskdictionary in DbContext.TaskDictionary on tasks.TaskDictionary_ID equals taskdictionary.ID
+                             where manager.Unit == user.Unit
+                             select new { TaskID = tasks.Task_ID, UsersID = tasks.Users_ID, Name = user.Name, Surname = user.Surname, TaskDictionaryID = taskdictionary.ID, TaskName = taskdictionary.TaskName, TaskDescription = taskdictionary.TaskDescription, Status = tasks.Status }).ToList();
 
+                tasksGrid.ItemsSource = query;
+            }
         }
 
         //tutaj
@@ -61,7 +71,7 @@ namespace HomeOffice.Views
                              join user in DbContext.Users on tasks.Users_ID equals user.ID
                              join taskdictionary in DbContext.TaskDictionary on tasks.TaskDictionary_ID equals taskdictionary.ID
                              where manager.Unit == user.Unit
-                             select new { TaskID = tasks.Task_ID, User_ID=tasks.Users_ID, Name = user.Name, Surname = user.Surname, TaskTitle = taskdictionary.TaskName, Description = taskdictionary.TaskDescription, Completed = tasks.Status }).ToList();
+                             select new { TaskID = tasks.Task_ID, UsersID=tasks.Users_ID, Name = user.Name, Surname = user.Surname,TaskDictionaryID=taskdictionary.ID, TaskName = taskdictionary.TaskName, TaskDescription = taskdictionary.TaskDescription, Status = tasks.Status }).ToList();
 
                 tasksGrid.ItemsSource = query;
             }
@@ -79,17 +89,30 @@ namespace HomeOffice.Views
 
         private void filterButton2nd_Click(object sender, RoutedEventArgs e)
         {
-
+           
         }
 
         private void refreshButton2nd_Click(object sender, RoutedEventArgs e)
         {
-
+            empGrid.ItemsSource = manager.UsersFromUnitToList(manager);
+            taskDicGrid.ItemsSource = manager.UnitTasksToList(manager);
         }
 
         private void assignButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            foreach (var selectedEmp in empGrid.SelectedItems)
+            {
+                if (selectedEmp is User)
+                {
+                    foreach (var selectedTask in taskDicGrid.SelectedItems)
+                    {
+                        if (selectedTask is TaskDictionary)
+                        {
+                            manager.AssignActivity((TaskDictionary)selectedTask, (User)selectedEmp);
+                        }
+                    }
+                }
+            }
         }
 
         private void addTaskButton_Click(object sender, RoutedEventArgs e)
@@ -99,7 +122,15 @@ namespace HomeOffice.Views
 
         private void deleteAssigned_Click(object sender, RoutedEventArgs e)
         {
-
+                foreach (var selected in tasksGrid.SelectedItems)
+                {
+                    string toDelete = selected.ToString();
+                    string[] split = toDelete.Split(new char[] { ',' });
+                    string taskID = Regex.Match(split[0], @"\d+").Value;
+                    int task_ID = Convert.ToInt32(taskID);
+                    Task todelete = new Task(task_ID);
+                    manager.UnassignActivity(todelete);
+                }
         }
 
         private void logOut_Click(object sender, RoutedEventArgs e)

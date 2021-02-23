@@ -20,6 +20,10 @@ namespace HomeOffice.classes.Tasks
             TaskDictionary_ID = TDID;
             Status = false;
         }
+        public Task(int taskid)
+        {
+            Task_ID = taskid;
+        }
         public void AddTask()
         {
             using (var DbContext = new HomeOfficeContext())

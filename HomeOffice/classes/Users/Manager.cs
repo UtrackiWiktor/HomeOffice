@@ -87,12 +87,8 @@ namespace HomeOffice.classes.Users
         {
             using (var DbContext = new HomeOfficeContext())
             {
-                var result = DbContext.Tasks.SingleOrDefault(b => b.Users_ID == t.Users_ID && b.TaskDictionary_ID == t.TaskDictionary_ID);
-                if (result != null)
-                {
-                    result.Status = true;
-                    DbContext.SaveChanges();
-                }
+                DbContext.Remove(t);
+                DbContext.SaveChanges();
             }
         }
 
