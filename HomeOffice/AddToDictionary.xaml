@@ -20,6 +20,8 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
         <DockPanel Grid.Row="0" Grid.ColumnSpan="2">
             <Label Content="Task title:" FontSize="18" Margin="16,0" VerticalAlignment="Center"/>
@@ -27,16 +29,22 @@
         <DockPanel Grid.Row="1" Grid.ColumnSpan="2">
             <TextBox Name="taskTitle"  Margin="20,5" VerticalContentAlignment="Center" FontSize="18"/>
         </DockPanel>
-        <DockPanel Grid.Row="2">
+        <DockPanel Grid.Row="2" Grid.ColumnSpan="2">
+            <Label Content="Unit:" FontSize="18" Margin="16,0" VerticalAlignment="Center"/>
+        </DockPanel>
+        <DockPanel Grid.Row="3" Grid.ColumnSpan="2">
+            <TextBox Name="unit"  Margin="20,5" VerticalContentAlignment="Center" FontSize="18"/>
+        </DockPanel>
+        <DockPanel Grid.Row="4">
             <Label Content="Task description:" FontSize="18" Margin="16,0" VerticalAlignment="Center"/>
         </DockPanel>
-        <DockPanel Grid.Column="1" Grid.Row="2">
+        <DockPanel Grid.Column="1" Grid.Row="4">
             <Label Name="charLimit" Content="0/225" Margin="20,0" FontSize="12" Foreground="Gray" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
         </DockPanel>
-        <DockPanel Grid.Row="3" Grid.RowSpan="3" Grid.ColumnSpan="2">
+        <DockPanel Grid.Row="5" Grid.RowSpan="3" Grid.ColumnSpan="2">
             <TextBox Name="taskDesc"  Margin="20,5" TextWrapping="Wrap" FontSize="18"/>
         </DockPanel>
-        <DockPanel Grid.Row="6" Grid.RowSpan="2" Grid.ColumnSpan="2">
+        <DockPanel Grid.Row="8" Grid.RowSpan="2" Grid.ColumnSpan="2">
             <Button Margin="20" Content="Add task to dictionary" FontSize="18" Name="AddTask" Click="AddTask_Click"/>
         </DockPanel>
     </Grid>

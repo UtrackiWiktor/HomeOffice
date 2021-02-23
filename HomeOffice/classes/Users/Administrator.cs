@@ -95,16 +95,21 @@ namespace HomeOffice.classes.Users
             }
         }
 
-        public override void AddUnit(Unit unit) 
+        public override void AddUnit(String name) 
         {
+            Unit unit = new Unit(name);
             unit.AddUnit();
         }
-        public override void DeleteUnit(Unit unit) 
+        public override void DeleteUnit(int id) 
         {
+            Unit unit = new Unit();
+            unit.ID = id;
             unit.DeleteUnit();
         }
-        public override void UpdateUnit(Unit unit) 
+        public override void UpdateUnit(int id) 
         {
+            Unit unit = new Unit();
+            unit.ID = id;
             unit.UpdateUnit();
         }
         public override List<Unit> UnitList() 
