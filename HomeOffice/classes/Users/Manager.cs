@@ -100,5 +100,23 @@ namespace HomeOffice.classes.Users
         {
             return (base.TaskDictionaryList().Where(u => u.Unit == Unit)).ToList();
         }
+
+        public override List<TaskDictionary> UnitTasksToList(User u)
+        {
+            using (var DbContext = new HomeOfficeContext())
+            {
+                var query = DbContext.TaskDictionary.Where(t => t.Unit == u.Unit).ToList();
+                return query;
+            }
+        }
+
+        public override List<User> UsersFromUnitToList(User u)
+        {
+            using (var DbContext = new HomeOfficeContext())
+            {
+                var query = DbContext.Users.Where(us => us.Unit == u.Unit).ToList();
+                return query;
+            }
+        }
     }
 }
