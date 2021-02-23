@@ -15,6 +15,7 @@ using HomeOffice.classes.Users;
 using HomeOffice.classes.Passwords;
 using HomeOffice.classes.Tasks;
 using System.Globalization;
+using HomeOffice.classes.Units;
 
 namespace HomeOffice.Views
 {
@@ -29,6 +30,7 @@ namespace HomeOffice.Views
         List<User> userList;
         List<TaskDictionary> tasksDictionaryList;
         List<int> updatedUserIDs;
+        List<Unit> unitList;
 
         public void SetUser(User u)
         {
@@ -269,7 +271,7 @@ namespace HomeOffice.Views
 
         private void TasksDataGrid_Loaded(object sender, RoutedEventArgs e)
         {
-            TasksDataGrid.ItemsSource =tasksDictionaryList = admin.TaskDictionaryList();
+            TasksDataGrid.ItemsSource = tasksDictionaryList = admin.TaskDictionaryList();
             if(TasksDataGrid.Columns.Count>1)
                 TasksDataGrid.Columns[0].IsReadOnly = true;
         }
@@ -279,34 +281,81 @@ namespace HomeOffice.Views
 
         }
 
-        private void UnitName_TextChanged(object sender, TextChangedEventArgs e)
+        private void filterUnits()
         {
+            List<Unit> temp = unitList;
+            if (UnitNameFilter.Text != null)
+            {
+                //like %tasksTitle.Text%
+                temp = temp.Where(u => u.UnitName.ToUpper().Contains(UnitNameFilter.Text.ToUpper())).ToList();
+            }
 
+            UnitsDataGrid.ItemsSource = temp;
+            if (UnitsDataGrid.Columns.Count > 1) // at init is 0
+                UnitsDataGrid.Columns[0].IsReadOnly = true;
         }
-
-        private void UnitNameAdd_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
         private void UnitNameFilter_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            filterUnits();
         }
-
+        private void RefreshUnits()
+        {
+            UnitsDataGrid.ItemsSource = unitList = admin.UnitList();
+            filterUnits();
+        }
         private void RefreshUnits_Click(object sender, RoutedEventArgs e)
         {
-
+            RefreshUnits();
         }
 
         private void AddNewUnit_Click(object sender, RoutedEventArgs e)
         {
+            if (UnitNameAdd.Text != null)
+            { 
+                admin.AddUnit(UnitNameAdd.Text);
+                RefreshUnits();
+                MessageBox.Show("Unit was added!");
+            }
+            else
+            {
+                MessageBox.Show("You probably provided incorrect data. Please correct it");
+            }
+        }
+        private void Delete3_Click(object sender, RoutedEventArgs e)
+        {
+            if (UnitsDataGrid.SelectedItems[0] is Unit)
+            {
+                string str = "Unit";
+                if (UnitsDataGrid.SelectedCells.Count > 1)
+                    str += "s";
+                if (MessageBox.Show("Do you want to delete selected " + str + "?", "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    foreach (var selected in UnitsDataGrid.SelectedItems)
+                    {
+                        if (selected is Unit)
+                            admin.DeleteUnit(((Unit)selected).ID);
+                    }
 
+                RefreshUnits();
+            }
         }
 
-        private void UnitsDataGrid_Loaded(object sender, RoutedEventArgs e)
+        private void Update3_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+        private void SelectAll3_Checked(object sender, RoutedEventArgs e)
+        {
+            if (SelectAll3.IsChecked == true)
+            {
+                UnitsDataGrid.Focus();
+                UnitsDataGrid.SelectAll();
+            }
+        }
+        private void UnitsDataGrid_Loaded(object sender, RoutedEventArgs e)
+        {
+            UnitsDataGrid.ItemsSource= unitList =admin.UnitList();
+            if (UnitsDataGrid.Columns.Count > 1)
+                UnitsDataGrid.Columns[0].IsReadOnly = true;
         }
     }
 }
