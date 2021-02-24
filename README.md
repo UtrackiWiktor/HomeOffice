@@ -42,7 +42,7 @@ Do not hesitate! Should you purchase our application today, you shall receive a 
 
 [Wiktor Utracki](https://github.com/UtrackiWiktor)
 
-[Paweł Lutostański]
+[Paweł Lutostański](https://github.com/TurboDabber)
 
 [Dominik Krzysztofik](https://github.com/DominB)
 
