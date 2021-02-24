@@ -83,9 +83,12 @@ namespace HomeOffice.classes.Users
         }
 
 
-        public String ShowMyActivity(TaskDictionary taskdic)
+        public String Show(String x)
         {
-            return taskdic.TaskName + "\n" + "\n" + taskdic.TaskDescription;
+
+
+            return null;
+                //taskdic.TaskName + "\n" + "\n" + taskdic.TaskDescription;
         }
     }
 }

@@ -38,7 +38,8 @@ namespace HomeOffice.Views
 
         }
 
-        private void refreshButton_Click(object sender, RoutedEventArgs e)
+        //tutaj
+        private void reportButton_Click(object sender, RoutedEventArgs e)
         {
             using (var DbContext = new HomeOfficeContext())
             {
@@ -48,19 +49,9 @@ namespace HomeOffice.Views
                              where manager.Unit == user.Unit
                              select new { TaskID = tasks.Task_ID, UsersID = tasks.Users_ID, Name = user.Name, Surname = user.Surname, TaskDictionaryID = taskdictionary.ID, TaskName = taskdictionary.TaskName, TaskDescription = taskdictionary.TaskDescription, Status = tasks.Status }).ToList();
 
-                tasksGrid.ItemsSource = query;
-            }
-        }
-
-        //tutaj
-        private void reportButton_Click(object sender, RoutedEventArgs e)
-        { 
-             using (var DbContext = new HomeOfficeContext())
-            {
-                var query = DbContext.TaskDictionary.Where(t => t.Unit == manager.Unit).ToList();        
                 System.Windows.Forms.MessageBox.Show(manager.PrintTheReport(query));
-                }
-            
+            }
+
         }
 
         private void tasksGrid_Loaded(object sender, RoutedEventArgs e)
@@ -139,6 +130,10 @@ namespace HomeOffice.Views
         }
 
         private void deleteTask_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void refreshButton_Click(object sender, RoutedEventArgs e)
         {
 
         }

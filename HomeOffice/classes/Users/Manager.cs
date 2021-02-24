@@ -15,32 +15,33 @@ namespace HomeOffice.classes.Users
         public Manager(string name, string surname, DateTime date, UserRoles typeOfUser, int unit,long pesel) : base(name, surname, date, typeOfUser, unit, pesel) { }
         public Manager(User u) : base(u) { }
 
-        //Manager prints the report of all activities that has the same ManagerID
-        public String PrintTheReport(List<TaskDictionary> list)
+        //Manager prints the report of all activities that 
+        public String PrintTheReport<T>(List<T> list)
         {
             //search for a user's desktop and create folder there
             string path = Environment.GetFolderPath(
                          System.Environment.SpecialFolder.DesktopDirectory);
-            path += "/report.csv";
+            path += "/Report.csv";
             //var file = File.CreateText(path);
 
-            StreamWriter writer = new StreamWriter(path);  
- 
-            writer.WriteLine(CreateCSVTextFile(list));   
+            StreamWriter writer = new StreamWriter(path);
+
+            writer.WriteLine(CreateCSVTextFile(list));
             writer.Flush();
 
 
             //save task list content to the list
-           // file.Write(CreateCSVTextFile(list));
-            
-            return "Report saved as CSV file" + CreateCSVTextFile(list);
+            // file.Write(CreateCSVTextFile(list));
+
+            return "Report saved as CSV file";
         }
 
         private string CreateCSVTextFile<T>(List<T> data)
         {
             var properties = typeof(T).GetProperties();
             var result = new StringBuilder();
-
+            result.Insert(0, "TaskID,UserID,Name,Surname,TaskTitle,Description,Completed,");
+            result.AppendLine();
             foreach (var row in data)
             {
                 var values = properties.Select(p => p.GetValue(row, null))
@@ -48,6 +49,7 @@ namespace HomeOffice.classes.Users
                 var line = string.Join(",", values);
                 result.AppendLine(line);
             }
+
 
             return result.ToString();
         }
@@ -68,6 +70,8 @@ namespace HomeOffice.classes.Users
                 sb.Append("\"");
                 return sb.ToString();
             }
+
+
 
             return str;
         }
