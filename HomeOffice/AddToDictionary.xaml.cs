@@ -46,7 +46,7 @@ namespace HomeOffice
                 if (!String.IsNullOrWhiteSpace(TaskDesc.Text) && !String.IsNullOrWhiteSpace(TaskTitle.Text) && int.TryParse(Unit.Text, out unit))
                 {
 
-                    AuthorizedUser.AddToTaskDictionary(new TaskDictionary(TaskTitle.Text, TaskTitle.Text, unit));
+                    AuthorizedUser.AddToTaskDictionary(new TaskDictionary(TaskTitle.Text, TaskDesc.Text, unit));
                     MessageBox.Show("Task was added successfully.");
                     AddTaskDel.DynamicInvoke();
                     this.Close();
