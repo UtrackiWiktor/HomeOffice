@@ -137,5 +137,9 @@ namespace HomeOffice.classes.Users
                 }
             }
         }
+        public override void AddToTaskDictionary(TaskDictionary taskDictionary)
+        {
+            taskDictionary.AddTaskDictionary();
+        }
     }
 }

@@ -25,15 +25,18 @@ namespace HomeOffice
         public Delegate AddTaskDel;
         public AddToDictionary(User user)
         {
-            if((UserRoles)user.UserGroup==UserRoles.Administrator)
+            InitializeComponent();
+            if ((UserRoles)user.UserGroup==UserRoles.Administrator)
             {
                 AuthorizedUser = new Administrator(user);
             }
             else if ((UserRoles)user.UserGroup == UserRoles.Manager)
             {
                 AuthorizedUser = new Manager(user);
+                Unit.Text = AuthorizedUser.Unit.ToString();
+                Unit.IsReadOnly = true;
             }
-            InitializeComponent();
+            
         }
 
 

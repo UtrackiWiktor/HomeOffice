@@ -92,11 +92,14 @@ namespace HomeOffice.Views
         {
 
         }
-
-        private void refreshButton2nd_Click(object sender, RoutedEventArgs e)
+        private void refresh2()
         {
             empGrid.ItemsSource = manager.UsersFromUnitToList(manager);
             taskDicGrid.ItemsSource = manager.UnitTasksToList(manager);
+        }
+        private void refreshButton2nd_Click(object sender, RoutedEventArgs e)
+        {
+            refresh2();
         }
 
         private void assignButton_Click(object sender, RoutedEventArgs e)
@@ -125,7 +128,10 @@ namespace HomeOffice.Views
 
         private void addTaskButton_Click(object sender, RoutedEventArgs e)
         {
-
+            AddToDictionary addToDictionryInstance = new AddToDictionary(manager);
+            RefreshListEvent += new RefreshList(refresh2);
+            addToDictionryInstance.AddTaskDel = RefreshListEvent;
+            addToDictionryInstance.Show();
         }
 
         private void deleteAssigned_Click(object sender, RoutedEventArgs e)
