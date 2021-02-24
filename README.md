@@ -22,3 +22,9 @@ Do not hesitate! Should you purchase our application today, you shall receive a 
 
 
 *None of the Mini Korpo affiliates, partners, suppliers or licensors take responsibility or liability for the frequency of provision and accuracy of the "Home-office Activity Records" rate towards employee effectiveness, whether or not arising from the negligence of any of Mini Korpo associates or the Suppliers.
+
+# How to run project
+
+1. open terminal and run git clone https://github.com/UtrackiWiktor/HomeOffice.git command
+2. open the *.sln file using latest Microsoft Visual Studio IDE
+3. run the project with f5 button
