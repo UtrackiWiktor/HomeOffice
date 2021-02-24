@@ -137,5 +137,10 @@ namespace HomeOffice.Views
         {
 
         }
+
+        private void deleteTask_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
