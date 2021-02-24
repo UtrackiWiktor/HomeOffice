@@ -56,7 +56,7 @@
                         <TextBox Name="tasksTypes1st"  Margin="10,0" VerticalContentAlignment="Center" FontSize="18"/>
                     </DockPanel>
                     <DockPanel Grid.Column="0" Grid.Row="4">
-                        <CheckBox Name="finished" Content=" Finished tasks" Margin="10,5" VerticalContentAlignment="Center" FontSize="18"/>
+                        <CheckBox Name="finished" Content=" Finished tasks" Margin="10,5" VerticalContentAlignment="Center" FontSize="18" Checked="Finished_Checked"/>
                     </DockPanel>
                     <DockPanel Grid.Column="1" Grid.Row="4">
                         <CheckBox Name="selectAll1st" Content=" Select all" Margin="10,5" VerticalContentAlignment="Center" FontSize="18"/>

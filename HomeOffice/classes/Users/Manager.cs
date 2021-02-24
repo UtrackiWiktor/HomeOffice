@@ -101,7 +101,7 @@ namespace HomeOffice.classes.Users
         {
             using (var DbContext = new HomeOfficeContext())
             {
-                var query = DbContext.TaskDictionary.Where(t => t.Unit == u.Unit).ToList();
+                var query = DbContext.TaskDictionary.Where(t => t.Unit == u.Unit && t.IsEnabled == true).ToList();
                 return query;
             }
         }
@@ -112,6 +112,15 @@ namespace HomeOffice.classes.Users
             {
                 var query = DbContext.Users.Where(us => us.Unit == u.Unit).ToList();
                 return query;
+            }
+        }
+
+        public override void DeleteFromTaskDictionary(TaskDictionary taskDictionary)
+        {
+            using (var DbContext = new HomeOfficeContext())
+            {
+                DbContext.Entry(taskDictionary).CurrentValues.SetValues(taskDictionary.IsEnabled=false);
+                DbContext.SaveChanges();
             }
         }
     }
