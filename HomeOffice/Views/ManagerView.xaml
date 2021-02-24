@@ -41,7 +41,7 @@
                         <Label Content="Name(s):"  FontSize="18" Margin="6,0"/>
                     </DockPanel>
                     <DockPanel Grid.Column="0" Grid.Row="2">
-                        <TextBox Name="usersNames1st"  Margin="10,0" VerticalContentAlignment="Center" FontSize="18"/>
+                        <TextBox Name="usersNames1st"  Margin="10,0" VerticalContentAlignment="Center" FontSize="18" />
                     </DockPanel>
                     <DockPanel Grid.Column="1" Grid.Row="1">
                         <Label Content="Surname(s):" FontSize="18" Margin="6,0"/>
