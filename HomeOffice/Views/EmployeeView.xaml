@@ -36,13 +36,13 @@
             <Label Content="Task(s) title:" FontSize="18" Margin="6,0" VerticalAlignment="Center"/>
         </DockPanel>
         <DockPanel Grid.Column="0" Grid.Row="2">
-            <TextBox Name="tasksTitle" VerticalContentAlignment="Center" FontSize="18" Margin="10,0" />
+            <TextBox Name="tasksTitle" VerticalContentAlignment="Center" FontSize="18" Margin="10,0" TextChanged="TextChanged" />
         </DockPanel>
         <DockPanel Grid.Column="1" Grid.Row="1">
             <Label Content="Task(s) description:" FontSize="18" Margin="17,0" VerticalAlignment="Center"/>
         </DockPanel>
         <DockPanel Grid.Column="1" Grid.Row="2">
-            <TextBox Name="taskDesc" VerticalContentAlignment="Center" FontSize="18" Margin="10,0" />
+            <TextBox Name="taskDesc" VerticalContentAlignment="Center" FontSize="18" Margin="10,0" TextChanged="TextChanged" />
         </DockPanel>
         <DockPanel Grid.Column="2" Grid.Row="1"/>
         <DockPanel Grid.Column="2" Grid.Row="2">
@@ -52,9 +52,7 @@
             <DataGrid Name="tasksList" Margin="10, 20" Loaded="LoadTasks" CanUserAddRows="false">
                 <DataGrid.ContextMenu>
                     <ContextMenu>
-
-                        <MenuItem Header="Mark as done/undone" Click="DoneUndone_Click"/>
-						<MenuItem Header="Show more info" Click="ShowMyActivity"/>
+                        <MenuItem Header="Finish My Activity" Click="DoneUndone_Click"/>
                     </ContextMenu>
                 </DataGrid.ContextMenu>
             </DataGrid>

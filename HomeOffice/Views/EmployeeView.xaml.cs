@@ -62,19 +62,27 @@ namespace HomeOffice.Views
 
         private void DoneUndone_Click(object sender, RoutedEventArgs e)
         {
-              foreach (var selected in tasksList.SelectedItems)
-                {
-                    if (selected is Task)
-                    {
-                      System.Windows.Forms.MessageBox.Show(user.FinishMyActivity((Task)selected));
-                    }
-                }
+            FinishTask finishtaskInstance = new FinishTask(user);
+            finishtaskInstance.ShowDialog();
+        }
+
+        private void refresh()
+        {
+            using (var DbContext = new HomeOfficeContext())
+            {
+                var query = (from tasks in DbContext.Tasks
+                             join user1 in DbContext.Users on tasks.Users_ID equals user1.ID
+                             join taskdictionary in DbContext.TaskDictionary on tasks.TaskDictionary_ID equals taskdictionary.ID
+                             where tasks.Users_ID == user.ID
+                             select new { TaskID = tasks.Task_ID, TaskTitle = taskdictionary.TaskName, Description = taskdictionary.TaskDescription, Completed = tasks.Status }).ToList();
+
+                tasksList.ItemsSource = query;
+            }
         }
 
         private void click(object sender, RoutedEventArgs e)
         {
-            FinishTask finishtaskInstance = new FinishTask(user);
-            finishtaskInstance.ShowDialog();
+            refresh();
         }
 
         private void logOut_Click(object sender, RoutedEventArgs e)
@@ -82,8 +90,9 @@ namespace HomeOffice.Views
             user.logOut();
         }
 
-        private void ShowMyActivity(object sender, RoutedEventArgs e){
+        private void TextChanged(object sender, RoutedEventArgs e){
 
+            
         }
 
     }

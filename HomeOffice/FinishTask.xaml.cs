@@ -84,6 +84,8 @@ namespace HomeOffice
                     System.Windows.Forms.MessageBox.Show(user.FinishMyActivity((Task)selected));
                 }
             }
+            refresh();
+
         }
 
         private void ShowMyActivity(object sender, RoutedEventArgs e)
@@ -98,6 +100,19 @@ namespace HomeOffice
 
 
             }
+        }
+
+        private void refresh()
+        {
+            List<Task> x = t.AllTasksToList();
+            foreach (Task task in x.ToList())
+            {
+                if (task.Users_ID != user.ID)
+                {
+                    x.Remove(task);
+                }
+            }
+            windowList.ItemsSource = x;
         }
 
     }
