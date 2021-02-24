@@ -83,12 +83,17 @@ namespace HomeOffice.classes.Users
         }
 
 
-        public String Show(String x)
+        public override String Show(Task task)
         {
-
-
-            return null;
-                //taskdic.TaskName + "\n" + "\n" + taskdic.TaskDescription;
+            String temp, temp1;
+            using (var DbContext = new HomeOfficeContext())
+            {
+                var result = DbContext.TaskDictionary.SingleOrDefault(t => t.ID == task.TaskDictionary_ID);
+                temp = result.TaskDescription;
+                temp1 = result.TaskName;
+            }
+            
+            return temp1 + "\n" + "\n" + temp;
         }
     }
 }

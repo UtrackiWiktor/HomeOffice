@@ -37,12 +37,12 @@ namespace HomeOffice
 
         public void SetUser(User u)
         {
-            //emp = new Employee(u);
+            user = new Employee(u);
         }
 
-        public FinishTask(User user)
+        public FinishTask(User u)
         {
-            user = new Employee(((MainWindow)Application.Current.MainWindow).GetUser());
+            SetUser(u);
             InitializeComponent();
         }
 
@@ -50,7 +50,7 @@ namespace HomeOffice
         private void windowList_Loaded(object sender, RoutedEventArgs e)
         {
             List<Task> x = t.AllTasksToList();
-            foreach (Task task in x)
+            foreach (Task task in x.ToList())
             {
                 if (task.Users_ID != user.ID)
                 {
@@ -92,9 +92,7 @@ namespace HomeOffice
             {
                 foreach (var selected in windowList.SelectedItems)
                 {
-
-                    string x = selected.ToString();
-                    System.Windows.Forms.MessageBox.Show(x);
+                   System.Windows.Forms.MessageBox.Show(user.Show((Task)selected));
 
                 }
 
