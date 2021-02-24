@@ -66,8 +66,6 @@ namespace HomeOffice
                     password = null;//wipe data
                     addUserDel.DynamicInvoke();
                     this.Close();
-                    //test
-                    //((MainWindow)Application.Current.MainWindow).SetUser(new User("Ula", "Stańczyk", dateTime, UserRoles.Employee, 10, 100));
                 }
                 else
                 {

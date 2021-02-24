@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TabControl Margin="-10,-10,10,10">
+        <TabControl Margin="0,0,10,10">
             <TabItem Header="Users" Name="usersTab">
                 <Grid Margin="10">
                     <Grid.ColumnDefinitions>
@@ -147,12 +147,12 @@
                         <Label Name="WarningLabel2" Content="" FontSize="18" Margin="6,0" VerticalAlignment="Center" Foreground="Red"/>
                     </DockPanel>
                     <DockPanel Grid.Column="0" Grid.Row="4" Grid.RowSpan="5" Grid.ColumnSpan="4">
-                        <DataGrid Name="TasksDataGrid" Margin="10, 0, 10, 20" Loaded="TasksDataGrid_Loaded">
+                        <DataGrid Name="TasksDataGrid" Margin="10, 0, 10, 20" Loaded="TasksDataGrid_Loaded" CanUserAddRows="False">
                             <DataGrid.ContextMenu>
                                 <ContextMenu>
-                                    <MenuItem Header="Delete" Click="Delete_Click"/>
+                                    <MenuItem Header="Delete" Click="Delete2_Click"/>
 
-                                    <MenuItem Header="Update" Click="Update_Click"/>
+                                    <MenuItem Header="Update" Click="Update2_Click"/>
                                 </ContextMenu>
                             </DataGrid.ContextMenu>
                         </DataGrid>
@@ -218,7 +218,7 @@
                     </DockPanel>
                     <DockPanel Grid.Column="0" Grid.Row="4" Grid.RowSpan="6" Grid.ColumnSpan="4">
                         <DockPanel Grid.Column="0" Grid.Row="4" Grid.RowSpan="5" Grid.ColumnSpan="4">
-                            <DataGrid Name="UnitsDataGrid" Margin="10, 5" Loaded="UnitsDataGrid_Loaded" CanUserAddRows="False">
+                            <DataGrid Name="UnitDataGrid" Margin="10, 5" Loaded="UnitsDataGrid_Loaded" CanUserAddRows="False" CellEditEnding="UnitsDataGrid_CellEditEnding">
                             <DataGrid.ContextMenu>
                                     <ContextMenu>
                                         <MenuItem Header="Delete" Click="Delete3_Click"/>
