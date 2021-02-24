@@ -55,6 +55,7 @@ namespace HomeOffice.Data
                 entity.Property(e => e.TaskDescription).HasColumnName("TaskDescription");
                 entity.Property(e => e.TaskName).IsRequired().HasColumnName("TaskName");
                 entity.Property(e => e.Unit).HasColumnName("Unit");
+                entity.Property(e => e.IsEnabled).HasColumnName("IsEnabled");
             });
 
             modelBuilder.Entity<Password>(entity =>

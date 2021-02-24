@@ -13,12 +13,14 @@ namespace HomeOffice.classes.Tasks
         public string TaskName { get; set; }
         public string TaskDescription { get; set; }
         public int Unit { get; set; }
+        public bool IsEnabled { get; set; }
         public TaskDictionary() { }//used by entity framework, otherwise it throws exp
-        public TaskDictionary(string tskName, string tskDesctiption, int unit)
+        public TaskDictionary(string tskName, string tskDesctiption, int unit,bool enabled=true)
         {
              TaskName = tskName;
              TaskDescription = tskDesctiption;
              Unit = unit;
+             IsEnabled = enabled;
         }
         public void AddTaskDictionary()
         {
@@ -46,6 +48,14 @@ namespace HomeOffice.classes.Tasks
                 DbContext.Remove(this);
                 DbContext.SaveChanges();
             }
+        }
+        public void DisableTaskDictionary()
+        {
+
+        }
+        public void EnableTaskDictionary()
+        {
+
         }
     }
 }

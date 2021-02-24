@@ -53,7 +53,6 @@ namespace HomeOffice.classes.Units
                 {
                     DbContext.Entry(result).CurrentValues.SetValues(this);
                     DbContext.SaveChanges();
-
                 }
 
             }
