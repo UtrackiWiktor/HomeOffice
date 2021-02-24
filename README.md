@@ -22,3 +22,28 @@ Do not hesitate! Should you purchase our application today, you shall receive a 
 
 
 *None of the Mini Korpo affiliates, partners, suppliers or licensors take responsibility or liability for the frequency of provision and accuracy of the "Home-office Activity Records" rate towards employee effectiveness, whether or not arising from the negligence of any of Mini Korpo associates or the Suppliers.
+
+# How to run the project
+
+1. open terminal and run git clone https://github.com/UtrackiWiktor/HomeOffice.git command
+2. open the *.sln file using latest Microsoft Visual Studio IDE
+3. run the project with f5 button
+
+# Technology Stack
+- C#
+- LinQ
+- EntityFramework
+- Amazon AWS
+- RDS
+- ADO.NET
+
+# Team
+[Dawid Jóźwiak](https://github.com/DawidJozwiak)
+
+[Wiktor Utracki](https://github.com/UtrackiWiktor)
+
+[Paweł Lutostański](https://github.com/TurboDabber)
+
+[Dominik Krzysztofik](https://github.com/DominB)
+
+[Wiktoria Gajek](https://github.com/CashmereOgre)
