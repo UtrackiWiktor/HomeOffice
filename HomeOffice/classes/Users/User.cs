@@ -65,6 +65,7 @@ namespace HomeOffice.classes.Users
 
         public void logOut()
         {
+            App.Current.Windows[0].Show();
             for (int intCounter = App.Current.Windows.Count - 1; intCounter >= 1; intCounter--)
             {
                 App.Current.Windows[intCounter].Close();
