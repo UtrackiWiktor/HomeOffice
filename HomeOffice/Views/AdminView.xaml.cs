@@ -258,15 +258,27 @@ namespace HomeOffice.Views
             if (TasksDataGrid.Columns.Count > 1) // at init is 0
                 TasksDataGrid.Columns[0].IsReadOnly = true;
         }
-
-        private void RefreshTasks_Click(object sender, RoutedEventArgs e)
+        private void FilterTasks()
         {
 
+        }
+        private void RefreshTasks()
+        {
+            TasksDataGrid.ItemsSource = tasksDictionaryList = admin.TaskDictionaryList();
+            FilterTasks();
+            WarningLabel3.Content = null;
+        }
+        private void RefreshTasks_Click(object sender, RoutedEventArgs e)
+        {
+            RefreshTasks();
         }
 
         private void AddTask_Click(object sender, RoutedEventArgs e)
         {
-
+            AddToDictionary addToDictionryInstance = new AddToDictionary(admin);
+            RefreshListEvent += new RefreshList(RefreshTasks);
+            addToDictionryInstance.AddTaskDel = RefreshListEvent;
+            addToDictionryInstance.Show();
         }
 
         private void TasksDataGrid_Loaded(object sender, RoutedEventArgs e)
