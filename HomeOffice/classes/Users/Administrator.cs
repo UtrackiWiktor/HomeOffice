@@ -106,10 +106,8 @@ namespace HomeOffice.classes.Users
             unit.ID = id;
             unit.DeleteUnit();
         }
-        public override void UpdateUnit(int id) 
+        public override void UpdateUnit(Unit unit) 
         {
-            Unit unit = new Unit();
-            unit.ID = id;
             unit.UpdateUnit();
         }
         public override List<Unit> UnitList() 

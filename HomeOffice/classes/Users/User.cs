@@ -89,7 +89,7 @@ namespace HomeOffice.classes.Users
         public virtual void DeleteFromTaskDictionary(TaskDictionary taskDictionary) { }
         public virtual void AddUnit(String name) { }
         public virtual void DeleteUnit(int id) { }
-        public virtual void UpdateUnit(int id) { }
+        public virtual void UpdateUnit(Unit unit) { }
         
         public virtual List<Unit> UnitList() { return null; }
         public virtual String FinishMyActivity(Tasks.Task task) { return null; }

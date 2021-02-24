@@ -272,7 +272,7 @@ namespace HomeOffice.Views
         private void TasksDataGrid_Loaded(object sender, RoutedEventArgs e)
         {
             TasksDataGrid.ItemsSource = tasksDictionaryList = admin.TaskDictionaryList();
-            if(TasksDataGrid.Columns.Count>1)
+            if (TasksDataGrid.Columns.Count > 1)
                 TasksDataGrid.Columns[0].IsReadOnly = true;
             idList = new List<int>();
             WarningLabel2.Content = "";
@@ -281,12 +281,20 @@ namespace HomeOffice.Views
             TasksDescription.Text = "";
         }
 
+        private void Update2_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void Delete2_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
         private void LogOut_Click(object sender, RoutedEventArgs e)
         {
             admin.logOut();
         }
 
-        private void filterUnits()
+        private void FilterUnits()
         {
             List<Unit> temp = unitList;
             if (UnitNameFilter.Text != null)
@@ -295,18 +303,21 @@ namespace HomeOffice.Views
                 temp = temp.Where(u => u.UnitName.ToUpper().Contains(UnitNameFilter.Text.ToUpper())).ToList();
             }
 
-            UnitsDataGrid.ItemsSource = temp;
-            if (UnitsDataGrid.Columns.Count > 1) // at init is 0
-                UnitsDataGrid.Columns[0].IsReadOnly = true;
+            UnitDataGrid.ItemsSource = temp;
+            if (UnitDataGrid.Columns.Count > 1) // at init is 0
+                UnitDataGrid.Columns[0].IsReadOnly = true;
+            
         }
         private void UnitNameFilter_TextChanged(object sender, TextChangedEventArgs e)
         {
-            filterUnits();
+            FilterUnits();
         }
         private void RefreshUnits()
         {
-            UnitsDataGrid.ItemsSource = unitList = admin.UnitList();
-            filterUnits();
+            UnitDataGrid.ItemsSource = unitList = admin.UnitList();
+            FilterUnits();
+            WarningLabel3.Content = null;
+            idList = new List<int>();
         }
         private void RefreshUnits_Click(object sender, RoutedEventArgs e)
         {
@@ -328,13 +339,13 @@ namespace HomeOffice.Views
         }
         private void Delete3_Click(object sender, RoutedEventArgs e)
         {
-            if (UnitsDataGrid.SelectedItems[0] is Unit)
+            if (UnitDataGrid.SelectedItems[0] is Unit)
             {
                 string str = "Unit";
-                if (UnitsDataGrid.SelectedCells.Count > 1)
+                if (UnitDataGrid.SelectedCells.Count > 1)
                     str += "s";
                 if (MessageBox.Show("Do you want to delete selected " + str + "?", "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-                    foreach (var selected in UnitsDataGrid.SelectedItems)
+                    foreach (var selected in UnitDataGrid.SelectedItems)
                     {
                         if (selected is Unit)
                             admin.DeleteUnit(((Unit)selected).ID);
@@ -346,26 +357,65 @@ namespace HomeOffice.Views
 
         private void Update3_Click(object sender, RoutedEventArgs e)
         {
+            foreach (var selected in UnitDataGrid.SelectedItems)
+            {
+                if (selected is Unit && idList.Contains(((Unit)selected).ID))
+                {
+                    admin.UpdateUnit(((Unit)selected));
+                    idList.Remove(((Unit)selected).ID);
+                }
 
+            }
+            if (idList.Count == 0)
+            {
+                WarningLabel3.Content = "";
+                idList = new List<int>();
+            }
+            else
+            {
+                WarningLabel3.Content = "Non committed changes for users with ids: ";
+                foreach (var id in idList)
+                {
+                    WarningLabel3.Content += id.ToString() + ", ";
+                }
+            }
         }
         private void SelectAll3_Checked(object sender, RoutedEventArgs e)
         {
             if (SelectAll3.IsChecked == true)
             {
-                UnitsDataGrid.Focus();
-                UnitsDataGrid.SelectAll();
+                UnitDataGrid.Focus();
+                UnitDataGrid.SelectAll();
             }
         }
         private void UnitsDataGrid_Loaded(object sender, RoutedEventArgs e)
         {
-            UnitsDataGrid.ItemsSource= unitList =admin.UnitList();
-            if (UnitsDataGrid.Columns.Count > 1)
-                UnitsDataGrid.Columns[0].IsReadOnly = true;
+            UnitDataGrid.ItemsSource= unitList =admin.UnitList();
+            if (UnitDataGrid.Columns.Count > 1)
+                UnitDataGrid.Columns[0].IsReadOnly = true;
             idList = new List<int>();
             WarningLabel3.Content = "";
             SelectAll3.IsChecked = false;
             
             UnitNameFilter.Text = "";
         }
+
+        private void UnitsDataGrid_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+        {
+            if (UnitDataGrid.SelectedItem is Unit)
+            {
+                if (!idList.Contains(((Unit)UnitDataGrid.SelectedItem).ID))
+                {
+                    idList.Add(((Unit)UnitDataGrid.SelectedItem).ID);
+                    if (idList.Count == 1)
+                    {
+                        WarningLabel3.Content = "Non committed changes for units with ids: ";
+                    }
+                    var s = ((Unit)(UnitDataGrid.SelectedItem)).ID.ToString();
+                    WarningLabel3.Content += s + ", ";
+                }
+            }
+        }
+
     }
 }
