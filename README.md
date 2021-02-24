@@ -28,3 +28,14 @@ Do not hesitate! Should you purchase our application today, you shall receive a 
 1. open terminal and run git clone https://github.com/UtrackiWiktor/HomeOffice.git command
 2. open the *.sln file using latest Microsoft Visual Studio IDE
 3. run the project with f5 button
+
+# Technology Stack
+- C#
+- LinQ
+- EntityFramework
+- Amazon AWS
+- RDS
+- ADO.NET
+
+# Team
+[Dawid Jóźwiak](https://github.com/DawidJozwiak)
