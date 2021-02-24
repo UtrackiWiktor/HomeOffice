@@ -29,7 +29,7 @@ namespace HomeOffice.Views
         public event RefreshList RefreshListEvent;
         List<User> userList;
         List<TaskDictionary> tasksDictionaryList;
-        List<int> updatedUserIDs;
+        List<int> idList;
         List<Unit> unitList;
 
         public void SetUser(User u)
@@ -43,7 +43,7 @@ namespace HomeOffice.Views
             InitializeComponent();
         }
 
-        private void filterUserDataGrid()
+        private void FilterUserDataGrid()
         {
             List<User> temp = userList;
             if (UserName.Text != null)
@@ -77,7 +77,6 @@ namespace HomeOffice.Views
                     temp = temp.Where(u => u.UserGroup.ToString().Contains(((int)userRole).ToString())).ToList();
                 }
             }
-            //WarningLabel.Content = "";
             UserDataGrid.ItemsSource = temp;
             if(UserDataGrid.Columns.Count>1) // at init is 0
                 UserDataGrid.Columns[0].IsReadOnly = true;
@@ -89,9 +88,9 @@ namespace HomeOffice.Views
         {
             userList = admin.AllUsersToList();
             WarningLabel.Content = "";
-            updatedUserIDs = new List<int>();
+            idList = new List<int>();
             
-            filterUserDataGrid();
+            FilterUserDataGrid();
             UserDataGrid.Columns[0].IsReadOnly = true;
         }
 
@@ -112,22 +111,23 @@ namespace HomeOffice.Views
         {
             UserDataGrid.ItemsSource = admin.AllUsersToList();
             UserDataGrid.Columns[0].IsReadOnly = true;
-            updatedUserIDs = new List<int>();
+            idList = new List<int>();
             WarningLabel.Content = "";
             UserName.Text = "";
             UserSurname.Text = "";
             UserUnit.Text = "";
             SelectedTypeOfUser.SelectedIndex = 3;
+            SelectAll.IsChecked = false;
         }
         private void UserDataGrid_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
 
             if (UserDataGrid.SelectedItem is User)
             {
-                if (!updatedUserIDs.Contains(((User)UserDataGrid.SelectedItem).ID))
+                if (!idList.Contains(((User)UserDataGrid.SelectedItem).ID))
                 {
-                    updatedUserIDs.Add(((User)UserDataGrid.SelectedItem).ID);
-                    if (updatedUserIDs.Count==1)
+                    idList.Add(((User)UserDataGrid.SelectedItem).ID);
+                    if (idList.Count==1)
                     {
                         WarningLabel.Content = "Non committed changes for users with ids: ";
                     }
@@ -139,13 +139,13 @@ namespace HomeOffice.Views
 
         private void User_TextChanged(object sender, TextChangedEventArgs e)
         {
-            filterUserDataGrid();
+            FilterUserDataGrid();
 
         }
 
         private void SelectedTypeOfUser_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            filterUserDataGrid();
+            FilterUserDataGrid();
         }
 
         private void SelectedTypeOfUser_Unselected(object sender, RoutedEventArgs e)
@@ -204,22 +204,22 @@ namespace HomeOffice.Views
             {
                 foreach (var selected in UserDataGrid.SelectedItems)
                 {
-                    if (selected is User && updatedUserIDs.Contains(((User)selected).ID))
+                    if (selected is User && idList.Contains(((User)selected).ID))
                     {
                         admin.UpdateUser(((User)selected));
-                        updatedUserIDs.Remove(((User)selected).ID);
+                        idList.Remove(((User)selected).ID);
                     }
 
                 }
-                if(updatedUserIDs.Count==0)
+                if(idList.Count==0)
                 {
                         WarningLabel.Content = "";
-                        updatedUserIDs = new List<int>();
+                        idList = new List<int>();
                 }
                 else
                 {
                         WarningLabel.Content = "Non committed changes for users with ids: ";
-                        foreach(var id in updatedUserIDs)
+                        foreach(var id in idList)
                         {
                         WarningLabel.Content += id.ToString() + ", ";
                         }
@@ -229,7 +229,7 @@ namespace HomeOffice.Views
         }
         private void SelectAll_Checked(object sender, RoutedEventArgs e)
         {
-            if (selectAll1.IsChecked == true)
+            if (SelectAll.IsChecked == true)
             {
                 UserDataGrid.Focus();
                 UserDataGrid.SelectAll();
@@ -274,6 +274,11 @@ namespace HomeOffice.Views
             TasksDataGrid.ItemsSource = tasksDictionaryList = admin.TaskDictionaryList();
             if(TasksDataGrid.Columns.Count>1)
                 TasksDataGrid.Columns[0].IsReadOnly = true;
+            idList = new List<int>();
+            WarningLabel2.Content = "";
+            SelectAll2.IsChecked = false;
+            TasksTitle.Text = "";
+            TasksDescription.Text = "";
         }
 
         private void LogOut_Click(object sender, RoutedEventArgs e)
@@ -356,6 +361,11 @@ namespace HomeOffice.Views
             UnitsDataGrid.ItemsSource= unitList =admin.UnitList();
             if (UnitsDataGrid.Columns.Count > 1)
                 UnitsDataGrid.Columns[0].IsReadOnly = true;
+            idList = new List<int>();
+            WarningLabel3.Content = "";
+            SelectAll3.IsChecked = false;
+            
+            UnitNameFilter.Text = "";
         }
     }
 }

@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TabControl>
+        <TabControl Margin="-10,-10,10,10">
             <TabItem Header="Users" Name="usersTab">
                 <Grid Margin="10">
                     <Grid.ColumnDefinitions>
@@ -68,7 +68,7 @@
                         </ComboBox>
                     </DockPanel>
                     <DockPanel Grid.Column="0" Grid.Row="4">
-                        <CheckBox Name="selectAll1" Content=" Select all" Margin="10,0" VerticalContentAlignment="Center" FontSize="18" Checked="SelectAll_Checked" />
+                        <CheckBox Name="SelectAll" Content=" Select all" Margin="10,0" VerticalContentAlignment="Center" FontSize="18" Checked="SelectAll_Checked" />
                     </DockPanel>
                     <DockPanel Grid.Column="3" Grid.Row="4">
                         <Button Margin="10,0" Content="Add new user" Name="AddUser" FontSize="18" Click="AddUser_Click"/>
@@ -95,7 +95,7 @@
                     </DockPanel>
                 </Grid>
             </TabItem>
-            <TabItem Header="Task dictionary" Name="taskDictionary" HorizontalAlignment="Right" Width="94">
+            <TabItem Header="Task dictionary" Name="taskDictionary" Margin="2,-2,-2,0">
                 <Grid Margin="10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -135,13 +135,16 @@
                         <TextBox Name="TasksDescription" Margin="10,5" VerticalContentAlignment="Center" FontSize="18" TextChanged="Tasks_TextChanged"/>
                     </DockPanel>
                     <DockPanel Grid.Column="2" Grid.Row="2">
-                        <CheckBox Name="selectAll2" Content=" Select all" Margin="10,0" VerticalContentAlignment="Center" FontSize="18"/>
+                        <CheckBox Name="SelectAll2" Content=" Select all" Margin="10,0" VerticalContentAlignment="Center" FontSize="18"/>
                     </DockPanel>
                     <DockPanel Grid.Column="3" Grid.Row="1">
                         <Button Margin="10,5" Content="Refresh" Name="refreshTasks" FontSize="18" Click="RefreshTasks_Click"/>
                     </DockPanel>
                     <DockPanel Grid.Column="3" Grid.Row="2">
                         <Button Margin="10,5" Content="Add new task" Name="AddTask" FontSize="18" Click="AddTask_Click"/>
+                    </DockPanel>
+                    <DockPanel Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="4">
+                        <Label Name="WarningLabel2" Content="" FontSize="18" Margin="6,0" VerticalAlignment="Center" Foreground="Red"/>
                     </DockPanel>
                     <DockPanel Grid.Column="0" Grid.Row="4" Grid.RowSpan="5" Grid.ColumnSpan="4">
                         <DataGrid Name="TasksDataGrid" Margin="10, 0, 10, 20" Loaded="TasksDataGrid_Loaded">
@@ -210,9 +213,12 @@
                     <DockPanel Grid.Column="3" Grid.Row="2">
                         <Button Name="addNewUnit" Content="Add new unit" FontSize="18" Margin="10, 5" Click="AddNewUnit_Click"/>
                     </DockPanel>
-                    <DockPanel Grid.Column="0" Grid.Row="3" Grid.RowSpan="6" Grid.ColumnSpan="4">
+                    <DockPanel Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="4">
+                        <Label Name="WarningLabel3" Content="" FontSize="18" Margin="6,0" VerticalAlignment="Center" Foreground="Red"/>
+                    </DockPanel>
+                    <DockPanel Grid.Column="0" Grid.Row="4" Grid.RowSpan="6" Grid.ColumnSpan="4">
                         <DockPanel Grid.Column="0" Grid.Row="4" Grid.RowSpan="5" Grid.ColumnSpan="4">
-                            <DataGrid Name="UnitsDataGrid" Margin="10, 20" Loaded="UnitsDataGrid_Loaded" CanUserAddRows="False">
+                            <DataGrid Name="UnitsDataGrid" Margin="10, 5" Loaded="UnitsDataGrid_Loaded" CanUserAddRows="False">
                             <DataGrid.ContextMenu>
                                     <ContextMenu>
                                         <MenuItem Header="Delete" Click="Delete3_Click"/>
