@@ -39,7 +39,11 @@ Do not hesitate! Should you purchase our application today, you shall receive a 
 
 # Team
 [Dawid Jóźwiak](https://github.com/DawidJozwiak)
+
 [Wiktor Utracki](https://github.com/UtrackiWiktor)
+
 [Paweł Lutostański]
+
 [Dominik Krzysztofik](https://github.com/DominB)
+
 [Wiktoria Gajek](https://github.com/CashmereOgre)
