@@ -105,7 +105,7 @@ namespace HomeOffice.classes.Users
         {
             using (var DbContext = new HomeOfficeContext())
             {
-                var query = DbContext.TaskDictionary.Where(t => t.Unit == u.Unit && t.IsEnabled == true).ToList();
+                var query = DbContext.TaskDictionary.Where(t => t.Unit == u.Unit).ToList();
                 return query;
             }
         }
@@ -123,8 +123,18 @@ namespace HomeOffice.classes.Users
         {
             using (var DbContext = new HomeOfficeContext())
             {
-                DbContext.Entry(taskDictionary).CurrentValues.SetValues(taskDictionary.IsEnabled=false);
-                DbContext.SaveChanges();
+                if (taskDictionary.IsEnabled == true)
+                {
+                    TaskDictionary toUpdate = DbContext.TaskDictionary.Where(t => t.ID == taskDictionary.ID).FirstOrDefault();
+                    toUpdate.IsEnabled = false;
+                    DbContext.SaveChanges();
+                }
+                else
+                {
+                    TaskDictionary toUpdate = DbContext.TaskDictionary.Where(t => t.ID == taskDictionary.ID).FirstOrDefault();
+                    toUpdate.IsEnabled = true;
+                    DbContext.SaveChanges();
+                }
             }
         }
     }

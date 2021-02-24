@@ -59,7 +59,7 @@
                         <CheckBox Name="finished" Content=" Finished tasks" Margin="10,5" VerticalContentAlignment="Center" FontSize="18" Checked="Finished_Checked"/>
                     </DockPanel>
                     <DockPanel Grid.Column="1" Grid.Row="4">
-                        <CheckBox Name="selectAll1st" Content=" Select all" Margin="10,5" VerticalContentAlignment="Center" FontSize="18"/>
+                        <CheckBox Name="selectAll1st" Content=" Select all" Margin="10,5" VerticalContentAlignment="Center" FontSize="18" Checked="SelectAll_Checked"/>
                     </DockPanel>
                     <DockPanel Grid.Column="2" Grid.Row="4">
                         <Button Margin="10,0" Content="Refresh" Name="refreshButton" Click="refreshButton_Click" FontSize="18"/>
@@ -111,7 +111,7 @@
                             <DataGrid.ContextMenu>
                                 <ContextMenu>
 
-                                    <MenuItem Header="Delete task from dictionary" Click="deleteTask_Click"/>
+                                    <MenuItem Header="Enable/Disable task from dictionary" Click="enableDisableTask_Click"/>
 
                                 </ContextMenu>
                             </DataGrid.ContextMenu>
@@ -141,10 +141,10 @@
                         <TextBox Name="tasksTypes2nd" Margin="10,5" VerticalContentAlignment="Center" FontSize="18"/>
                     </DockPanel>
                     <DockPanel Grid.Column="4" Grid.Row="6" Grid.ColumnSpan="2">
-                        <CheckBox Name="selectAllUsers" Content="Select all employees" VerticalAlignment="Center" Margin="10, 0" FontSize="18"/>
+                        <CheckBox Name="selectAllUsers" Content="Select all employees" VerticalAlignment="Center" Margin="10, 0" FontSize="18" Checked="SelectAllUsers_Checked"/>
                     </DockPanel>
                     <DockPanel Grid.Column="4" Grid.Row="7" Grid.ColumnSpan="2">
-                        <CheckBox Name="selectAllTasks" Content="Select all tasks" VerticalAlignment="Center" Margin="10, 0" FontSize="18"/>
+                        <CheckBox Name="selectAllTasks" Content="Select all tasks" VerticalAlignment="Center" Margin="10, 0" FontSize="18" Checked="SelectAllTasks_Checked"/>
                     </DockPanel>
                     <DockPanel Grid.Column="4" Grid.Row="8" Grid.ColumnSpan="2">
                         <Button Margin="10,5" Content="Refresh" Name="refreshButton2nd" Click="refreshButton2nd_Click" FontSize="18"/>

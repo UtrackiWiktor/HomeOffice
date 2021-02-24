@@ -109,7 +109,14 @@ namespace HomeOffice.Views
                     {
                         if (selectedTask is TaskDictionary)
                         {
-                            manager.AssignActivity((TaskDictionary)selectedTask, (User)selectedEmp);
+                            if (((TaskDictionary)selectedTask).IsEnabled == true)
+                            {
+                                manager.AssignActivity((TaskDictionary)selectedTask, (User)selectedEmp);
+                            }
+                            else
+                            {
+                                MessageBox.Show("You can;t assign task that is disabled");
+                            }
                         }
                     }
                 }
@@ -139,13 +146,13 @@ namespace HomeOffice.Views
             manager.logOut();
         }
 
-        private void deleteTask_Click(object sender, RoutedEventArgs e)
+        private void enableDisableTask_Click(object sender, RoutedEventArgs e)
         {
             foreach (var selected in taskDicGrid.SelectedItems)
             {
                 if (selected is TaskDictionary)
                 {
-                    manager.DeleteFromTaskDictionary((TaskDictionary)selected);
+                        manager.DeleteFromTaskDictionary((TaskDictionary)selected);
                 }
             }
         }
