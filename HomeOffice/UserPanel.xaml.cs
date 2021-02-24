@@ -50,6 +50,9 @@ namespace HomeOffice
             
         }
 
-
+        private void UserPanel_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            App.Current.Windows[0].Show();
+        }
     }
 }

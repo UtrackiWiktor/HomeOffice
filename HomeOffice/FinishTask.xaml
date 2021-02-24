@@ -7,6 +7,14 @@
         mc:Ignorable="d"
         Title="FinishTask" Height="450" Width="800">
     <Grid>
-        
+        <DataGrid Name="windowList" Margin="10,10,10.333,19.667" Loaded="windowList_Loaded" CanUserAddRows="false">
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+
+                    <MenuItem Header="Mark as done/undone" Click="DoneUndone_Click"/>
+                    <MenuItem Header="Show more info" Click="ShowMyActivity"/>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+        </DataGrid>
     </Grid>
 </Window>

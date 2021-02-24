@@ -93,6 +93,7 @@ namespace HomeOffice.classes.Users
         
         public virtual List<Unit> UnitList() { return null; }
         public virtual String FinishMyActivity(Tasks.Task task) { return null; }
+        public virtual String Show(Tasks.Task task) { return null; }
     }
 
 }
