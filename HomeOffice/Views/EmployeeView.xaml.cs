@@ -72,7 +72,7 @@ namespace HomeOffice.Views
 
         private void logOut_Click(object sender, RoutedEventArgs e)
         {
-
+            user.logOut();
         }
 
         private void ShowMyActivity(object sender, RoutedEventArgs e){

@@ -62,7 +62,8 @@ namespace HomeOffice
                     Warning.Content = "";
                     UserPanel userPanel = new UserPanel(user);
                     userPanel.Show();
-
+                    PeselBox.Text = "";
+                    PasswordBox.Text = "";
                 }
                 else
                     Warning.Content = "Wrong password";

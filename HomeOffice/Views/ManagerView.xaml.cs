@@ -135,7 +135,7 @@ namespace HomeOffice.Views
 
         private void logOut_Click(object sender, RoutedEventArgs e)
         {
-
+            manager.logOut();
         }
 
         private void deleteTask_Click(object sender, RoutedEventArgs e)

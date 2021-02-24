@@ -7,6 +7,8 @@ using HomeOffice.classes.Passwords;
 using HomeOffice.Data;
 using HomeOffice.classes.Tasks;
 using HomeOffice.classes.Units;
+using System.Windows;
+
 namespace HomeOffice.classes.Users
 {
     public class User
@@ -60,6 +62,16 @@ namespace HomeOffice.classes.Users
             Unit = u.Unit;
             PESEL = u.PESEL;
         }
+
+        public void logOut()
+        {
+            for (int intCounter = App.Current.Windows.Count - 1; intCounter >= 1; intCounter--)
+            {
+                App.Current.Windows[intCounter].Close();
+            }
+                
+        }
+
         public virtual void AddPassword(Password password) { }
         public virtual void AddUser(User user) { }
         public virtual List<User> AllUsersToList()

@@ -283,7 +283,7 @@ namespace HomeOffice.Views
 
         private void LogOut_Click(object sender, RoutedEventArgs e)
         {
-
+            admin.logOut();
         }
 
         private void filterUnits()
