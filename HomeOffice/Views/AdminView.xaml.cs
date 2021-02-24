@@ -258,14 +258,11 @@ namespace HomeOffice.Views
             if (TaskDictionaryDataGrid.Columns.Count > 1) // at init is 0
                 TaskDictionaryDataGrid.Columns[0].IsReadOnly = true;
         }
-        private void FilterTasks()
-        {
 
-        }
         private void RefreshTaskDictonary()
         {
             TaskDictionaryDataGrid.ItemsSource = tasksDictionaryList = admin.TaskDictionaryList();
-            FilterTasks();
+            FilterTasksDataGrid();
             WarningLabel2.Content = "";
         }
         private void RefreshTasks_Click(object sender, RoutedEventArgs e)
@@ -280,7 +277,14 @@ namespace HomeOffice.Views
             addToDictionryInstance.AddTaskDel = RefreshListEvent;
             addToDictionryInstance.Show();
         }
-
+        private void SelectAll2_Checked(object sender, RoutedEventArgs e)
+        {
+            if (SelectAll2.IsChecked == true)
+            {
+                TaskDictionaryDataGrid.Focus();
+                TaskDictionaryDataGrid.SelectAll();
+            }
+        }
         private void TasksDataGrid_Loaded(object sender, RoutedEventArgs e)
         {
             TaskDictionaryDataGrid.ItemsSource = tasksDictionaryList = admin.TaskDictionaryList();
@@ -479,6 +483,6 @@ namespace HomeOffice.Views
             }
         }
 
-
+       
     }
 }
