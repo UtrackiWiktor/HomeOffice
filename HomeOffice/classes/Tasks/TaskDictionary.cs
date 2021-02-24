@@ -49,13 +49,18 @@ namespace HomeOffice.classes.Tasks
                 DbContext.SaveChanges();
             }
         }
-        public void DisableTaskDictionary()
+        public void UpdateTaskDictionary()
         {
+            using (var DbContext = new HomeOfficeContext())
+            {
+                var result = DbContext.TaskDictionary.SingleOrDefault(t => t.ID == ID);
+                if (result != null)
+                {
+                    DbContext.Entry(result).CurrentValues.SetValues(this);
+                    DbContext.SaveChanges();
+                }
 
-        }
-        public void EnableTaskDictionary()
-        {
-
+            }
         }
     }
 }

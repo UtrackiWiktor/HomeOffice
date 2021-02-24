@@ -147,10 +147,10 @@
                         <Label Name="WarningLabel2" Content="" FontSize="18" Margin="6,0" VerticalAlignment="Center" Foreground="Red"/>
                     </DockPanel>
                     <DockPanel Grid.Column="0" Grid.Row="4" Grid.RowSpan="5" Grid.ColumnSpan="4">
-                        <DataGrid Name="TasksDataGrid" Margin="10, 0, 10, 20" Loaded="TasksDataGrid_Loaded" CanUserAddRows="False">
+                        <DataGrid Name="TaskDictionaryDataGrid" Margin="10, 0, 10, 20" Loaded="TasksDataGrid_Loaded" CanUserAddRows="False" CellEditEnding="TaskDictionaryDataGrid_CellEditEnding">
                             <DataGrid.ContextMenu>
                                 <ContextMenu>
-                                    <MenuItem Header="Delete" Click="Delete2_Click"/>
+                                    <MenuItem Header="Enable/Disable task dictionary" Click="Delete2_Click"/>
 
                                     <MenuItem Header="Update" Click="Update2_Click"/>
                                 </ContextMenu>

@@ -80,9 +80,28 @@ namespace HomeOffice.classes.Users
             taskDictionary.AddTaskDictionary();
         }
 
+        public override void UpdateTaskDictionary(TaskDictionary taskDictionary)
+        {
+            taskDictionary.UpdateTaskDictionary();
+        }
+
         public override void DeleteFromTaskDictionary(TaskDictionary taskDictionary)
         {
-            taskDictionary.DeleteTaskDictionary();
+            using (var DbContext = new HomeOfficeContext())
+            {
+                if (taskDictionary.IsEnabled == true)
+                {
+                    TaskDictionary toUpdate = DbContext.TaskDictionary.Where(t => t.ID == taskDictionary.ID).FirstOrDefault();
+                    toUpdate.IsEnabled = false;
+                    DbContext.SaveChanges();
+                }
+                else
+                {
+                    TaskDictionary toUpdate = DbContext.TaskDictionary.Where(t => t.ID == taskDictionary.ID).FirstOrDefault();
+                    toUpdate.IsEnabled = true;
+                    DbContext.SaveChanges();
+                }
+            }
         }
 
         private void DeletePasswordOfUser(User user)

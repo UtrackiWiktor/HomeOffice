@@ -254,38 +254,38 @@ namespace HomeOffice.Views
             {
                 temp = temp.Where(t => t.TaskDescription.ToUpper().Contains(TasksDescription.Text.ToUpper())).ToList();
             }
-            TasksDataGrid.ItemsSource = temp;
-            if (TasksDataGrid.Columns.Count > 1) // at init is 0
-                TasksDataGrid.Columns[0].IsReadOnly = true;
+            TaskDictionaryDataGrid.ItemsSource = temp;
+            if (TaskDictionaryDataGrid.Columns.Count > 1) // at init is 0
+                TaskDictionaryDataGrid.Columns[0].IsReadOnly = true;
         }
         private void FilterTasks()
         {
 
         }
-        private void RefreshTasks()
+        private void RefreshTaskDictonary()
         {
-            TasksDataGrid.ItemsSource = tasksDictionaryList = admin.TaskDictionaryList();
+            TaskDictionaryDataGrid.ItemsSource = tasksDictionaryList = admin.TaskDictionaryList();
             FilterTasks();
-            WarningLabel3.Content = null;
+            WarningLabel2.Content = "";
         }
         private void RefreshTasks_Click(object sender, RoutedEventArgs e)
         {
-            RefreshTasks();
+            RefreshTaskDictonary();
         }
 
         private void AddTask_Click(object sender, RoutedEventArgs e)
         {
             AddToDictionary addToDictionryInstance = new AddToDictionary(admin);
-            RefreshListEvent += new RefreshList(RefreshTasks);
+            RefreshListEvent += new RefreshList(RefreshTaskDictonary);
             addToDictionryInstance.AddTaskDel = RefreshListEvent;
             addToDictionryInstance.Show();
         }
 
         private void TasksDataGrid_Loaded(object sender, RoutedEventArgs e)
         {
-            TasksDataGrid.ItemsSource = tasksDictionaryList = admin.TaskDictionaryList();
-            if (TasksDataGrid.Columns.Count > 1)
-                TasksDataGrid.Columns[0].IsReadOnly = true;
+            TaskDictionaryDataGrid.ItemsSource = tasksDictionaryList = admin.TaskDictionaryList();
+            if (TaskDictionaryDataGrid.Columns.Count > 1)
+                TaskDictionaryDataGrid.Columns[0].IsReadOnly = true;
             idList = new List<int>();
             WarningLabel2.Content = "";
             SelectAll2.IsChecked = false;
@@ -295,11 +295,61 @@ namespace HomeOffice.Views
 
         private void Update2_Click(object sender, RoutedEventArgs e)
         {
+            foreach (var selected in TaskDictionaryDataGrid.SelectedItems)
+            {
+                if (selected is TaskDictionary && idList.Contains(((TaskDictionary)selected).ID))
+                {
+                    admin.UpdateTaskDictionary(((TaskDictionary)selected));
+                    idList.Remove(((TaskDictionary)selected).ID);
+                }
 
+            }
+            if (idList.Count == 0)
+            {
+                WarningLabel2.Content = "";
+                idList = new List<int>();
+            }
+            else
+            {
+                WarningLabel2.Content = "Non committed changes for task definitions with ids: ";
+                foreach (var id in idList)
+                {
+                    WarningLabel2.Content += id.ToString() + ", ";
+                }
+            }
         }
         private void Delete2_Click(object sender, RoutedEventArgs e)
         {
+            if (TaskDictionaryDataGrid.SelectedItems[0] is TaskDictionary)
+            {
+                string str = "task definition";
+                if (TaskDictionaryDataGrid.SelectedCells.Count > 1)
+                    str += "s";
+                if (MessageBox.Show("Do you want to change selected " + str + "?", "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    foreach (var selected in TaskDictionaryDataGrid.SelectedItems)
+                    {
+                        if (selected is TaskDictionary)
+                            admin.DeleteFromTaskDictionary((TaskDictionary)selected);
+                    }
 
+                RefreshTaskDictonary();
+            }
+        }
+        private void TaskDictionaryDataGrid_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+        {
+            if (TaskDictionaryDataGrid.SelectedItem is TaskDictionary)
+            {
+                if (!idList.Contains(((TaskDictionary)TaskDictionaryDataGrid.SelectedItem).ID))
+                {
+                    idList.Add(((TaskDictionary)TaskDictionaryDataGrid.SelectedItem).ID);
+                    if (idList.Count == 1)
+                    {
+                        WarningLabel2.Content = "Non committed changes for task definitions with ids: ";
+                    }
+                    var s = ((TaskDictionary)(TaskDictionaryDataGrid.SelectedItem)).ID.ToString();
+                    WarningLabel2.Content += s + ", ";
+                }
+            }
         }
         private void LogOut_Click(object sender, RoutedEventArgs e)
         {
@@ -428,6 +478,7 @@ namespace HomeOffice.Views
                 }
             }
         }
+
 
     }
 }

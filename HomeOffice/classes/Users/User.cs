@@ -87,6 +87,7 @@ namespace HomeOffice.classes.Users
         public virtual List<TaskDictionary> UnitTasksToList(User u) { return null; }
         public virtual List<User> UsersFromUnitToList(User u) { return null; }
         public virtual void DeleteFromTaskDictionary(TaskDictionary taskDictionary) { }
+        public virtual void UpdateTaskDictionary(TaskDictionary task) { }
         public virtual void AddUnit(String name) { }
         public virtual void DeleteUnit(int id) { }
         public virtual void UpdateUnit(Unit unit) { }
