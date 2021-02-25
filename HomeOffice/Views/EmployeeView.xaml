@@ -32,17 +32,13 @@
                 <TextBlock TextDecorations="Underline" Text="Log Out"/>
             </Button>
         </DockPanel>
-        <DockPanel Grid.Column="0" Grid.Row="1">
-            <Label Content="Task(s) title:" FontSize="18" Margin="6,0" VerticalAlignment="Center"/>
-        </DockPanel>
+        <DockPanel Grid.Column="0" Grid.Row="1"/>
         <DockPanel Grid.Column="0" Grid.Row="2">
-            <TextBox Name="tasksTitle" VerticalContentAlignment="Center" FontSize="18" Margin="10,0" TextChanged="TextChanged" />
+            <CheckBox Name ="Finished" Content="Hide Unfinished" Height="43.3333333333333" VerticalAlignment="Top" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked_1"  FontSize="18"/>
         </DockPanel>
-        <DockPanel Grid.Column="1" Grid.Row="1">
-            <Label Content="Task(s) description:" FontSize="18" Margin="17,0" VerticalAlignment="Center"/>
-        </DockPanel>
+        <DockPanel Grid.Column="1" Grid.Row="1"/>
         <DockPanel Grid.Column="1" Grid.Row="2">
-            <TextBox Name="taskDesc" VerticalContentAlignment="Center" FontSize="18" Margin="10,0" TextChanged="TextChanged" />
+            <CheckBox Name ="Unfinished" Content="Hide Finished" Height="43.3333333333333" VerticalAlignment="Top" FontSize="18" Checked="CheckBox_Checked_1" Unchecked="CheckBox_Unchecked"/>
         </DockPanel>
         <DockPanel Grid.Column="2" Grid.Row="1"/>
         <DockPanel Grid.Column="2" Grid.Row="2">
