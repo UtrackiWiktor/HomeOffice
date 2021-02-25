@@ -116,7 +116,7 @@ namespace HomeOffice.Views
                              join user in DbContext.Users on tasks.Users_ID equals user.ID
                              join taskdictionary in DbContext.TaskDictionary on tasks.TaskDictionary_ID equals taskdictionary.ID
                              where manager.Unit == user.Unit
-                             select new { TaskID = tasks.Task_ID, UsersID = tasks.Users_ID, Name = user.Name, Surname = user.Surname, TaskDictionaryID = taskdictionary.ID, TaskName = taskdictionary.TaskName, TaskDescription = taskdictionary.TaskDescription, Status = tasks.Status }).ToList();
+                             select new { TaskID = tasks.Task_ID, UsersID = tasks.Users_ID, Name = user.Name, Surname = user.Surname, TaskName = taskdictionary.TaskName, TaskDescription = taskdictionary.TaskDescription, Status = tasks.Status }).ToList();
                 System.Windows.Forms.MessageBox.Show(manager.PrintTheReport(query));
             }
 
