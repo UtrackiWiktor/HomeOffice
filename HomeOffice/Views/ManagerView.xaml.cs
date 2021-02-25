@@ -18,8 +18,10 @@ namespace HomeOffice.Views
     public partial class ManagerView : UserControl
     {
         Manager manager;
+        List<User> userList;
         Task t = new Task();
         TaskDictionary task = new TaskDictionary();
+        List<TaskDictionary> tasksDictionaryList;
         public delegate void RefreshList();
         public event RefreshList RefreshListEvent;
         public void SetUser(User u)
@@ -30,12 +32,63 @@ namespace HomeOffice.Views
         public ManagerView()
         {
             manager = new Manager(((MainWindow)Application.Current.MainWindow).GetUser());
+            userList = manager.UsersFromUnitToList(manager);
+            tasksDictionaryList = manager.UnitTasksToList(manager);
             InitializeComponent();
         }
 
         private void filterButton_Click(object sender, RoutedEventArgs e)
         {
+            FilterTasks();
+        }
 
+        private void FilterTasks()
+        {
+            if(usersNames1st.Text != null)
+            {
+                using (var DbContext = new HomeOfficeContext())
+                {
+                    var query = (from tasks in DbContext.Tasks
+                                 join user in DbContext.Users on tasks.Users_ID equals user.ID
+                                 join taskdictionary in DbContext.TaskDictionary on tasks.TaskDictionary_ID equals taskdictionary.ID
+                                 where manager.Unit == user.Unit && usersNames1st.Text == user.Name
+                                 select new { TaskID = tasks.Task_ID, UsersID = tasks.Users_ID, Name = user.Name, Surname = user.Surname, TaskDictionaryID = taskdictionary.ID, TaskName = taskdictionary.TaskName, TaskDescription = taskdictionary.TaskDescription, Status = tasks.Status }).ToList();
+                    if (query.Any())
+                    {
+                        tasksGrid.ItemsSource = query;
+                    }
+                }
+            }
+            if (usersSurnames1st.Text != null)
+            {
+                using (var DbContext = new HomeOfficeContext())
+                {
+                    var query = (from tasks in DbContext.Tasks
+                                 join user in DbContext.Users on tasks.Users_ID equals user.ID
+                                 join taskdictionary in DbContext.TaskDictionary on tasks.TaskDictionary_ID equals taskdictionary.ID
+                                 where manager.Unit == user.Unit && usersSurnames1st.Text == user.Surname
+                                 select new { TaskID = tasks.Task_ID, UsersID = tasks.Users_ID, Name = user.Name, Surname = user.Surname, TaskDictionaryID = taskdictionary.ID, TaskName = taskdictionary.TaskName, TaskDescription = taskdictionary.TaskDescription, Status = tasks.Status }).ToList();
+                    if (query.Any())
+                    {
+                        tasksGrid.ItemsSource = query;
+                    }
+                }
+            }
+            if (tasksTypes1st.Text != null)
+            {
+                using (var DbContext = new HomeOfficeContext())
+                {
+                    var query = (from tasks in DbContext.Tasks
+                                 join user in DbContext.Users on tasks.Users_ID equals user.ID
+                                 join taskdictionary in DbContext.TaskDictionary on tasks.TaskDictionary_ID equals taskdictionary.ID
+                                 where manager.Unit == user.Unit && tasksTypes1st.Text == taskdictionary.TaskName
+                                 select new { TaskID = tasks.Task_ID, UsersID = tasks.Users_ID, Name = user.Name, Surname = user.Surname, TaskDictionaryID = taskdictionary.ID, TaskName = taskdictionary.TaskName, TaskDescription = taskdictionary.TaskDescription, Status = tasks.Status }).ToList();
+                    if (query.Any())
+                    {
+                        tasksGrid.ItemsSource = query;
+                    }
+                }
+            }
         }
 
         private void refreshButton_Click(object sender, RoutedEventArgs e)
@@ -51,6 +104,7 @@ namespace HomeOffice.Views
 
                 tasksGrid.ItemsSource = query;
             }
+            FilterTasks();
         }
 
         //tutaj
@@ -90,12 +144,15 @@ namespace HomeOffice.Views
 
         private void filterButton2nd_Click(object sender, RoutedEventArgs e)
         {
-
+            FilterUserDataGrid();
+            FilterTasksDataGrid();
         }
         private void refresh2()
         {
             empGrid.ItemsSource = manager.UsersFromUnitToList(manager);
             taskDicGrid.ItemsSource = manager.UnitTasksToList(manager);
+            FilterUserDataGrid();
+            FilterTasksDataGrid();
         }
         private void refreshButton2nd_Click(object sender, RoutedEventArgs e)
         {
@@ -118,7 +175,7 @@ namespace HomeOffice.Views
                             }
                             else
                             {
-                                MessageBox.Show("You can;t assign task that is disabled");
+                                MessageBox.Show("You can't assign task that is disabled");
                             }
                         }
                     }
@@ -176,7 +233,10 @@ namespace HomeOffice.Views
                                  where manager.Unit == user.Unit && tasks.Status == true
                                  select new { TaskID = tasks.Task_ID, UsersID = tasks.Users_ID, Name = user.Name, Surname = user.Surname, TaskDictionaryID = taskdictionary.ID, TaskName = taskdictionary.TaskName, TaskDescription = taskdictionary.TaskDescription, Status = tasks.Status }).ToList();
 
-                    tasksGrid.ItemsSource = query;
+                    if (query.Any())
+                    {
+                        tasksGrid.ItemsSource = query;
+                    }
                 }
             }
         }
@@ -206,6 +266,36 @@ namespace HomeOffice.Views
                 taskDicGrid.Focus();
                 taskDicGrid.SelectAll();
             }
+        }
+
+        private void FilterUserDataGrid()
+        {
+            List<User> temp = userList;
+            if (usersNames2nd.Text != null)
+            {
+                //like %UserName.Text%
+                temp = temp.Where(u => u.Name.ToUpper().Contains(usersNames2nd.Text.ToUpper())).ToList();
+            }
+            if (usersSurnames2nd.Text != null)
+            {
+                temp = temp.Where(u => u.Surname.ToUpper().Contains(usersSurnames2nd.Text.ToUpper())).ToList();
+            }
+            empGrid.ItemsSource = temp;
+            if (empGrid.Columns.Count > 1) // at init is 0
+                empGrid.Columns[0].IsReadOnly = true;
+        }
+
+        private void FilterTasksDataGrid()
+        {
+            List<TaskDictionary> temp = tasksDictionaryList;
+            if (tasksTypes2nd.Text != null)
+            {
+                //like %tasksTitle.Text%
+                temp = temp.Where(t => t.TaskName.ToUpper().Contains(tasksTypes2nd.Text.ToUpper())).ToList();
+            }
+            taskDicGrid.ItemsSource = temp;
+            if (taskDicGrid.Columns.Count > 1) // at init is 0
+                taskDicGrid.Columns[0].IsReadOnly = true;
         }
     }
 }
