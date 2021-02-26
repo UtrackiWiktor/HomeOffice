@@ -55,26 +55,31 @@ namespace HomeOffice
             }
             if (user != null && user.ID >= 1 )
             {
-                Password password = new Password();
-                password.FromDatabase(user.ID);
-                if (password.CompareWithPassword(PasswordBox.Text)&&password.ID>=1)
-                {
-                    Warning.Content = "";
-                    UserPanel userPanel = new UserPanel(user);
-                    userPanel.Show();
-                    PeselBox.Text = "";
-                    PasswordBox.Text = "";
-                    this.Hide();
+                try
+                { 
+                    Password password = new Password();
+                    password.FromDatabase(user.ID);
+                    if (password.CompareWithPassword(PasswordBox.Text)&&password.ID>=1)
+                    {
+                        Warning.Content = "";
+                        UserPanel userPanel = new UserPanel(user);
+                        userPanel.Show();
+                        PeselBox.Text = "";
+                        PasswordBox.Text = "";
+                        this.Hide();
+                    }
+                    else
+                        Warning.Content = "Wrong password";
                 }
-                else
-                    Warning.Content = "Wrong password";
+                catch (Exception exception)
+                {
+                    MessageBox.Show("There is some problem, please try once more or restart your application.\nIf the problem will occur once more call your software provider.");
+                }
             }
             else
             {
                 Warning.Content = "No user with such PESEL in database";
             }
-
-
         }
     }
 }

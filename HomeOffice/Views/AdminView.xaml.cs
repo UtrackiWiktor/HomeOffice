@@ -38,8 +38,15 @@ namespace HomeOffice.Views
         }
         public AdminView()
         {
-            admin = new Administrator(((MainWindow)Application.Current.MainWindow).GetUser());
-            userList = admin.AllUsersToList();
+            try
+            {
+                admin = new Administrator(((MainWindow)Application.Current.MainWindow).GetUser());
+                userList = admin.AllUsersToList();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("There is some problem please restart your application.\nIf the problem will occur once more call your software provider.");
+            }
             InitializeComponent();
         }
 
@@ -86,7 +93,14 @@ namespace HomeOffice.Views
         }
         public void RefreshUserList()
         {
-            userList = admin.AllUsersToList();
+            try
+            { 
+                 userList = admin.AllUsersToList();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("There is some problem please try once more or restart your application.\nIf the problem will occur once more call your software provider.");
+            }
             WarningLabel.Content = "";
             idList = new List<int>();
             
@@ -109,7 +123,14 @@ namespace HomeOffice.Views
 
         private void UserGrid_Loaded(object sender, RoutedEventArgs e)
         {
-            UserDataGrid.ItemsSource = admin.AllUsersToList();
+            try
+            {
+                UserDataGrid.ItemsSource = admin.AllUsersToList();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Thhere is some problem please try once more or restart your application.\nIf the problem will occur once more call your software provider.");
+            }
             UserDataGrid.Columns[0].IsReadOnly = true;
             idList = new List<int>();
             WarningLabel.Content = "";
@@ -162,10 +183,19 @@ namespace HomeOffice.Views
                 if (MessageBox.Show("Do you want to delete selected " + str + "?", "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     foreach (var selected in UserDataGrid.SelectedItems)
                     {
-                        if (selected is User)
-                        admin.DeleteUser(((User)selected));
+                        try 
+                        {
+                            if (selected is User)
+                            {
+                                admin.DeleteUser(((User)selected));
+                                idList.Remove(((User)selected).ID);
+                            }
+                        }
+                        catch (Exception exception)
+                        {
+                                MessageBox.Show("There is some problem please try once more or restart your application.\nIf the problem will occur once more call your software provider.");
+                        }
                     }
-
                     RefreshUserList();
             }
         }
@@ -182,13 +212,19 @@ namespace HomeOffice.Views
                     {
                         if (selected is User)
                         {
-                            Password password = new Password(((User)selected).ID);
-                            var p = password.GetPassword();
-                            password.EncodePassword();
-                            password.ResetPassword();
-
-                            MessageBox.Show("The password of User with ID="+((User)selected).ID + " was changed successfully.\n His password is: \"" + p + "\". \nPlease note it otherwise this data will be lost.");
-                            p = null;
+                            try
+                            {
+                                Password password = new Password(((User)selected).ID);
+                                var p = password.GetPassword();
+                                password.EncodePassword();
+                                password.ResetPassword();
+                                MessageBox.Show("The password of User with ID=" + ((User)selected).ID + " was changed successfully.\n His password is: \"" + p + "\". \nPlease note it otherwise this data will be lost.");
+                                p = null;
+                            }
+                            catch (Exception exception)
+                            {
+                                MessageBox.Show("There is some problem please try once more or restart your application.\nIf the problem will occur once more call your software provider.");
+                            }
                         }
                     }
                 }
@@ -206,8 +242,15 @@ namespace HomeOffice.Views
                 {
                     if (selected is User && idList.Contains(((User)selected).ID))
                     {
-                        admin.UpdateUser(((User)selected));
-                        idList.Remove(((User)selected).ID);
+                        try
+                        {
+                            admin.UpdateUser(((User)selected));
+                            idList.Remove(((User)selected).ID);
+                        }
+                        catch (Exception exception)
+                        {
+                            MessageBox.Show("There is some problem, please try once more or restart your application.\nIf the problem will occur once more call your software provider.");
+                        }
                     }
 
                 }
@@ -264,6 +307,7 @@ namespace HomeOffice.Views
             TaskDictionaryDataGrid.ItemsSource = tasksDictionaryList = admin.TaskDictionaryList();
             FilterTasksDataGrid();
             WarningLabel2.Content = "";
+            idList = new List<int>();
         }
         private void RefreshTasks_Click(object sender, RoutedEventArgs e)
         {
@@ -272,7 +316,7 @@ namespace HomeOffice.Views
 
         private void AddTask_Click(object sender, RoutedEventArgs e)
         {
-            AddToDictionary addToDictionryInstance = new AddToDictionary(admin);
+            AddToDictionaryWindow addToDictionryInstance = new AddToDictionaryWindow(admin);
             RefreshListEvent += new RefreshList(RefreshTaskDictonary);
             addToDictionryInstance.AddTaskDel = RefreshListEvent;
             addToDictionryInstance.Show();
@@ -287,7 +331,14 @@ namespace HomeOffice.Views
         }
         private void TasksDataGrid_Loaded(object sender, RoutedEventArgs e)
         {
-            TaskDictionaryDataGrid.ItemsSource = tasksDictionaryList = admin.TaskDictionaryList();
+            try
+            { 
+                TaskDictionaryDataGrid.ItemsSource = tasksDictionaryList = admin.TaskDictionaryList();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("There is some problem, please try once more or restart your application.\nIf the problem will occur once more call your software provider.");
+            }
             if (TaskDictionaryDataGrid.Columns.Count > 1)
                 TaskDictionaryDataGrid.Columns[0].IsReadOnly = true;
             idList = new List<int>();
@@ -303,7 +354,14 @@ namespace HomeOffice.Views
             {
                 if (selected is TaskDictionary && idList.Contains(((TaskDictionary)selected).ID))
                 {
-                    admin.UpdateTaskDictionary(((TaskDictionary)selected));
+                    try 
+                    { 
+                        admin.UpdateTaskDictionary(((TaskDictionary)selected));
+                    }
+                    catch (Exception exception)
+                    {
+                        MessageBox.Show("There is some problem, please try once more or restart your application.\nIf the problem will occur once more call your software provider.");
+                    }
                     idList.Remove(((TaskDictionary)selected).ID);
                 }
 
@@ -332,9 +390,19 @@ namespace HomeOffice.Views
                 if (MessageBox.Show("Do you want to change selected " + str + "?", "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     foreach (var selected in TaskDictionaryDataGrid.SelectedItems)
                     {
-                        if (selected is TaskDictionary)
-                            admin.DeleteFromTaskDictionary((TaskDictionary)selected);
-                    }
+                        try
+                        {
+                            if (selected is TaskDictionary)
+                            {
+                                admin.DeleteFromTaskDictionary((TaskDictionary)selected);
+                                idList.Remove(((TaskDictionary)selected).ID);
+                            }
+                        }
+                        catch (Exception exception)
+                        {
+                            MessageBox.Show("There is some problem, please try once more or restart your application.\nIf the problem will occur once more call your software provider.");
+                        }
+            }
 
                 RefreshTaskDictonary();
             }
@@ -380,7 +448,14 @@ namespace HomeOffice.Views
         }
         private void RefreshUnits()
         {
-            UnitDataGrid.ItemsSource = unitList = admin.UnitList();
+            try 
+            { 
+                 UnitDataGrid.ItemsSource = unitList = admin.UnitList();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("There is some problem, please try once more or restart your application.\nIf the problem will occur once more call your software provider.");
+            }
             FilterUnits();
             WarningLabel3.Content = null;
             idList = new List<int>();
@@ -393,8 +468,15 @@ namespace HomeOffice.Views
         private void AddNewUnit_Click(object sender, RoutedEventArgs e)
         {
             if (UnitNameAdd.Text != null)
-            { 
-                admin.AddUnit(UnitNameAdd.Text);
+            {
+                try
+                { 
+                    admin.AddUnit(UnitNameAdd.Text);
+                }
+                catch (Exception exception)
+                {
+                    MessageBox.Show("There is some problem, please try once more or restart your application.\nIf the problem will occur once more call your software provider.");
+                }
                 RefreshUnits();
                 MessageBox.Show("Unit was added!");
             }
@@ -414,9 +496,19 @@ namespace HomeOffice.Views
                     foreach (var selected in UnitDataGrid.SelectedItems)
                     {
                         if (selected is Unit)
-                            admin.DeleteUnit(((Unit)selected).ID);
-                    }
+                        {
+                            try
+                            { 
+                                admin.DeleteUnit(((Unit)selected).ID);
+                                idList.Remove(((Unit)selected).ID);
+                            }
+                            catch (Exception exception)
+                            {
+                                MessageBox.Show("There is some problem, please try once more or restart your application.\nIf the problem will occur once more call your software provider.");
+                            }
+                        }
 
+                    }
                 RefreshUnits();
             }
         }
@@ -427,7 +519,14 @@ namespace HomeOffice.Views
             {
                 if (selected is Unit && idList.Contains(((Unit)selected).ID))
                 {
-                    admin.UpdateUnit(((Unit)selected));
+                    try 
+                    { 
+                        admin.UpdateUnit(((Unit)selected));
+                    }
+                    catch (Exception exception)
+                    {
+                        MessageBox.Show("There is some problem, please try once more or restart your application.\nIf the problem will occur once more call your software provider.");
+                    }
                     idList.Remove(((Unit)selected).ID);
                 }
 
@@ -456,7 +555,14 @@ namespace HomeOffice.Views
         }
         private void UnitsDataGrid_Loaded(object sender, RoutedEventArgs e)
         {
-            UnitDataGrid.ItemsSource= unitList =admin.UnitList();
+            try
+            { 
+                UnitDataGrid.ItemsSource= unitList =admin.UnitList();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("There is some problem, please try once more or restart your application.\nIf the problem will occur once more call your software provider.");
+            }
             if (UnitDataGrid.Columns.Count > 1)
                 UnitDataGrid.Columns[0].IsReadOnly = true;
             idList = new List<int>();

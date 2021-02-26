@@ -32,8 +32,15 @@ namespace HomeOffice.Views
         public ManagerView()
         {
             manager = new Manager(((MainWindow)Application.Current.MainWindow).GetUser());
-            userList = manager.UsersFromUnitToList(manager);
-            tasksDictionaryList = manager.UnitTasksToList(manager);
+            try
+            {
+                userList = manager.UsersFromUnitToList(manager);
+                tasksDictionaryList = manager.UnitTasksToList(manager);
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("There is some problem please restart your application.\nIf the problem will occur once more call your software provider.");
+            }
             InitializeComponent();
         }
 
@@ -44,106 +51,147 @@ namespace HomeOffice.Views
 
         private void FilterTasks()
         {
-            if(usersNames1st.Text != null)
+            try
             {
-                using (var DbContext = new HomeOfficeContext())
+                if (usersNames1st.Text != null)
                 {
-                    var query = (from tasks in DbContext.Tasks
-                                 join user in DbContext.Users on tasks.Users_ID equals user.ID
-                                 join taskdictionary in DbContext.TaskDictionary on tasks.TaskDictionary_ID equals taskdictionary.ID
-                                 where manager.Unit == user.Unit && usersNames1st.Text == user.Name
-                                 select new { TaskID = tasks.Task_ID, UsersID = tasks.Users_ID, Name = user.Name, Surname = user.Surname, TaskDictionaryID = taskdictionary.ID, TaskName = taskdictionary.TaskName, TaskDescription = taskdictionary.TaskDescription, Status = tasks.Status }).ToList();
-                    if (query.Any())
+                    using (var DbContext = new HomeOfficeContext())
                     {
-                        tasksGrid.ItemsSource = query;
+                        var query = (from tasks in DbContext.Tasks
+                                     join user in DbContext.Users on tasks.Users_ID equals user.ID
+                                     join taskdictionary in DbContext.TaskDictionary on tasks.TaskDictionary_ID equals taskdictionary.ID
+                                     where manager.Unit == user.Unit && usersNames1st.Text == user.Name
+                                     select new { TaskID = tasks.Task_ID, UsersID = tasks.Users_ID, Name = user.Name, Surname = user.Surname, TaskDictionaryID = taskdictionary.ID, TaskName = taskdictionary.TaskName, TaskDescription = taskdictionary.TaskDescription, Status = tasks.Status }).ToList();
+                        if (query.Any())
+                        {
+                            tasksGrid.ItemsSource = query;
+                        }
+                    }
+                }
+                if (usersSurnames1st.Text != null)
+                {
+                    using (var DbContext = new HomeOfficeContext())
+                    {
+                        var query = (from tasks in DbContext.Tasks
+                                     join user in DbContext.Users on tasks.Users_ID equals user.ID
+                                     join taskdictionary in DbContext.TaskDictionary on tasks.TaskDictionary_ID equals taskdictionary.ID
+                                     where manager.Unit == user.Unit && usersSurnames1st.Text == user.Surname
+                                     select new { TaskID = tasks.Task_ID, UsersID = tasks.Users_ID, Name = user.Name, Surname = user.Surname, TaskDictionaryID = taskdictionary.ID, TaskName = taskdictionary.TaskName, TaskDescription = taskdictionary.TaskDescription, Status = tasks.Status }).ToList();
+                        if (query.Any())
+                        {
+                            tasksGrid.ItemsSource = query;
+                        }
+                    }
+                }
+                if (tasksTypes1st.Text != null)
+                {
+                    using (var DbContext = new HomeOfficeContext())
+                    {
+                        var query = (from tasks in DbContext.Tasks
+                                     join user in DbContext.Users on tasks.Users_ID equals user.ID
+                                     join taskdictionary in DbContext.TaskDictionary on tasks.TaskDictionary_ID equals taskdictionary.ID
+                                     where manager.Unit == user.Unit && tasksTypes1st.Text == taskdictionary.TaskName
+                                     select new { TaskID = tasks.Task_ID, UsersID = tasks.Users_ID, Name = user.Name, Surname = user.Surname, TaskDictionaryID = taskdictionary.ID, TaskName = taskdictionary.TaskName, TaskDescription = taskdictionary.TaskDescription, Status = tasks.Status }).ToList();
+                        if (query.Any())
+                        {
+                            tasksGrid.ItemsSource = query;
+                        }
                     }
                 }
             }
-            if (usersSurnames1st.Text != null)
+            catch (Exception exception)
             {
-                using (var DbContext = new HomeOfficeContext())
-                {
-                    var query = (from tasks in DbContext.Tasks
-                                 join user in DbContext.Users on tasks.Users_ID equals user.ID
-                                 join taskdictionary in DbContext.TaskDictionary on tasks.TaskDictionary_ID equals taskdictionary.ID
-                                 where manager.Unit == user.Unit && usersSurnames1st.Text == user.Surname
-                                 select new { TaskID = tasks.Task_ID, UsersID = tasks.Users_ID, Name = user.Name, Surname = user.Surname, TaskDictionaryID = taskdictionary.ID, TaskName = taskdictionary.TaskName, TaskDescription = taskdictionary.TaskDescription, Status = tasks.Status }).ToList();
-                    if (query.Any())
-                    {
-                        tasksGrid.ItemsSource = query;
-                    }
-                }
-            }
-            if (tasksTypes1st.Text != null)
-            {
-                using (var DbContext = new HomeOfficeContext())
-                {
-                    var query = (from tasks in DbContext.Tasks
-                                 join user in DbContext.Users on tasks.Users_ID equals user.ID
-                                 join taskdictionary in DbContext.TaskDictionary on tasks.TaskDictionary_ID equals taskdictionary.ID
-                                 where manager.Unit == user.Unit && tasksTypes1st.Text == taskdictionary.TaskName
-                                 select new { TaskID = tasks.Task_ID, UsersID = tasks.Users_ID, Name = user.Name, Surname = user.Surname, TaskDictionaryID = taskdictionary.ID, TaskName = taskdictionary.TaskName, TaskDescription = taskdictionary.TaskDescription, Status = tasks.Status }).ToList();
-                    if (query.Any())
-                    {
-                        tasksGrid.ItemsSource = query;
-                    }
-                }
+                MessageBox.Show("There is some problem, please try once more or restart your application.\nIf the problem will occur once more call your software provider.");
             }
         }
 
         private void refreshButton_Click(object sender, RoutedEventArgs e)
         {
             //first check if checked all is checked
-            using (var DbContext = new HomeOfficeContext())
+            try
             {
-                var query = (from tasks in DbContext.Tasks
-                             join user in DbContext.Users on tasks.Users_ID equals user.ID
-                             join taskdictionary in DbContext.TaskDictionary on tasks.TaskDictionary_ID equals taskdictionary.ID
-                             where manager.Unit == user.Unit
-                             select new { TaskID = tasks.Task_ID, UsersID = tasks.Users_ID, Name = user.Name, Surname = user.Surname, TaskDictionaryID = taskdictionary.ID, TaskName = taskdictionary.TaskName, TaskDescription = taskdictionary.TaskDescription, Status = tasks.Status }).ToList();
+                using (var DbContext = new HomeOfficeContext())
+                {
+                    var query = (from tasks in DbContext.Tasks
+                                 join user in DbContext.Users on tasks.Users_ID equals user.ID
+                                 join taskdictionary in DbContext.TaskDictionary on tasks.TaskDictionary_ID equals taskdictionary.ID
+                                 where manager.Unit == user.Unit
+                                 select new { TaskID = tasks.Task_ID, UsersID = tasks.Users_ID, Name = user.Name, Surname = user.Surname, TaskDictionaryID = taskdictionary.ID, TaskName = taskdictionary.TaskName, TaskDescription = taskdictionary.TaskDescription, Status = tasks.Status }).ToList();
 
-                tasksGrid.ItemsSource = query;
+                    tasksGrid.ItemsSource = query;
+                }
+                FilterTasks();
             }
-            FilterTasks();
+            catch (Exception exception)
+            {
+                MessageBox.Show("There is some problem, please try once more or restart your application.\nIf the problem will occur once more call your software provider.");
+            }
         }
 
         //tutaj
         private void reportButton_Click(object sender, RoutedEventArgs e)
         {
-            using (var DbContext = new HomeOfficeContext())
+            try
             {
-                var query = (from tasks in DbContext.Tasks
-                             join user in DbContext.Users on tasks.Users_ID equals user.ID
-                             join taskdictionary in DbContext.TaskDictionary on tasks.TaskDictionary_ID equals taskdictionary.ID
-                             where manager.Unit == user.Unit
-                             select new { TaskID = tasks.Task_ID, UsersID = tasks.Users_ID, Name = user.Name, Surname = user.Surname, TaskName = taskdictionary.TaskName, TaskDescription = taskdictionary.TaskDescription, Status = tasks.Status }).ToList();
-                System.Windows.Forms.MessageBox.Show(manager.PrintTheReport(query));
+                using (var DbContext = new HomeOfficeContext())
+                {
+                    var query = (from tasks in DbContext.Tasks
+                                 join user in DbContext.Users on tasks.Users_ID equals user.ID
+                                 join taskdictionary in DbContext.TaskDictionary on tasks.TaskDictionary_ID equals taskdictionary.ID
+                                 where manager.Unit == user.Unit
+                                 select new { TaskID = tasks.Task_ID, UsersID = tasks.Users_ID, Name = user.Name, Surname = user.Surname, TaskName = taskdictionary.TaskName, TaskDescription = taskdictionary.TaskDescription, Status = tasks.Status }).ToList();
+                    System.Windows.Forms.MessageBox.Show(manager.PrintTheReport(query));
+                }
             }
-
+            catch (Exception exception)
+            {
+                MessageBox.Show("There is some problem, please try once more or restart your application.\nIf the problem will occur once more call your software provider.");
+            }
         }
 
         private void tasksGrid_Loaded(object sender, RoutedEventArgs e)
         {
-            using (var DbContext = new HomeOfficeContext())
+            try
             {
-                var query = (from tasks in DbContext.Tasks
-                             join user in DbContext.Users on tasks.Users_ID equals user.ID
-                             join taskdictionary in DbContext.TaskDictionary on tasks.TaskDictionary_ID equals taskdictionary.ID
-                             where manager.Unit == user.Unit
-                             select new { TaskID = tasks.Task_ID, UsersID = tasks.Users_ID, Name = user.Name, Surname = user.Surname, TaskDictionaryID = taskdictionary.ID, TaskName = taskdictionary.TaskName, TaskDescription = taskdictionary.TaskDescription, Status = tasks.Status }).ToList();
+                using (var DbContext = new HomeOfficeContext())
+                {
+                    var query = (from tasks in DbContext.Tasks
+                                 join user in DbContext.Users on tasks.Users_ID equals user.ID
+                                 join taskdictionary in DbContext.TaskDictionary on tasks.TaskDictionary_ID equals taskdictionary.ID
+                                 where manager.Unit == user.Unit
+                                 select new { TaskID = tasks.Task_ID, UsersID = tasks.Users_ID, Name = user.Name, Surname = user.Surname, TaskDictionaryID = taskdictionary.ID, TaskName = taskdictionary.TaskName, TaskDescription = taskdictionary.TaskDescription, Status = tasks.Status }).ToList();
 
-                tasksGrid.ItemsSource = query;
+                    tasksGrid.ItemsSource = query;
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("There is some problem, please try once more or restart your application.\nIf the problem will occur once more call your software provider.");
             }
         }
 
         private void empGrid_Loaded(object sender, RoutedEventArgs e)
         {
-            empGrid.ItemsSource = manager.UsersFromUnitToList(manager);
+            try
+            {
+                empGrid.ItemsSource = manager.UsersFromUnitToList(manager);
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("There is some problem, please try once more or restart your application.\nIf the problem will occur once more call your software provider.");
+            }
         }
 
         private void taskDicGrid_Loaded(object sender, RoutedEventArgs e)
         {
-            taskDicGrid.ItemsSource = manager.UnitTasksToList(manager);
+            try
+            {
+                taskDicGrid.ItemsSource = manager.UnitTasksToList(manager);
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("There is some problem, please try once more or restart your application.\nIf the problem will occur once more call your software provider.");
+            }
         }
 
         private void filterButton2nd_Click(object sender, RoutedEventArgs e)
@@ -153,12 +201,19 @@ namespace HomeOffice.Views
         }
         private void refresh2()
         {
-            userList = manager.UsersFromUnitToList(manager);
-            tasksDictionaryList = manager.UnitTasksToList(manager);
-            empGrid.ItemsSource = manager.UsersFromUnitToList(manager);
-            taskDicGrid.ItemsSource = manager.UnitTasksToList(manager);
-            FilterUserDataGrid();
-            FilterTasksDataGrid();
+            try
+            {
+                userList = manager.UsersFromUnitToList(manager);
+                tasksDictionaryList = manager.UnitTasksToList(manager);
+                empGrid.ItemsSource = manager.UsersFromUnitToList(manager);
+                taskDicGrid.ItemsSource = manager.UnitTasksToList(manager);
+                FilterUserDataGrid();
+                FilterTasksDataGrid();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("There is some problem, please try once more or restart your application.\nIf the problem will occur once more call your software provider.");
+            }
         }
         private void refreshButton2nd_Click(object sender, RoutedEventArgs e)
         {
@@ -175,13 +230,20 @@ namespace HomeOffice.Views
                     {
                         if (selectedTask is TaskDictionary)
                         {
-                            if (((TaskDictionary)selectedTask).IsEnabled == true)
+                            try
                             {
-                                manager.AssignActivity((TaskDictionary)selectedTask, (User)selectedEmp);
+                                if (((TaskDictionary)selectedTask).IsEnabled == true)
+                                {
+                                    manager.AssignActivity((TaskDictionary)selectedTask, (User)selectedEmp);
+                                }
+                                else
+                                {
+                                    MessageBox.Show("You can't assign task that is disabled");
+                                }
                             }
-                            else
+                            catch (Exception exception)
                             {
-                                MessageBox.Show("You can't assign task that is disabled");
+                                MessageBox.Show("There is some problem, please try once more or restart your application.\nIf the problem will occur once more call your software provider.");
                             }
                         }
                     }
@@ -191,7 +253,7 @@ namespace HomeOffice.Views
 
         private void addTaskButton_Click(object sender, RoutedEventArgs e)
         {
-            AddToDictionary addToDictionryInstance = new AddToDictionary(manager);
+            AddToDictionaryWindow addToDictionryInstance = new AddToDictionaryWindow(manager);
             RefreshListEvent += new RefreshList(refresh2);
             addToDictionryInstance.AddTaskDel = RefreshListEvent;
             addToDictionryInstance.Show();
@@ -206,7 +268,14 @@ namespace HomeOffice.Views
                 string taskID = Regex.Match(split[0], @"\d+").Value;
                 int task_ID = Convert.ToInt32(taskID);
                 Task todelete = new Task(task_ID);
-                manager.UnassignActivity(todelete);
+                try
+                {
+                    manager.UnassignActivity(todelete);
+                }
+                catch (Exception exception)
+                {
+                    MessageBox.Show("There is some problem, please try once more or restart your application.\nIf the problem will occur once more call your software provider.");
+                }                
             }
         }
 
@@ -221,7 +290,14 @@ namespace HomeOffice.Views
             {
                 if (selected is TaskDictionary)
                 {
+                    try
+                    {
                         manager.DeleteFromTaskDictionary((TaskDictionary)selected);
+                    }
+                    catch (Exception exception)
+                    {
+                        MessageBox.Show("There is some problem, please try once more or restart your application.\nIf the problem will occur once more call your software provider.");
+                    }
                 }
             }
         }
@@ -231,18 +307,25 @@ namespace HomeOffice.Views
             if (finished.IsChecked == true)
             {
                 tasksGrid.Focus();
-                using (var DbContext = new HomeOfficeContext())
+                try
                 {
-                    var query = (from tasks in DbContext.Tasks
-                                 join user in DbContext.Users on tasks.Users_ID equals user.ID
-                                 join taskdictionary in DbContext.TaskDictionary on tasks.TaskDictionary_ID equals taskdictionary.ID
-                                 where manager.Unit == user.Unit && tasks.Status == true
-                                 select new { TaskID = tasks.Task_ID, UsersID = tasks.Users_ID, Name = user.Name, Surname = user.Surname, TaskDictionaryID = taskdictionary.ID, TaskName = taskdictionary.TaskName, TaskDescription = taskdictionary.TaskDescription, Status = tasks.Status }).ToList();
-
-                    if (query.Any())
+                    using (var DbContext = new HomeOfficeContext())
                     {
-                        tasksGrid.ItemsSource = query;
+                        var query = (from tasks in DbContext.Tasks
+                                     join user in DbContext.Users on tasks.Users_ID equals user.ID
+                                     join taskdictionary in DbContext.TaskDictionary on tasks.TaskDictionary_ID equals taskdictionary.ID
+                                     where manager.Unit == user.Unit && tasks.Status == true
+                                     select new { TaskID = tasks.Task_ID, UsersID = tasks.Users_ID, Name = user.Name, Surname = user.Surname, TaskDictionaryID = taskdictionary.ID, TaskName = taskdictionary.TaskName, TaskDescription = taskdictionary.TaskDescription, Status = tasks.Status }).ToList();
+
+                        if (query.Any())
+                        {
+                            tasksGrid.ItemsSource = query;
+                        }
                     }
+                }
+                catch (Exception exception)
+                {
+                    MessageBox.Show("There is some problem, please try once more or restart your application.\nIf the problem will occur once more call your software provider.");
                 }
             }
         }

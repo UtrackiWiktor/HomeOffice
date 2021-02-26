@@ -33,11 +33,6 @@ namespace HomeOffice.Views
         User user;
         Task t = new Task();
         TaskDictionary task = new TaskDictionary();
-        //Employee emp;
-        public void SetUser(User u)
-        {
-            //emp = new Employee(u);
-        }
 
         public EmployeeView()
         {
@@ -47,37 +42,52 @@ namespace HomeOffice.Views
 
         void LoadTasks(object sender, RoutedEventArgs e)
         {
-            using (var DbContext = new HomeOfficeContext())
-            {
-                var query = (from tasks in DbContext.Tasks
-                             join user1 in DbContext.Users on tasks.Users_ID equals user1.ID
-                             join taskdictionary in DbContext.TaskDictionary on tasks.TaskDictionary_ID equals taskdictionary.ID
-                             where tasks.Users_ID == user.ID
-                             select new { TaskID = tasks.Task_ID,TaskTitle = taskdictionary.TaskName, Description = taskdictionary.TaskDescription, Completed = tasks.Status }).ToList();
+            try 
+            { 
+                using (var DbContext = new HomeOfficeContext())
+                {
+                    var query = (from tasks in DbContext.Tasks
+                                 join user1 in DbContext.Users on tasks.Users_ID equals user1.ID
+                                 join taskdictionary in DbContext.TaskDictionary on tasks.TaskDictionary_ID equals taskdictionary.ID
+                                 where tasks.Users_ID == user.ID
+                                 select new { TaskID = tasks.Task_ID,TaskTitle = taskdictionary.TaskName, Description = taskdictionary.TaskDescription, Completed = tasks.Status }).ToList();
 
-                tasksList.ItemsSource = query;
+                    tasksList.ItemsSource = query;
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("There is some problem, please try once more or restart your application.\nIf the problem will occur once more call your software provider.");
             }
 
         }
 
         private void DoneUndone_Click(object sender, RoutedEventArgs e)
         {
-            FinishTask finishtaskInstance = new FinishTask(user);
+            FinishTaskWindow finishtaskInstance = new FinishTaskWindow(user);
             finishtaskInstance.ShowDialog();
         }
 
         private void refresh()
         {
-            using (var DbContext = new HomeOfficeContext())
-            {
-                var query = (from tasks in DbContext.Tasks
-                             join user1 in DbContext.Users on tasks.Users_ID equals user1.ID
-                             join taskdictionary in DbContext.TaskDictionary on tasks.TaskDictionary_ID equals taskdictionary.ID
-                             where tasks.Users_ID == user.ID
-                             select new { TaskID = tasks.Task_ID, TaskTitle = taskdictionary.TaskName, Description = taskdictionary.TaskDescription, Completed = tasks.Status }).ToList();
+            try
+            { 
+                using (var DbContext = new HomeOfficeContext())
+                {
+                    var query = (from tasks in DbContext.Tasks
+                                 join user1 in DbContext.Users on tasks.Users_ID equals user1.ID
+                                 join taskdictionary in DbContext.TaskDictionary on tasks.TaskDictionary_ID equals taskdictionary.ID
+                                 where tasks.Users_ID == user.ID
+                                 select new { TaskID = tasks.Task_ID, TaskTitle = taskdictionary.TaskName, Description = taskdictionary.TaskDescription, Completed = tasks.Status }).ToList();
 
-                tasksList.ItemsSource = query;
+                    tasksList.ItemsSource = query;
+                }
             }
+            catch (Exception exception)
+            {
+                MessageBox.Show("There is some problem, please try once more or restart your application.\nIf the problem will occur once more call your software provider.");
+            }
+
         }
 
         private void click(object sender, RoutedEventArgs e)
@@ -92,121 +102,149 @@ namespace HomeOffice.Views
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            if (Unfinished.IsChecked == true)
-            {
-                using (var DbContext = new HomeOfficeContext())
+            try 
+            { 
+                if (Unfinished.IsChecked == true)
                 {
-                    var query = (from tasks in DbContext.Tasks
-                                 join user1 in DbContext.Users on tasks.Users_ID equals user1.ID
-                                 join taskdictionary in DbContext.TaskDictionary on tasks.TaskDictionary_ID equals taskdictionary.ID
-                                 where tasks.Users_ID == user.ID && tasks.Status != true && tasks.Status != false
-                                 select new { TaskID = tasks.Task_ID, TaskTitle = taskdictionary.TaskName, Description = taskdictionary.TaskDescription, Completed = tasks.Status }).ToList();
+                    using (var DbContext = new HomeOfficeContext())
+                    {
+                        var query = (from tasks in DbContext.Tasks
+                                     join user1 in DbContext.Users on tasks.Users_ID equals user1.ID
+                                     join taskdictionary in DbContext.TaskDictionary on tasks.TaskDictionary_ID equals taskdictionary.ID
+                                     where tasks.Users_ID == user.ID && tasks.Status != true && tasks.Status != false
+                                     select new { TaskID = tasks.Task_ID, TaskTitle = taskdictionary.TaskName, Description = taskdictionary.TaskDescription, Completed = tasks.Status }).ToList();
 
-                    tasksList.ItemsSource = query;
+                        tasksList.ItemsSource = query;
+                    }
+                }
+                else
+                {
+                    using (var DbContext = new HomeOfficeContext())
+                    {
+                        var query = (from tasks in DbContext.Tasks
+                                     join user1 in DbContext.Users on tasks.Users_ID equals user1.ID
+                                     join taskdictionary in DbContext.TaskDictionary on tasks.TaskDictionary_ID equals taskdictionary.ID
+                                     where tasks.Users_ID == user.ID && tasks.Status != false
+                                     select new { TaskID = tasks.Task_ID, TaskTitle = taskdictionary.TaskName, Description = taskdictionary.TaskDescription, Completed = tasks.Status }).ToList();
+
+                        tasksList.ItemsSource = query;
+                    }
                 }
             }
-            else
+            catch (Exception exception)
             {
-                using (var DbContext = new HomeOfficeContext())
-                {
-                    var query = (from tasks in DbContext.Tasks
-                                 join user1 in DbContext.Users on tasks.Users_ID equals user1.ID
-                                 join taskdictionary in DbContext.TaskDictionary on tasks.TaskDictionary_ID equals taskdictionary.ID
-                                 where tasks.Users_ID == user.ID && tasks.Status != false
-                                 select new { TaskID = tasks.Task_ID, TaskTitle = taskdictionary.TaskName, Description = taskdictionary.TaskDescription, Completed = tasks.Status }).ToList();
-
-                    tasksList.ItemsSource = query;
-                }
+                MessageBox.Show("There is some problem, please try once more or restart your application.\nIf the problem will occur once more call your software provider.");
             }
         }
 
         private void CheckBox_Checked_1(object sender, RoutedEventArgs e)
         {
-            if (Finished.IsChecked == true)
-            {
-                using (var DbContext = new HomeOfficeContext())
+            try 
+            { 
+                if (Finished.IsChecked == true)
                 {
-                    var query = (from tasks in DbContext.Tasks
-                                 join user1 in DbContext.Users on tasks.Users_ID equals user1.ID
-                                 join taskdictionary in DbContext.TaskDictionary on tasks.TaskDictionary_ID equals taskdictionary.ID
-                                 where tasks.Users_ID == user.ID && tasks.Status != true && tasks.Status != false
-                                 select new { TaskID = tasks.Task_ID, TaskTitle = taskdictionary.TaskName, Description = taskdictionary.TaskDescription, Completed = tasks.Status }).ToList();
+                    using (var DbContext = new HomeOfficeContext())
+                    {
+                        var query = (from tasks in DbContext.Tasks
+                                     join user1 in DbContext.Users on tasks.Users_ID equals user1.ID
+                                     join taskdictionary in DbContext.TaskDictionary on tasks.TaskDictionary_ID equals taskdictionary.ID
+                                     where tasks.Users_ID == user.ID && tasks.Status != true && tasks.Status != false
+                                     select new { TaskID = tasks.Task_ID, TaskTitle = taskdictionary.TaskName, Description = taskdictionary.TaskDescription, Completed = tasks.Status }).ToList();
 
-                    tasksList.ItemsSource = query;
+                        tasksList.ItemsSource = query;
+                    }
+                }
+                else
+                {
+                    using (var DbContext = new HomeOfficeContext())
+                    {
+                        var query = (from tasks in DbContext.Tasks
+                                     join user1 in DbContext.Users on tasks.Users_ID equals user1.ID
+                                     join taskdictionary in DbContext.TaskDictionary on tasks.TaskDictionary_ID equals taskdictionary.ID
+                                     where tasks.Users_ID == user.ID && tasks.Status != true
+                                     select new { TaskID = tasks.Task_ID, TaskTitle = taskdictionary.TaskName, Description = taskdictionary.TaskDescription, Completed = tasks.Status }).ToList();
+
+                        tasksList.ItemsSource = query;
+                    }
                 }
             }
-            else
+            catch (Exception exception)
             {
-                using (var DbContext = new HomeOfficeContext())
-                {
-                    var query = (from tasks in DbContext.Tasks
-                                 join user1 in DbContext.Users on tasks.Users_ID equals user1.ID
-                                 join taskdictionary in DbContext.TaskDictionary on tasks.TaskDictionary_ID equals taskdictionary.ID
-                                 where tasks.Users_ID == user.ID && tasks.Status != true
-                                 select new { TaskID = tasks.Task_ID, TaskTitle = taskdictionary.TaskName, Description = taskdictionary.TaskDescription, Completed = tasks.Status }).ToList();
-
-                    tasksList.ItemsSource = query;
-                }
+                MessageBox.Show("There is some problem, please try once more or restart your application.\nIf the problem will occur once more call your software provider.");
             }
         }
 
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
-            if (Finished.IsChecked == true)
-            {
-                using (var DbContext = new HomeOfficeContext())
+            try
+            { 
+                if (Finished.IsChecked == true)
                 {
-                    var query = (from tasks in DbContext.Tasks
-                                 join user1 in DbContext.Users on tasks.Users_ID equals user1.ID
-                                 join taskdictionary in DbContext.TaskDictionary on tasks.TaskDictionary_ID equals taskdictionary.ID
-                                 where tasks.Users_ID == user.ID && tasks.Status != false
-                                 select new { TaskID = tasks.Task_ID, TaskTitle = taskdictionary.TaskName, Description = taskdictionary.TaskDescription, Completed = tasks.Status }).ToList();
+                    using (var DbContext = new HomeOfficeContext())
+                    {
+                        var query = (from tasks in DbContext.Tasks
+                                     join user1 in DbContext.Users on tasks.Users_ID equals user1.ID
+                                     join taskdictionary in DbContext.TaskDictionary on tasks.TaskDictionary_ID equals taskdictionary.ID
+                                     where tasks.Users_ID == user.ID && tasks.Status != false
+                                     select new { TaskID = tasks.Task_ID, TaskTitle = taskdictionary.TaskName, Description = taskdictionary.TaskDescription, Completed = tasks.Status }).ToList();
 
-                    tasksList.ItemsSource = query;
+                        tasksList.ItemsSource = query;
+                    }
+                }
+                else
+                {
+                    using (var DbContext = new HomeOfficeContext())
+                    {
+                        var query = (from tasks in DbContext.Tasks
+                                     join user1 in DbContext.Users on tasks.Users_ID equals user1.ID
+                                     join taskdictionary in DbContext.TaskDictionary on tasks.TaskDictionary_ID equals taskdictionary.ID
+                                     where tasks.Users_ID == user.ID
+                                     select new { TaskID = tasks.Task_ID, TaskTitle = taskdictionary.TaskName, Description = taskdictionary.TaskDescription, Completed = tasks.Status }).ToList();
+
+                        tasksList.ItemsSource = query;
+                    }
                 }
             }
-            else
+            catch (Exception exception)
             {
-                using (var DbContext = new HomeOfficeContext())
-                {
-                    var query = (from tasks in DbContext.Tasks
-                                 join user1 in DbContext.Users on tasks.Users_ID equals user1.ID
-                                 join taskdictionary in DbContext.TaskDictionary on tasks.TaskDictionary_ID equals taskdictionary.ID
-                                 where tasks.Users_ID == user.ID
-                                 select new { TaskID = tasks.Task_ID, TaskTitle = taskdictionary.TaskName, Description = taskdictionary.TaskDescription, Completed = tasks.Status }).ToList();
-
-                    tasksList.ItemsSource = query;
-                }
+                MessageBox.Show("There is some problem, please try once more or restart your application.\nIf the problem will occur once more call your software provider.");
             }
         }
 
         private void CheckBox_Unchecked_1(object sender, RoutedEventArgs e)
         {
-            if (Unfinished.IsChecked == true)
-            {
-                using (var DbContext = new HomeOfficeContext())
+            try
+            { 
+                if (Unfinished.IsChecked == true)
                 {
-                    var query = (from tasks in DbContext.Tasks
-                                 join user1 in DbContext.Users on tasks.Users_ID equals user1.ID
-                                 join taskdictionary in DbContext.TaskDictionary on tasks.TaskDictionary_ID equals taskdictionary.ID
-                                 where tasks.Users_ID == user.ID && tasks.Status != true
-                                 select new { TaskID = tasks.Task_ID, TaskTitle = taskdictionary.TaskName, Description = taskdictionary.TaskDescription, Completed = tasks.Status }).ToList();
+                    using (var DbContext = new HomeOfficeContext())
+                    {
+                        var query = (from tasks in DbContext.Tasks
+                                     join user1 in DbContext.Users on tasks.Users_ID equals user1.ID
+                                     join taskdictionary in DbContext.TaskDictionary on tasks.TaskDictionary_ID equals taskdictionary.ID
+                                     where tasks.Users_ID == user.ID && tasks.Status != true
+                                     select new { TaskID = tasks.Task_ID, TaskTitle = taskdictionary.TaskName, Description = taskdictionary.TaskDescription, Completed = tasks.Status }).ToList();
 
-                    tasksList.ItemsSource = query;
+                        tasksList.ItemsSource = query;
+                    }
+                }
+                else
+                {
+                    using (var DbContext = new HomeOfficeContext())
+                    {
+                        var query = (from tasks in DbContext.Tasks
+                                     join user1 in DbContext.Users on tasks.Users_ID equals user1.ID
+                                     join taskdictionary in DbContext.TaskDictionary on tasks.TaskDictionary_ID equals taskdictionary.ID
+                                     where tasks.Users_ID == user.ID
+                                     select new { TaskID = tasks.Task_ID, TaskTitle = taskdictionary.TaskName, Description = taskdictionary.TaskDescription, Completed = tasks.Status }).ToList();
+
+                        tasksList.ItemsSource = query;
+                    }
                 }
             }
-            else
+            catch (Exception exception)
             {
-                using (var DbContext = new HomeOfficeContext())
-                {
-                    var query = (from tasks in DbContext.Tasks
-                                 join user1 in DbContext.Users on tasks.Users_ID equals user1.ID
-                                 join taskdictionary in DbContext.TaskDictionary on tasks.TaskDictionary_ID equals taskdictionary.ID
-                                 where tasks.Users_ID == user.ID
-                                 select new { TaskID = tasks.Task_ID, TaskTitle = taskdictionary.TaskName, Description = taskdictionary.TaskDescription, Completed = tasks.Status }).ToList();
-
-                    tasksList.ItemsSource = query;
-                }
+                MessageBox.Show("There is some problem, please try once more or restart your application.\nIf the problem will occur once more call your software provider.");
             }
         }
     }

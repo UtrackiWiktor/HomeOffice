@@ -30,7 +30,7 @@ namespace HomeOffice
     /// </summary>
     /// 
     /// 
-    public partial class FinishTask : Window
+    public partial class FinishTaskWindow : Window
     {
         User user;
         Task t = new Task();
@@ -40,7 +40,7 @@ namespace HomeOffice
             user = new Employee(u);
         }
 
-        public FinishTask(User u)
+        public FinishTaskWindow(User u)
         {
             SetUser(u);
             InitializeComponent();

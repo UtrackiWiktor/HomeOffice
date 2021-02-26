@@ -19,11 +19,11 @@ namespace HomeOffice
     /// <summary>
     /// Logika interakcji dla klasy AddToDictionary.xaml
     /// </summary>
-    public partial class AddToDictionary : Window
+    public partial class AddToDictionaryWindow : Window
     {
         User AuthorizedUser;
         public Delegate AddTaskDel;
-        public AddToDictionary(User user)
+        public AddToDictionaryWindow(User user)
         {
             InitializeComponent();
             if ((UserRoles)user.UserGroup==UserRoles.Administrator)
@@ -42,7 +42,6 @@ namespace HomeOffice
 
         private void AddTask_Click(object sender, RoutedEventArgs e)
         {
-
             try
             {
                 int unit;
