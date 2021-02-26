@@ -73,22 +73,7 @@ namespace HomeOffice
             {
                 Warning.Content = "No user with such PESEL in database";
             }
-            //var users = user.AllUsersToList();
-            //User result =users.Single(u=>u.PESEL==user.PESEL);
-            //if(result!=null)
-            //{
-            //    Password password = new Password(user.ID);
-            //    var passwords = password.AllPasswordsToList();
-            //    Password res = passwords.Single(p => p.ID == password.ID);
-            //    if(res.Password_==password.Password_)
-            //    {
-            //        UserPanel UserPanel = new UserPanel();
-            //        UserPanel.Show();
-            //    }
-            //}
 
-            //test normalnie wyszukaj w bazie
-           // user= new Administrator("Paweł", "Tomaszewski", DateTime.Now, UserRoles.Administrator, 10, 89020119495);
 
         }
     }
