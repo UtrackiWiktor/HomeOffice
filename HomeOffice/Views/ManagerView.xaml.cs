@@ -153,6 +153,8 @@ namespace HomeOffice.Views
         }
         private void refresh2()
         {
+            userList = manager.UsersFromUnitToList(manager);
+            tasksDictionaryList = manager.UnitTasksToList(manager);
             empGrid.ItemsSource = manager.UsersFromUnitToList(manager);
             taskDicGrid.ItemsSource = manager.UnitTasksToList(manager);
             FilterUserDataGrid();
